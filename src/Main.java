@@ -28,6 +28,7 @@ public class Main {
                     JOptionPane.showMessageDialog((Component)null, "a bueno adios master");
             }
         } while(opcion != 3);
+        
 
     }
 }
