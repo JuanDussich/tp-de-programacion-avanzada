@@ -29,7 +29,7 @@ public class Main {
             }
         } while(opcion != 3);
         
-        JOptionPane.showMessageDialog(null, "Esta es la rama de agustin");
+        JOptionPane.showMessageDialog(null, "esto es en la rama agustin");
 
     }
 }
