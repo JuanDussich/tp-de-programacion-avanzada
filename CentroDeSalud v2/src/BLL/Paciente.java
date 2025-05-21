@@ -2,6 +2,7 @@ package BLL;
 import javax.swing.*;
 
 import DLL.Conexion;
+import repository.Encriptador;
 import repository.OpcionesPaciente;
 
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 
 
-public class Paciente extends Usuario {
+public class Paciente extends Usuario implements Encriptador{
 
 	//ATRIBUTOS
     private int id;
@@ -40,8 +41,9 @@ public class Paciente extends Usuario {
                     "SELECT * FROM paciente WHERE email = ? AND contrasenia = ?"
             );
             stmt.setString(1, email);
-            stmt.setString(2, contrasenia);
-//            stmt.setString(2,usuario.encriptar(contrasenia));
+            stmt.setString(2,paciente.encriptar(contrasenia));
+            //stmt.setString(2, contrasenia);
+            
 
             ResultSet rs = stmt.executeQuery();
 
@@ -70,8 +72,8 @@ public class Paciente extends Usuario {
             statement.setInt(3,usuario.getDni());
             statement.setString(4, usuario.getFechaNacimiento());
             statement.setString(5, usuario.getEmail());
-//            statement.setString(6, usuario.encriptar(usuario.getContrasenia()));
-            statement.setString(6, usuario.getContrasenia());
+            statement.setString(6, usuario.encriptar(usuario.getContrasenia()));
+            //statement.setString(6, usuario.getContrasenia());
 
             int filas = statement.executeUpdate();
             if (filas > 0) {
