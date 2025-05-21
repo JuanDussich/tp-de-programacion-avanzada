@@ -3,7 +3,6 @@ import javax.swing.*;
 public class Administrador extends Usuario {
 	
 		//ATRIBUTOS
-		private String nombre;
 		
 	    // CONSTRUCTOR
 	    public Administrador() {
@@ -18,17 +17,17 @@ public class Administrador extends Usuario {
 	    //GETTERS Y SETTERS
 
 	    // METODOS
-	    @Override
-	    public void Login() {
+	   @Override
+		public void Login() {
+			// TODO Auto-generated method stub
+			super.Login();
+		}
 
-	    }
-	    public void AgregarPaciente(){
-
-	    }
-	    @Override
-	    public void Registro() {
-
-	    }
+		@Override
+		public void Registro() {
+			// TODO Auto-generated method stub
+			super.Registro();
+		}
 
 	    public void MenuAdministrador() {
 	        int opcion;
@@ -50,5 +49,9 @@ public class Administrador extends Usuario {
 	            }
 	        }while (opcion != 3);
 	    }
+	    
+	    
+
+		
 
 }
