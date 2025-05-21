@@ -1,4 +1,7 @@
+package BLL;
 import javax.swing.*;
+
+import repository.OpcionesAdministrador;
 
 public class Administrador extends Usuario {
 	
@@ -17,18 +20,6 @@ public class Administrador extends Usuario {
 	    //GETTERS Y SETTERS
 
 	    // METODOS
-	   @Override
-		public void Login() {
-			// TODO Auto-generated method stub
-			super.Login();
-		}
-
-		@Override
-		public void Registro() {
-			// TODO Auto-generated method stub
-			super.Registro();
-		}
-
 	    public void MenuAdministrador() {
 	        int opcion;
 	        do{
@@ -51,7 +42,6 @@ public class Administrador extends Usuario {
 	    }
 	    
 	    
-
 		
 
 }

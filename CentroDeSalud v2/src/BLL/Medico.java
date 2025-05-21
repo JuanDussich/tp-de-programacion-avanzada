@@ -1,4 +1,7 @@
+package BLL;
 import javax.swing.*;
+
+import repository.OpcionesMedico;
 
 public class Medico {
 	

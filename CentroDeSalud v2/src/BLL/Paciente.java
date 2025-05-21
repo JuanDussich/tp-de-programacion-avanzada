@@ -1,6 +1,10 @@
+package BLL;
 import javax.swing.*;
+
+import DLL.Conexion;
+import repository.OpcionesPaciente;
+
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -13,55 +17,21 @@ public class Paciente extends Usuario {
 	//ATRIBUTOS
     private int id;
     private int dni;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
+    private static Connection con = Conexion.getInstance().getConnection();
 //    private HistoriaClinica historiaClinica;
 
     // CONSTRUCTOR
     public Paciente() {
     }
     
-    public Paciente(int id, String nombre,String apellido,int dni,Date fechaNacimiento,String email,String contrasenia) {
+    public Paciente(int id, String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia) {
         super(nombre,apellido,email,contrasenia);
         this.id = id;
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
     }
     // METODOS
-
-    @Override
-    public void Login() {
-        String email = JOptionPane.showInputDialog("ingresa tu mail");
-        String contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
-
-        try {
-            PreparedStatement stmt = con.prepareStatement(
-                    "SELECT * FROM paciente WHERE email = ? AND contrasenia = ?"
-            );
-            stmt.setString(1, email);
-            stmt.setString(2, contrasenia);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                this.id = rs.getInt("idPaciente");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                this.dni = rs.getInt("dni");
-                this.fechaNacimiento = rs.getDate("fecha_De_nacimiento");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-//    public void AgregarPaciente(){
-//
-//    }
-
-    @Override
-    public void Registro() {
-
-    }
-private static Connection con = Conexion.getInstance().getConnection();
-
 
     public static Paciente login(String email, String contrasenia) {
         Paciente paciente = new Paciente();
@@ -80,7 +50,7 @@ private static Connection con = Conexion.getInstance().getConnection();
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 int dni = rs.getInt("dni");
-                Date fechaNacimiento = rs.getDate("fecha_De_nacimiento");
+                String fechaNacimiento = rs.getString("fecha_De_nacimiento");
 
                 paciente =  new Paciente(id,nombre,apellido,dni, fechaNacimiento, email,contrasenia);
             }
@@ -98,7 +68,7 @@ private static Connection con = Conexion.getInstance().getConnection();
             statement.setString(1, usuario.getNombre());
             statement.setString(2, usuario.getApellido());
             statement.setInt(3,usuario.getDni());
-            statement.setDate(4, usuario.getFechaNacimiento());
+            statement.setString(4, usuario.getFechaNacimiento());
             statement.setString(5, usuario.getEmail());
 //            statement.setString(6, usuario.encriptar(usuario.getContrasenia()));
             statement.setString(6, usuario.getContrasenia());
@@ -117,11 +87,7 @@ private static Connection con = Conexion.getInstance().getConnection();
         String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
         String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
         int  dni = Integer.parseInt(JOptionPane.showInputDialog("ingresa tu dni"));
-
-        int anio = Integer.parseInt(JOptionPane.showInputDialog("ingresa el año que naciste"));
-        int mes = Integer.parseInt(JOptionPane.showInputDialog("ingresa el mes que naciste"));
-        int dia = Integer.parseInt(JOptionPane.showInputDialog("ingresa el dia que naciste"));
-        Date fechaNacimiento = new Date(anio,mes,dia) ;
+        String fechaNacimiento = JOptionPane.showInputDialog("ingresa la fecha");
 
         String email = JOptionPane.showInputDialog("ingresa tu email");
         String contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
@@ -154,11 +120,11 @@ private static Connection con = Conexion.getInstance().getConnection();
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 int dni = rs.getInt("dni");
-                Date fechaDeNacimiento = rs.getDate("fecha de nacimiento");
+                String fechaNacimiento = rs.getString("fecha_De_nacimiento");
                 String email = rs.getString("email");
-                String contrasenia = rs.getString("password");
+                String contrasenia = rs.getString("contrasenia");
 
-                usuarios.add(new Paciente(id, nombre,apellido,dni ,fechaDeNacimiento, email,contrasenia));
+                usuarios.add(new Paciente(id, nombre,apellido,dni ,fechaNacimiento, email,contrasenia));
 
             }
         } catch (Exception e) {
@@ -178,7 +144,6 @@ private static Connection con = Conexion.getInstance().getConnection();
             menu = JOptionPane.showOptionDialog(null, "menu", "Menu Paciente", JOptionPane.DEFAULT_OPTION, 0,  null,OpcionesPaciente.values(), OpcionesPaciente.values());
             switch (menu){
                 case 0:
-
                     // Ver datos personales se va a poder hacer el login y registro en esta parte
                     String[] accionesUsuario = { "Login", "Registro","Ver mi usuario", "Salir" };
                     int opcion;
@@ -224,11 +189,11 @@ private static Connection con = Conexion.getInstance().getConnection();
     }
 
     // fechaNacimiento
-    public  Date getFechaNacimiento() {
+    public  String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento( Date fechaNacimiento) {
+    public void setFechaNacimiento( String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
