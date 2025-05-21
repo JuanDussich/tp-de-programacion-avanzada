@@ -28,8 +28,8 @@ public class Main {
                     JOptionPane.showMessageDialog((Component)null, "a bueno adios master");
             }
         } while(opcion != 3);
+        //JOptionPane.showMessageDialog(null, "esto es en la rama juan");
+        //JOptionPane.showMessageDialog(null, "prueba de ");
         
-        JOptionPane.showMessageDialog(null, "Esta es la rama de brian");
-
     }
 }
