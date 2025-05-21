@@ -188,8 +188,7 @@ private static Connection con = Conexion.getInstance().getConnection();
                             mail = JOptionPane.showInputDialog("ingresa tu mail para poder logearte");
                             contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
                             paciente = Paciente.login(mail,contrasenia);
-                            paciente.Login();
-                            JOptionPane.showMessageDialog(null,"hola");
+                            
                             break;
                         case 1:
                             Paciente.RegistrarUsuario();
