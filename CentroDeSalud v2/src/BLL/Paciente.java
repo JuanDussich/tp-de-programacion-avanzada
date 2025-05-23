@@ -1,5 +1,7 @@
 
+
 package BLL;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +12,8 @@ import javax.swing.JOptionPane;
 import DLL.Conexion;
 import repository.Encriptador;
 import repository.OpcionesPaciente;
+import DLL.ControllerPaciente;
+
 
 
 public class Paciente extends Usuario implements Encriptador{

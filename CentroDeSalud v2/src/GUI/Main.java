@@ -1,10 +1,12 @@
+
 package GUI;
+
 import javax.swing.*;
 
 import BLL.Administrador;
 import BLL.Medico;
 import BLL.Paciente;
-import repository.*;
+import repository.OpcionMain;
 
 import java.awt.*;
 
