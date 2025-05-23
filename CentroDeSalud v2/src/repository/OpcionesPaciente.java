@@ -1,5 +1,5 @@
 package repository;
 
 public enum OpcionesPaciente {
-	SolicitarTurno,VerTurnosProgramados,VerHistorialMedico,Salir
+	Informacion_Usuario, SolicitarTurno,VerTurnosProgramados,VerHistorialMedico,Salir
 }
