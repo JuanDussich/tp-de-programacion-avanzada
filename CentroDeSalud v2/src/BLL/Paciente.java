@@ -1,16 +1,15 @@
+
 package BLL;
-import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
 
 import DLL.Conexion;
 import repository.Encriptador;
 import repository.OpcionesPaciente;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-
-import java.util.LinkedList;
 
 
 public class Paciente extends Usuario implements Encriptador{
@@ -97,7 +96,7 @@ public class Paciente extends Usuario implements Encriptador{
 
         LinkedList<Paciente> existentes = mostrarPaciente();
         boolean flag = true;
-        for (Usuario existente : existentes) {
+        for (Paciente existente : existentes) {
             if (existente.getEmail().equals(nuevo.getEmail())) {
                 flag = false;
                 break;

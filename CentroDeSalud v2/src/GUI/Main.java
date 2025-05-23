@@ -4,7 +4,7 @@ import javax.swing.*;
 import BLL.Administrador;
 import BLL.Medico;
 import BLL.Paciente;
-import repository.OpcionMain;
+import repository.*;
 
 import java.awt.*;
 
