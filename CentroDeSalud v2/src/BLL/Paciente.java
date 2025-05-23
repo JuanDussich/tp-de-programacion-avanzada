@@ -100,7 +100,7 @@ public class Paciente extends Usuario implements Encriptador{
 
         LinkedList<Paciente> existentes = mostrarPaciente();
         boolean flag = true;
-        for (Paciente existente : existentes) {
+        for (Usuario existente : existentes) {
             if (existente.getEmail().equals(nuevo.getEmail())) {
                 flag = false;
                 break;
