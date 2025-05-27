@@ -50,8 +50,8 @@ public class Paciente extends Usuario implements Encriptador{
 
     public static void RegistrarUsuario() {
     	
+    	JOptionPane.showMessageDialog(null, "Estas registrandote");
     	ControllerPaciente.RegistrarPaciente();
-    	
     	
     }
     
