@@ -22,7 +22,7 @@ public class Paciente extends Usuario implements Encriptador{
     private int id;
     private int dni;
     private String fechaNacimiento;
-    private static Connection con = Conexion.getInstance().getConnection();
+    
 //    private HistoriaClinica historiaClinica;
 
     // CONSTRUCTOR
@@ -36,58 +36,20 @@ public class Paciente extends Usuario implements Encriptador{
         this.fechaNacimiento = fechaNacimiento;
     }
     // METODOS
-
+    
     public static Paciente login(String email, String contrasenia) {
-        Paciente paciente = new Paciente();
-        try {
-            PreparedStatement stmt = con.prepareStatement(
-                    "SELECT * FROM paciente WHERE email = ? AND contrasenia = ?"
-            );
-            stmt.setString(1, email);
-            stmt.setString(2,paciente.encriptar(contrasenia));
-            //stmt.setString(2, contrasenia);
-            
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                int id = rs.getInt("idPaciente");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                int dni = rs.getInt("dni");
-                String fechaNacimiento = rs.getString("fecha_De_nacimiento");
-
-                paciente =  new Paciente(id,nombre,apellido,dni, fechaNacimiento, email,contrasenia);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return paciente;
-    }
-
-    public static void agregarUsuario(Paciente usuario) {
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                    "INSERT INTO `paciente`( `nombre`, `apellido`, `dni`, `fecha_De_Nacimiento`, `email`, `contrasenia`) VALUES (?,?,?,?,?,?)"
-            );
-            statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getApellido());
-            statement.setInt(3,usuario.getDni());
-            statement.setString(4, usuario.getFechaNacimiento());
-            statement.setString(5, usuario.getEmail());
-            statement.setString(6, usuario.encriptar(usuario.getContrasenia()));
-            //statement.setString(6, usuario.getContrasenia());
-
-            int filas = statement.executeUpdate();
-            if (filas > 0) {
-                System.out.println("Usuario agregado correctamente.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    	Paciente usuario = new Paciente() ;
+    	if (email.isEmpty() || contrasenia.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Hay un error, no puede ser vacio");
+		}else {
+			usuario = ControllerPaciente.login(email, contrasenia);
+			
+		}
+    	return usuario;
     }
 
     public static void RegistrarUsuario() {
+<<<<<<< HEAD
 
         String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
         String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
@@ -113,31 +75,14 @@ public class Paciente extends Usuario implements Encriptador{
         }
 
 
+=======
+    	
+    	ControllerPaciente.RegistrarPaciente();
+    	
+    	
+>>>>>>> Juan
     }
-    public static LinkedList<Paciente> mostrarPaciente() {
-        LinkedList<Paciente> usuarios = new LinkedList<>();
-        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM paciente");
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int id = rs.getInt("idPaciente");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                int dni = rs.getInt("dni");
-                String fechaNacimiento = rs.getString("fecha_De_nacimiento");
-                String email = rs.getString("email");
-                String contrasenia = rs.getString("contrasenia");
-
-                usuarios.add(new Paciente(id, nombre,apellido,dni ,fechaNacimiento, email,contrasenia));
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return usuarios;
-    }
-
+    
     public void MenuPaciente() {
 
         int menu;

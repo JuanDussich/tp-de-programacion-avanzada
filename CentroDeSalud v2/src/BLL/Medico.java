@@ -1,9 +1,10 @@
 package BLL;
 import javax.swing.*;
 
+import repository.Encriptador;
 import repository.OpcionesMedico;
 
-public class Medico {
+public class Medico extends Usuario implements Encriptador{
 	
 	private String matricula;
     private String especialidad;
