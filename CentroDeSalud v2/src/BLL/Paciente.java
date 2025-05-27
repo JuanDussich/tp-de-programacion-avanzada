@@ -49,38 +49,10 @@ public class Paciente extends Usuario implements Encriptador{
     }
 
     public static void RegistrarUsuario() {
-<<<<<<< HEAD
-
-        String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
-        String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
-        int  dni = Integer.parseInt(JOptionPane.showInputDialog("ingresa tu dni"));
-        String fechaNacimiento = JOptionPane.showInputDialog("ingresa la fecha");
-
-        String email = JOptionPane.showInputDialog("ingresa tu email");
-        String contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
-        Paciente nuevo = new Paciente(0,nombre,apellido,dni,fechaNacimiento,email,contrasenia);
-
-        LinkedList<Paciente> existentes = mostrarPaciente();
-        boolean flag = true;
-        for (Usuario existente : existentes) {
-            if (existente.getEmail().equals(nuevo.getEmail())) {
-                flag = false;
-                break;
-            }
-        }
-        if (flag) {
-            agregarUsuario(nuevo);
-        }else {
-            JOptionPane.showMessageDialog(null, "Usuario ya creado");
-        }
-
-
-=======
     	
+    	JOptionPane.showMessageDialog(null, "Estas registrandote");
     	ControllerPaciente.RegistrarPaciente();
     	
-    	
->>>>>>> Juan
     }
     
     public void MenuPaciente() {
