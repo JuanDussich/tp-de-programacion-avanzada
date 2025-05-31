@@ -114,8 +114,17 @@ public class Paciente extends Usuario implements Encriptador{
     public  String getFechaNacimiento() {
         return fechaNacimiento;
     }
+    
 
-    public void setFechaNacimiento( String fechaNacimiento) {
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setFechaNacimiento( String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
