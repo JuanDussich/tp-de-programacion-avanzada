@@ -7,6 +7,8 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import BLL.Paciente;
 import BLL.Usuario;
 
@@ -45,6 +47,35 @@ public class ControllerPaciente {
         }
         return paciente;
     }
+	
+	
+	public static String EditarPaciente(Paciente usuario) {
+		try {
+			PreparedStatement statement = con
+					.prepareStatement(
+							"UPDATE `paciente` SET `nombre`=?,`apellido`=?,`dni`=?,`fecha_De_nacimiento`=?,`email`=?,`contrasenia`=? WHERE id= ?");
+			statement.setString(1, usuario.getNombre());
+			statement.setString(2, usuario.getApellido());
+			statement.setInt(3, usuario.getDni());
+			statement.setString(4, usuario.getFechaNacimiento());
+			statement.setString(5, usuario.getEmail());
+			statement.setString(6,usuario.encriptar(usuario.getContrasenia()));
+			statement.setInt(7,usuario.getId());
+
+			int filas = statement.executeUpdate();
+			if (filas > 0) {
+				return "Usuario editado correctamente.";
+			}
+			
+		}catch (MySQLIntegrityConstraintViolationException e) {
+			return "Error mail existente";
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "Error";
+	}
+	
 
     public static void agregarPaciente(Paciente usuario) {
         try {
@@ -95,6 +126,7 @@ public class ControllerPaciente {
 
 
     }
+    
     public static LinkedList<Paciente> mostrarPaciente() {
         LinkedList<Paciente> usuarios = new LinkedList<>();
         try {
