@@ -55,6 +55,16 @@ public class Paciente extends Usuario implements Encriptador{
     	
     }
     
+    public static String EditarPaciente(Paciente usuario) {
+		
+		if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty()|| usuario.getContrasenia().isEmpty()) {
+			return "No se pudo editar";
+		}else {
+			return DLL.ControllerPaciente.EditarPaciente(usuario);
+		}
+		
+	}
+    
     public void MenuPaciente() {
 
         int menu;
@@ -115,18 +125,18 @@ public class Paciente extends Usuario implements Encriptador{
         return fechaNacimiento;
     }
     
+    public void setFechaNacimiento( String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
     public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public void setFechaNacimiento( String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+	
 
 
     @Override
