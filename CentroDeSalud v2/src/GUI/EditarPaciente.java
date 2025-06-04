@@ -22,6 +22,7 @@ public class EditarPaciente extends JFrame{
 	private JTextField inpContraseña;
 	
 	public EditarPaciente(Paciente usuario) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 547);
 		contentPane = new JPanel();
@@ -60,6 +61,7 @@ public class EditarPaciente extends JFrame{
 		lblMensaje.setBounds(55, 341, 277, 14);
 		contentPane.add(lblMensaje);
 		btnNewButton.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				Paciente editar = usuario;
 				editar.setNombre(inpNombre.getText());

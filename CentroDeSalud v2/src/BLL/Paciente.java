@@ -48,10 +48,10 @@ public class Paciente extends Usuario implements Encriptador{
     	return usuario;
     }
 
-    public static void RegistrarUsuario() {
+    public static void RegistrarUsuario(Paciente paciente) {
     	
     	JOptionPane.showMessageDialog(null, "Estas registrandote");
-    	ControllerPaciente.RegistrarPaciente();
+    	ControllerPaciente.RegistrarPaciente(paciente);
     	
     }
     
@@ -88,7 +88,7 @@ public class Paciente extends Usuario implements Encriptador{
                             
                             break;
                         case 1:
-                            Paciente.RegistrarUsuario();
+                            Paciente.RegistrarUsuario(paciente);
                             break;
                         case 2:
                             JOptionPane.showMessageDialog(null, paciente);
