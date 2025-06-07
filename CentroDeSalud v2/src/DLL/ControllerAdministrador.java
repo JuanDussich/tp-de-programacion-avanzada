@@ -13,7 +13,7 @@ import repository.*;
 
 public class ControllerAdministrador {
 	
-	//ATRIBUTOS
+		//ATRIBUTOS
 		private static Connection con = Conexion.getInstance().getConnection();
 		
 		
@@ -21,6 +21,7 @@ public class ControllerAdministrador {
 		
 		public static Administrador login(String email, String contrasenia) {
 	        Administrador administrador = new Administrador();
+	        JOptionPane.showMessageDialog(null, administrador);
 	        try {
 	            PreparedStatement stmt = con.prepareStatement(
 	                    "SELECT * FROM administrador WHERE email = ? AND contrasenia = ?"

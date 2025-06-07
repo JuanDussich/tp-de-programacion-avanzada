@@ -13,6 +13,7 @@ public class Conexion {
 
     private static Connection conect;
     private static Conexion instance;
+    
     private Conexion() {
         try {
             conect =  (Connection) DriverManager.getConnection(URL,USER,PASSWORD);
@@ -28,6 +29,7 @@ public class Conexion {
         }
         return instance;
     }
+    
     public Connection getConnection() {
         return conect;
     }
