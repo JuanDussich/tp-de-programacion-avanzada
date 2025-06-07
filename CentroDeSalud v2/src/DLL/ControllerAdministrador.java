@@ -48,7 +48,8 @@ public class ControllerAdministrador {
 	    public static void agregarAdministrador(Administrador usuario) {
 	        try {
 	            PreparedStatement statement = con.prepareStatement(
-	                    "INSERT INTO `paciente`( `nombre`, `apellido`, `email`, `contrasenia`) VALUES (?,?,?,?,)"
+	            		// ** correccion administrador -- correccion pasaba 5 parametros**
+	                    "INSERT INTO `administrador`( `nombre`, `apellido`, `email`, `contrasenia`) VALUES (?,?,?,?)"
 	            );
 	            statement.setString(1, usuario.getNombre());
 	            statement.setString(2, usuario.getApellido());

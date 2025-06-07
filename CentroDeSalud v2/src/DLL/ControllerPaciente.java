@@ -53,7 +53,8 @@ public class ControllerPaciente {
 		try {
 			PreparedStatement statement = con
 					.prepareStatement(
-							"UPDATE `paciente` SET `nombre`=?,`apellido`=?,`dni`=?,`fecha_De_nacimiento`=?,`email`=?,`contrasenia`=? WHERE id= ?");
+							//** corregi id por idPaciente
+							"UPDATE `paciente` SET `nombre`=?,`apellido`=?,`dni`=?,`fecha_De_nacimiento`=?,`email`=?,`contrasenia`=? WHERE idPaciente= ?");
 			statement.setString(1, usuario.getNombre());
 			statement.setString(2, usuario.getApellido());
 			statement.setInt(3, usuario.getDni());
