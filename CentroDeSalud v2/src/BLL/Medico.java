@@ -41,13 +41,13 @@ public class Medico extends Usuario implements Encriptador{
             opcion = JOptionPane.showOptionDialog(null, "menu", "Menu Medico", JOptionPane.DEFAULT_OPTION, 0, null, OpcionesMedico.values(), OpcionesMedico.values());
             switch (opcion) {
                 case 0:
-                    // Ver datos personales
+                    // Ver Agenda
                     break;
                 case 1:
-                    // Ver pacientes
+                    // Ver Cargar receta
                     break;
                 case 2:
-                    // Ver turnos
+                    // Consultar paciente
                     break;
                 case 3:
                     JOptionPane.showMessageDialog(null, "Saliendo del menu Medico");
