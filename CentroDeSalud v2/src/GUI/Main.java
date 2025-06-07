@@ -1,10 +1,17 @@
+
+package GUI;
+
 import javax.swing.*;
+
+import BLL.Administrador;
+import BLL.Medico;
+import BLL.Paciente;
+import repository.OpcionMain;
+
 import java.awt.*;
 
 public class Main {
-    public Main() {
-    }
-
+    
     public static void main(String[] args) {
         JOptionPane.showMessageDialog((Component)null, "hola esto es el main");
         Administrador admin = new Administrador();
@@ -28,8 +35,8 @@ public class Main {
                     JOptionPane.showMessageDialog((Component)null, "a bueno adios master");
             }
         } while(opcion != 3);
+        //JOptionPane.showMessageDialog(null, "esto es en la rama juan");
+        //JOptionPane.showMessageDialog(null, "prueba de que todo funciona ");
         
-        JOptionPane.showMessageDialog(null, "esto es en la rama amalia");
-
     }
 }
