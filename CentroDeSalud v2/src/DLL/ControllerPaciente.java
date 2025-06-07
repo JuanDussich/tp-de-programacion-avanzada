@@ -100,7 +100,7 @@ public class ControllerPaciente {
         }
     }
 
-    //ESTE ES EL METODO DE REGISTRAR PACIENTE
+    //ESTE ES EL METODO DE REGISTRAR PACIENTE 
     public static void RegistrarPaciente(Paciente nuevo) {
         LinkedList<Paciente> existentes = mostrarPaciente();
         boolean flag = true;
@@ -119,6 +119,7 @@ public class ControllerPaciente {
 
     }
     
+    //METODO DE REGISTRAR PACIENTE PERO EL PACIENTE SE CREA DENTRO DEL METODO
     public static void RegistrarPaciente() {
 
         String nombre = JOptionPane.showInputDialog("ingresa tu nombre");

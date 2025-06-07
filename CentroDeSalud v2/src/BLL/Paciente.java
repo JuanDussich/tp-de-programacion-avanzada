@@ -110,8 +110,16 @@ public class Paciente extends Usuario implements Encriptador{
         }while (menu != 3);
     }
 
+    
     // GETTERS Y SETTERS
-    // dni
+    public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	// dni
     public int getDni() {
         return dni;
     }
@@ -129,14 +137,6 @@ public class Paciente extends Usuario implements Encriptador{
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	
 
 
     @Override

@@ -35,11 +35,8 @@ public class PantallaPrincipal extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 	public PantallaPrincipal() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 742, 551);
 		contentPane = new JPanel();
@@ -67,6 +64,8 @@ public class PantallaPrincipal extends JFrame {
 		JButton btnAdministrador = new JButton("Menu Administrador");
 		btnAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				PantallaAdministrador vista = new PantallaAdministrador();
+				vista.setVisible(true);
 			}
 		});
 		btnAdministrador.setBounds(303, 374, 137, 61);
@@ -75,6 +74,8 @@ public class PantallaPrincipal extends JFrame {
 		JButton btnMedico = new JButton("Menu Medico");
 		btnMedico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				PantallaMedico vista = new PantallaMedico();
+				vista.setVisible(true);
 				
 			}
 		});
