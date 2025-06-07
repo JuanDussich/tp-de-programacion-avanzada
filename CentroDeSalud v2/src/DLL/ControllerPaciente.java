@@ -20,6 +20,7 @@ public class ControllerPaciente {
 	
 	//METODOS
 	
+	//ESTE ES EL METODO DE LOGIN DEL PACIENTE
 	public static Paciente login(String email, String contrasenia) {
         Paciente paciente = new Paciente();
         try {
@@ -48,12 +49,11 @@ public class ControllerPaciente {
         return paciente;
     }
 	
-	
+	//ESTA ES LA PARTE DE EDITAR PACIENTE
 	public static String EditarPaciente(Paciente usuario) {
 		try {
 			PreparedStatement statement = con
 					.prepareStatement(
-							//** corregi id por idPaciente
 							"UPDATE `paciente` SET `nombre`=?,`apellido`=?,`dni`=?,`fecha_De_nacimiento`=?,`email`=?,`contrasenia`=? WHERE idPaciente= ?");
 			statement.setString(1, usuario.getNombre());
 			statement.setString(2, usuario.getApellido());
@@ -77,7 +77,7 @@ public class ControllerPaciente {
 		return "Error";
 	}
 	
-
+	//ESTE ES EL METODO DE AGREGAR PACIENTE
     public static void agregarPaciente(Paciente usuario) {
         try {
             PreparedStatement statement = con.prepareStatement(
@@ -100,6 +100,26 @@ public class ControllerPaciente {
         }
     }
 
+    //ESTE ES EL METODO DE REGISTRAR PACIENTE 
+    public static void RegistrarPaciente(Paciente nuevo) {
+        LinkedList<Paciente> existentes = mostrarPaciente();
+        boolean flag = true;
+        for (Usuario existente : existentes) {
+            if (existente.getEmail().equals(nuevo.getEmail())) {
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            agregarPaciente(nuevo);
+        }else {
+            JOptionPane.showMessageDialog(null, "Usuario ya creado");
+        }
+
+
+    }
+    
+    //METODO DE REGISTRAR PACIENTE PERO EL PACIENTE SE CREA DENTRO DEL METODO
     public static void RegistrarPaciente() {
 
         String nombre = JOptionPane.showInputDialog("ingresa tu nombre");

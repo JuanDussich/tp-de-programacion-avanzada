@@ -48,12 +48,22 @@ public class Paciente extends Usuario implements Encriptador{
     	return usuario;
     }
 
-    public static void RegistrarUsuario() {
+    public static void RegistrarUsuario(Paciente paciente) {
     	
     	JOptionPane.showMessageDialog(null, "Estas registrandote");
-    	ControllerPaciente.RegistrarPaciente();
+    	ControllerPaciente.RegistrarPaciente(paciente);
     	
     }
+    
+    public static String EditarPaciente(Paciente usuario) {
+		
+		if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty()|| usuario.getContrasenia().isEmpty()) {
+			return "No se pudo editar";
+		}else {
+			return DLL.ControllerPaciente.EditarPaciente(usuario);
+		}
+		
+	}
     
     public void MenuPaciente() {
 
@@ -78,7 +88,7 @@ public class Paciente extends Usuario implements Encriptador{
                             
                             break;
                         case 1:
-                            Paciente.RegistrarUsuario();
+                            Paciente.RegistrarUsuario(paciente);
                             break;
                         case 2:
                             JOptionPane.showMessageDialog(null, paciente);
@@ -100,8 +110,16 @@ public class Paciente extends Usuario implements Encriptador{
         }while (menu != 3);
     }
 
+    
     // GETTERS Y SETTERS
-    // dni
+    public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	// dni
     public int getDni() {
         return dni;
     }
@@ -115,18 +133,10 @@ public class Paciente extends Usuario implements Encriptador{
         return fechaNacimiento;
     }
     
-
-    public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setFechaNacimiento( String fechaNacimiento) {
+    public void setFechaNacimiento( String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
 
 
     @Override
