@@ -13,7 +13,7 @@ import repository.*;
 
 public class ControllerAdministrador {
 	
-	//ATRIBUTOS
+		//ATRIBUTOS
 		private static Connection con = Conexion.getInstance().getConnection();
 		
 		
