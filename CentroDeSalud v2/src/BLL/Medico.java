@@ -14,6 +14,12 @@ public class Medico extends Usuario implements Encriptador{
     public Medico() {
 
     }
+    
+    public Medico(int id, String nombre, String apellido, String email, String contrasenia, String matricula, String especialidad) {
+        super(id, nombre, apellido, email, contrasenia);
+        this.matricula = matricula;
+        this.especialidad = especialidad;
+    }
     // Validación 
     public Medico(String matricula, String especialidad, int cantidadConsultas) {
         if (matricula != null && especialidad != null && cantidadConsultas >= 0) {
