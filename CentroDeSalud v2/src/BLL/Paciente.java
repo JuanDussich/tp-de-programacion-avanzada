@@ -104,10 +104,13 @@ public class Paciente extends Usuario implements Encriptador{
                     // Ver turnos
                     break;
                 case 3:
+                    // Ver historial Medico
+                    break;
+                case 4:
                     JOptionPane.showMessageDialog(null, "Saliendo del menu Paciente");
                     break;
             }
-        }while (menu != 3);
+        }while (menu != 4);
     }
 
     
