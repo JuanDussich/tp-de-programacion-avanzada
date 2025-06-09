@@ -1,6 +1,10 @@
 package DLL;
 
 import com.mysql.jdbc.Connection;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
