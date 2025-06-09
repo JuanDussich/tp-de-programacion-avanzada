@@ -1,5 +1,8 @@
 package repository;
 
 public enum OpcionesMedico {
-	VerAgenda, CargarReceta, ConsultarPacientes, Salir
+    VER_AGENDA,
+    CARGAR_RECETA,
+    CONSULTAR_PACIENTE,
+    SALIR
 }

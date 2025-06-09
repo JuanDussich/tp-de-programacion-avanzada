@@ -5,7 +5,8 @@ import repository.Encriptador;
 import repository.OpcionesMedico;
 
 public class Medico extends Usuario implements Encriptador{
-	
+	private int id;
+    private boolean activo = true;
 	private String matricula;
     private String especialidad;
     private int cantidadConsultas;
@@ -15,10 +16,12 @@ public class Medico extends Usuario implements Encriptador{
 
     }
     
-    public Medico(int id, String nombre, String apellido, String email, String contrasenia, String matricula, String especialidad) {
-        super(id, nombre, apellido, email, contrasenia);
-        this.matricula = matricula;
+    public Medico(int id, String nombre, String apellido, String email, String contrasenia, String especialidad, String matricula, boolean activo) {
+        super(nombre, apellido, email, contrasenia); // Hereda de Usuario
+        this.id = id;
         this.especialidad = especialidad;
+        this.matricula = matricula;
+        this.activo = activo;
     }
     // Validación 
     public Medico(String matricula, String especialidad, int cantidadConsultas) {
@@ -35,28 +38,99 @@ public class Medico extends Usuario implements Encriptador{
 
     
     public void MenuMedico() {
-    	
         int opcion;
+
+        // Bucle que muestra el menú hasta que el médico elija "Salir"
         do {
-            opcion = JOptionPane.showOptionDialog(null, "menu", "Menu Medico", JOptionPane.DEFAULT_OPTION, 0, null, OpcionesMedico.values(), OpcionesMedico.values());
+            // Mostrar opciones del menú
+            opcion = JOptionPane.showOptionDialog(
+                null,
+                "Seleccione una opción:",
+                "Menú Médico",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                OpcionesMedico.values(),
+                OpcionesMedico.VER_AGENDA
+            );
+
             switch (opcion) {
-                case 0:
-                    // Ver Agenda
+                case 0: // VER_AGENDA
+                    mostrarAgenda();
                     break;
-                case 1:
-                    // Ver Cargar receta
+                case 1: // CARGAR_RECETA
+                    cargarReceta();
                     break;
-                case 2:
-                    // Consultar paciente
+                case 2: // CONSULTAR_PACIENTE
+                    consultarPaciente();
                     break;
-                case 3:
-                    JOptionPane.showMessageDialog(null, "Saliendo del menu Medico");
+                case 3: // SALIR
+                    JOptionPane.showMessageDialog(null, "Saliendo del menú Médico...");
+                    break;
+                default:
+                    // Si se cierra el diálogo
+                    opcion = 3; // Fuerza la salida
                     break;
             }
         } while (opcion != 3);
     }
 
+    // Simula la visualización de turnos en agenda
+    private void mostrarAgenda() {
+        String agenda = """
+                Agenda del día:
+                - 08:00 - Juan Pérez
+                - 08:30 - María Gómez
+                - 09:00 - Luis Martínez
+                """;
+        JOptionPane.showMessageDialog(null, agenda, "Agenda", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    // Simula la carga de una receta para un paciente
+    private void cargarReceta() {
+        String paciente = JOptionPane.showInputDialog("Ingrese el nombre del paciente:");
+        String receta = JOptionPane.showInputDialog("Ingrese la receta (medicamentos, dosis, etc):");
+
+        if (paciente != null && receta != null) {
+            JOptionPane.showMessageDialog(null, "Receta cargada exitosamente para " + paciente);
+            // Aquí podrías guardar la receta en una base de datos
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingreso cancelado.");
+        }
+    }
+
+    // Simula la consulta de información básica de un paciente
+    private void consultarPaciente() {
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre del paciente a consultar:");
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            // Simulación de datos del paciente
+            String datos = "Nombre: " + nombre + "\nEdad: 45\nDiagnóstico: Hipertensión";
+            JOptionPane.showMessageDialog(null, datos, "Datos del Paciente", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nombre no válido.");
+        }
+    }
+
+
+
+    // ------------------- MÉTODOS GETTERS & SETTERS -------------------
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
+    public boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     public String getMatricula() {
         return matricula;
     }
@@ -88,6 +162,14 @@ public class Medico extends Usuario implements Encriptador{
 
     @Override
     public String toString() {
-        return super.toString() + "\nMédico {" + "\n  Matrícula: '" + matricula + '\'' + "\n  Especialidad: '" + especialidad + '\'' + "\n  Cantidad de Consultas: " + cantidadConsultas + "\n}";
+        return "Medico{" +
+                "id=" + id +
+                ", activo=" + activo +
+                ", nombre=" + getNombre() +
+                ", apellido=" + getApellido() +
+                ", email=" + getEmail() +
+                ", especialidad='" + especialidad + '\'' +
+                ", matricula='" + matricula + '\'' +
+                '}';
     }
 }
