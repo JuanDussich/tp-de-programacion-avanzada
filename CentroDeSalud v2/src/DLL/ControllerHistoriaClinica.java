@@ -6,14 +6,10 @@ import java.util.ArrayList;
 
 public class ControllerHistoriaClinica {
 
-    private Connection conn;
+	private static Connection con = Conexion.getInstance().getConnection();
 
     public ControllerHistoriaClinica() {
-        try {
-            conn = Conexion.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        
     }
 
     // CREATE
@@ -21,7 +17,7 @@ public class ControllerHistoriaClinica {
                                      int turnoId, int pacienteId, int tratamientoId,
                                      int medicamentoId, int medicoId) {
         try {
-            Statement stmt = conn.createStatement();
+            Statement stmt = con.createStatement();
             String sql = "INSERT INTO historia_clinica (observaciones, fecha, turno_idTurno, turno_Paciente_idPaciente, " +
                          "tratamiento_idTratamiento, medicamento_idMedicamento, medico_idMedico) VALUES (" +
                          "'" + observaciones + "', '" + fecha + "', " + turnoId + ", " + pacienteId + ", " +
@@ -37,7 +33,7 @@ public class ControllerHistoriaClinica {
     public ArrayList<HistoriaClinica> obtenerHistoriasClinicas() {
         ArrayList<HistoriaClinica> lista = new ArrayList<>();
         try {
-            Statement stmt = conn.createStatement();
+            Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM historia_clinica");
 
             while (rs.next()) {
@@ -55,7 +51,7 @@ public class ControllerHistoriaClinica {
     // UPDATE
     public void actualizarHistoriaClinica(int id, String nuevasObservaciones) {
         try {
-            Statement stmt = conn.createStatement();
+            Statement stmt = con.createStatement();
             String sql = "UPDATE historia_clinica SET observaciones = '" + nuevasObservaciones +
                          "' WHERE idHistorial_Medico = " + id;
             stmt.executeUpdate(sql);
@@ -68,7 +64,7 @@ public class ControllerHistoriaClinica {
     // DELETE
     public void eliminarHistoriaClinica(int id) {
         try {
-            Statement stmt = conn.createStatement();
+            Statement stmt = con.createStatement();
             String sql = "DELETE FROM historia_clinica WHERE idHistorial_Medico = " + id;
             stmt.executeUpdate(sql);
             System.out.println("Historia clínica eliminada.");
