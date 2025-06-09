@@ -138,8 +138,8 @@ public class VistaPacientes extends JFrame {
 	                        new String(contraseniaField.getPassword())
 	                );
 	
-	                //ControllerPaciente.RegistrarPaciente(nuevo);
-	                ControllerPaciente.RegistrarPaciente();
+	                ControllerPaciente.RegistrarPaciente(nuevo);
+	                //ControllerPaciente.RegistrarPaciente();
 	                cargarTabla();
 	            }
 	        });
