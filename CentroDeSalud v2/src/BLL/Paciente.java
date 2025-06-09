@@ -107,6 +107,7 @@ public class Paciente extends Usuario implements Encriptador{
                     // Ver Historial Medico
                     break;
                 case 4:
+                	JOptionPane.showMessageDialog(null, "a bueno adios master");
                     JOptionPane.showMessageDialog(null, "Saliendo del menu Paciente");
                     break;
             }
