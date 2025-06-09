@@ -76,15 +76,15 @@ public class Medico extends Usuario implements Encriptador{
     }
 
     // Simula la visualización de turnos en agenda
-    private void mostrarAgenda() {
-        String agenda = """
-                Agenda del día:
-                - 08:00 - Juan Pérez
-                - 08:30 - María Gómez
-                - 09:00 - Luis Martínez
-                """;
+   private void mostrarAgenda() {
+    	String agenda = 
+    		    "Agenda del día:\n" +
+    		    "- 08:00 - Juan Pérez\n" +
+    		    "- 08:30 - María Gómez\n" +
+    		    "- 09:00 - Luis Martínez";
         JOptionPane.showMessageDialog(null, agenda, "Agenda", JOptionPane.INFORMATION_MESSAGE);
     }
+    
 
     // Simula la carga de una receta para un paciente
     private void cargarReceta() {
