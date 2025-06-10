@@ -116,7 +116,6 @@ public class ControllerPaciente {
             JOptionPane.showMessageDialog(null, "Usuario ya creado");
         }
 
-
     }
     
     //METODO DE REGISTRAR PACIENTE PERO EL PACIENTE SE CREA DENTRO DEL METODO
@@ -148,6 +147,7 @@ public class ControllerPaciente {
 
     }
     
+    //METODO PARA MOSTRAR PACIENTES
     public static LinkedList<Paciente> mostrarPaciente() {
         LinkedList<Paciente> usuarios = new LinkedList<>();
         try {
@@ -171,5 +171,7 @@ public class ControllerPaciente {
         }
         return usuarios;
     }
+    
+    //ESTE ES EL METODO PARA ELIMINAR PACIENTES
 
 }

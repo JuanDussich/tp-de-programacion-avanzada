@@ -51,7 +51,18 @@ public class Administrador extends Usuario implements Encriptador {
 							break;
 						case 1:
 							JOptionPane.showMessageDialog(null, "registro");
-							Administrador.RegistrarUsuario();
+							//esta es una de las formas de registrar
+							
+							//Administrador.RegistrarAdministrador();
+							
+							//esta es otra de las formas de registrar
+							String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
+					        String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
+					        
+					        mail = JOptionPane.showInputDialog("ingresa tu email");
+					        contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
+					        admin = new Administrador(0,nombre,apellido,mail,contrasenia);
+					        Administrador.RegistrarAdministrador(admin);
 							break;
 						case 2:
 							JOptionPane.showMessageDialog(null, admin);
@@ -80,6 +91,7 @@ public class Administrador extends Usuario implements Encriptador {
 	        return "Paciente{" + "id=" + id + "} " + super.toString();
 	    }
 	    
+	    //METODO QUE LLAMA AL LOGIN DEL CONTROLADOR DE ADMINISTRADOR
 	    public static Administrador login(String email, String contrasenia) {
 	    	Administrador usuario = new Administrador() ;
 	    	if (email.isEmpty() || contrasenia.isEmpty()) {
@@ -91,12 +103,33 @@ public class Administrador extends Usuario implements Encriptador {
 	    	return usuario;
 	    }
 
-	    public static void RegistrarUsuario() {
+	    //METODO REGISTRAR USUARIO QUE LLAMA AL CONTROLADOR
+	    public static void RegistrarAdministrador() {
 	    	
 	    	ControllerAdministrador.RegistrarAdministrador();;
 	    	
 	    	
 	    }
+	    
+	    //METODO PARA REGISTRAR ADMINISTRADOR QUE LLAMA AL CONTROLADOR Y LE ENVIA EL ADMINISTRADOR YA CREADO ANTES DE ENVIARLO AL METODO
+	    public static void RegistrarAdministrador(Administrador admin) {
+	    	
+	    	JOptionPane.showMessageDialog(null, "Estas registrandote");
+	    	ControllerAdministrador.RegistrarAdministrador(admin);
+	    	
+	    }
+	    
+	    //METODO PARA EDITAR ADMINISTRADOR
+	    public static String EditarAdministrador(Administrador usuario) {
+			
+			if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty()|| usuario.getContrasenia().isEmpty()) {
+				return "No se pudo editar";
+			}else {
+				return DLL.ControllerAdministrador.EditarAdministrador(usuario);
+			}
+			
+		}
 		
+	    //METODO PARA ELIMINAR ADMINISTRADOR
 
 }

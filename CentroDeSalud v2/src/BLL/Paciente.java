@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import DLL.Conexion;
+import DLL.ControllerAdministrador;
 import repository.Encriptador;
 import repository.OpcionesPaciente;
 import DLL.ControllerPaciente;
@@ -37,6 +38,7 @@ public class Paciente extends Usuario implements Encriptador{
     }
     // METODOS
     
+    //METODO PARA HACER LOGIN DE PACIENTE
     public static Paciente login(String email, String contrasenia) {
     	Paciente usuario = new Paciente() ;
     	if (email.isEmpty() || contrasenia.isEmpty()) {
@@ -47,14 +49,24 @@ public class Paciente extends Usuario implements Encriptador{
 		}
     	return usuario;
     }
-
-    public static void RegistrarUsuario(Paciente paciente) {
+    
+    //METODO REGISTRAR PACIENTE QUE LLAMA AL CONTROLADOR
+    public static void RegistrarPaciente() {
+    	
+    	ControllerPaciente.RegistrarPaciente();;
+    	
+    	
+    }
+    
+    //METODO PARA REGISTRAR PACIENTE PERO ENVIANDO EL PACIENTE ANTES DE IR AL CONTROLADOR
+    public static void RegistrarPaciente(Paciente paciente) {
     	
     	JOptionPane.showMessageDialog(null, "Estas registrandote");
     	ControllerPaciente.RegistrarPaciente(paciente);
     	
     }
     
+    //METODO PARA EDITAR PACIENTE
     public static String EditarPaciente(Paciente usuario) {
 		
 		if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty()|| usuario.getContrasenia().isEmpty()) {
@@ -64,6 +76,9 @@ public class Paciente extends Usuario implements Encriptador{
 		}
 		
 	}
+    
+    //METODO PARA ELIMINAR PACIENTE
+    
     
     public void MenuPaciente() {
 
@@ -88,12 +103,28 @@ public class Paciente extends Usuario implements Encriptador{
                             
                             break;
                         case 1:
-                            Paciente.RegistrarUsuario(paciente);
+                        	//primer forma de registrar paciente, en esta se crea el paciente dentro del metodo registro
+                        	
+                        	//Paciente.RegistrarPaciente();
+                        	
+                        	//segunda forma de registrar paciente, en esta se envia el paciente ya registrado con sus datos
+                        	String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
+                            String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
+                            int  dni = Integer.parseInt(JOptionPane.showInputDialog("ingresa tu dni"));
+                            String fechaNacimiento = JOptionPane.showInputDialog("ingresa la fecha");
+
+                            mail = JOptionPane.showInputDialog("ingresa tu email");
+                            contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
+                            
+                            paciente = new Paciente(0,nombre,apellido,dni,fechaNacimiento,mail,contrasenia);
+                            Paciente.RegistrarPaciente(paciente);
+                            
                             break;
                         case 2:
                             JOptionPane.showMessageDialog(null, paciente);
                             break;
                         case 3:
+                        	JOptionPane.showMessageDialog(null, "a bueno adios master");
                             break;
                     }
                     break;
