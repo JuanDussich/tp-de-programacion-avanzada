@@ -56,13 +56,13 @@ public class Medico extends Usuario implements Encriptador{
 
             switch (opcion) {
                 case 0: // VER_AGENDA
-                    mostrarAgenda();
+                	JOptionPane.showMessageDialog(null, "Mostrar Agenda.");
                     break;
                 case 1: // CARGAR_RECETA
-                    cargarReceta();
+                	JOptionPane.showMessageDialog(null, "Cargar receta");
                     break;
                 case 2: // CONSULTAR_PACIENTE
-                    consultarPaciente();
+                	JOptionPane.showMessageDialog(null, "Consultar Paciente");
                     break;
                 case 3: // SALIR
                     JOptionPane.showMessageDialog(null, "Saliendo del menú Médico...");
@@ -75,44 +75,7 @@ public class Medico extends Usuario implements Encriptador{
         } while (opcion != 3);
     }
 
-    // Simula la visualización de turnos en agenda
-   private void mostrarAgenda() {
-    	String agenda = 
-    		    "Agenda del día:\n" +
-    		    "- 08:00 - Juan Pérez\n" +
-    		    "- 08:30 - María Gómez\n" +
-    		    "- 09:00 - Luis Martínez";
-        JOptionPane.showMessageDialog(null, agenda, "Agenda", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-
-    // Simula la carga de una receta para un paciente
-    private void cargarReceta() {
-        String paciente = JOptionPane.showInputDialog("Ingrese el nombre del paciente:");
-        String receta = JOptionPane.showInputDialog("Ingrese la receta (medicamentos, dosis, etc):");
-
-        if (paciente != null && receta != null) {
-            JOptionPane.showMessageDialog(null, "Receta cargada exitosamente para " + paciente);
-            // Aquí podrías guardar la receta en una base de datos
-        } else {
-            JOptionPane.showMessageDialog(null, "Ingreso cancelado.");
-        }
-    }
-
-    // Simula la consulta de información básica de un paciente
-    private void consultarPaciente() {
-        String nombre = JOptionPane.showInputDialog("Ingrese el nombre del paciente a consultar:");
-        if (nombre != null && !nombre.trim().isEmpty()) {
-            // Simulación de datos del paciente
-            String datos = "Nombre: " + nombre + "\nEdad: 45\nDiagnóstico: Hipertensión";
-            JOptionPane.showMessageDialog(null, datos, "Datos del Paciente", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Nombre no válido.");
-        }
-    }
-
-
-
+ 
     // ------------------- MÉTODOS GETTERS & SETTERS -------------------
 
     public int getId() {
