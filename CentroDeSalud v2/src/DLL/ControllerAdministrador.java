@@ -166,6 +166,8 @@ public class ControllerAdministrador {
 	        }
 	        return usuarios;
 	    }
+	    
+	    //METODO ELIMINAR ADMINISTRADOR
 
 }
 
