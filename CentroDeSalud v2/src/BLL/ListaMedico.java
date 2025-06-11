@@ -37,7 +37,7 @@ public class ListaMedico {
         Medico medico = buscarPorMatricula(matricula);
         if (medico != null) {
             medico.setEspecialidad(nuevaEspecialidad);
-            medico.setCantidadConsultas(nuevaCantidadConsultas);
+            //medico.setCantidadConsultas(nuevaCantidadConsultas);
             return true;
         }
         return false;

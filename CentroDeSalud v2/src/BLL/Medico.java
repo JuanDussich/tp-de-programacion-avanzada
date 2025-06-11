@@ -5,20 +5,20 @@ import repository.Encriptador;
 import repository.OpcionesMedico;
 
 public class Medico extends Usuario implements Encriptador{
-	private int id;
-    private boolean activo = true;
+	private int idMedico;
+    private int activo = 1; // true 1 false 0
 	private String matricula;
     private String especialidad;
-    private int cantidadConsultas;
+    //private int cantidadConsultas;
 
     
     public Medico() {
 
     }
     
-    public Medico(int id, String nombre, String apellido, String email, String contrasenia, String especialidad, String matricula, boolean activo) {
+    public Medico(int idMedico, String nombre, String apellido, String email, String contrasenia, String especialidad, String matricula, int activo) {
         super(nombre, apellido, email, contrasenia); // Hereda de Usuario
-        this.id = id;
+        this.idMedico = idMedico;
         this.especialidad = especialidad;
         this.matricula = matricula;
         this.activo = activo;
@@ -28,11 +28,11 @@ public class Medico extends Usuario implements Encriptador{
         if (matricula != null && especialidad != null && cantidadConsultas >= 0) {
             this.matricula = matricula;
             this.especialidad = especialidad;
-            this.cantidadConsultas = cantidadConsultas;
+            //this.cantidadConsultas = cantidadConsultas;
         } else {
             this.matricula = "Desconocida";
             this.especialidad = "Desconocida";
-            this.cantidadConsultas = 0;
+           // this.cantidadConsultas = 0;
         }
     }
 
@@ -79,18 +79,18 @@ public class Medico extends Usuario implements Encriptador{
     // ------------------- MÉTODOS GETTERS & SETTERS -------------------
 
     public int getId() {
-        return id;
+        return idMedico;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idMedico = id;
     }
     
-    public boolean getActivo() {
+    public int getActivo() {
         return activo;
     }
 
-    public void setActivo(boolean activo) {
+    public void setActivo(int activo) {
         this.activo = activo;
     }
 
@@ -111,7 +111,7 @@ public class Medico extends Usuario implements Encriptador{
         this.especialidad = especialidad;
     }
     
-    public int getCantidadConsultas() {
+    /*public int getCantidadConsultas() {
         return cantidadConsultas;
     }
 
@@ -121,12 +121,12 @@ public class Medico extends Usuario implements Encriptador{
         } else {
             this.cantidadConsultas = 0; // Establece un valor predeterminado si es negativo
         }
-    }
+    }*/
 
     @Override
     public String toString() {
         return "Medico{" +
-                "id=" + id +
+                "idMedico=" + idMedico +
                 ", activo=" + activo +
                 ", nombre=" + getNombre() +
                 ", apellido=" + getApellido() +

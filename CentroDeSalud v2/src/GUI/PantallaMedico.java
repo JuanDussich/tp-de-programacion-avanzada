@@ -61,7 +61,7 @@ public class PantallaMedico extends JFrame {
                 	String email = (String) modeloTabla.getValueAt(fila, 3);
                 	String matricula = (String) modeloTabla.getValueAt(fila, 4);
                 	String especialidad = (String) modeloTabla.getValueAt(fila, 5);
-                	boolean activo = (Boolean) modeloTabla.getValueAt(fila, 7);
+                	int activo = (int) modeloTabla.getValueAt(fila, 7);
 
                     // Solicita la contraseña del médico (simulada)
                     String contrasenia = JOptionPane.showInputDialog("Ingrese la contraseña del médico (obligatorio):");
@@ -77,7 +77,7 @@ public class PantallaMedico extends JFrame {
                         return;
                     }
 
-                    // Pide nueva cantidad de consultas
+                    /*Pide nueva cantidad de consultas
                     String cantConsultasStr = JOptionPane.showInputDialog("Cantidad de consultas actualizada:");
                     int nuevaCantidad;
                     try {
@@ -85,11 +85,11 @@ public class PantallaMedico extends JFrame {
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Cantidad de consultas inválida.");
                         return;
-                    }
+                    }*/
 
                     // Crear nuevo objeto médico con los datos modificados
                     Medico medico = new Medico(id, nombre, apellido, email, contrasenia, nuevaEspecialidad, matricula, activo);
-                    medico.setCantidadConsultas(nuevaCantidad);
+                    //medico.setCantidadConsultas(nuevaCantidad);
 
                     // Llama al controlador para actualizar
                     if (ControllerMedico.editarMedico(medico)) {
@@ -145,10 +145,11 @@ public class PantallaMedico extends JFrame {
 
         LinkedList<Medico> medicos = ControllerMedico.mostrarMedicos();
         for (Medico m : medicos) {
-            if (m.getActivo()) { // Solo muestra médicos activos
+            if (m.getActivo() == 1) { // Solo muestra médicos activos
                 modeloTabla.addRow(new Object[]{
                     m.getId(), m.getNombre(), m.getApellido(), m.getEmail(), m.getMatricula(),
-                    m.getEspecialidad(), m.getCantidadConsultas(), m.getActivo()
+                    m.getEspecialidad(), m.getActivo()
+                    /*m.getCantidadConsultas()*/
                 });
             }
         }

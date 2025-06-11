@@ -23,16 +23,16 @@ public class ControllerMedico {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
             	Medico medico = new Medico(
-            		    rs.getInt("id"),
+            		    rs.getInt("idMedico"),
             		    rs.getString("nombre"),
             		    rs.getString("apellido"),
             		    rs.getString("email"),
             		    rs.getString("contrasenia"),
             		    rs.getString("especialidad"),
             		    rs.getString("matricula"),
-            		    rs.getBoolean("activo")
+            		    rs.getInt("activo")
             		);
-                medico.setCantidadConsultas(rs.getInt("cantidadConsultas"));
+                //medico.setCantidadConsultas(rs.getInt("cantidadConsultas"));
                 return medico;
             }
         } catch (SQLException e) {
@@ -52,7 +52,7 @@ public class ControllerMedico {
             stmt.setString(4, medico.getContrasenia());
             stmt.setString(5, medico.getMatricula());
             stmt.setString(6, medico.getEspecialidad());
-            stmt.setInt(7, medico.getCantidadConsultas());
+            //stmt.setInt(7, medico.getCantidadConsultas());
 
             int filas = stmt.executeUpdate();
             if (filas > 0) {
@@ -75,16 +75,16 @@ public class ControllerMedico {
 
             while (rs.next()) {
             	Medico medico = new Medico(
-            		    rs.getInt("id"),
+            		    rs.getInt("idMedico"),
             		    rs.getString("nombre"),
             		    rs.getString("apellido"),
             		    rs.getString("email"),
             		    rs.getString("contrasenia"),
             		    rs.getString("especialidad"),
             		    rs.getString("matricula"),
-            		    rs.getBoolean("activo")
+            		    rs.getInt("activo")
             		);
-                medico.setCantidadConsultas(rs.getInt("cantidadConsultas"));
+               // medico.setCantidadConsultas(rs.getInt("cantidadConsultas"));
                 lista.add(medico);
             }
 
@@ -105,7 +105,7 @@ public class ControllerMedico {
             stmt.setString(3, medico.getEmail());
             stmt.setString(4, medico.getContrasenia());
             stmt.setString(5, medico.getEspecialidad());
-            stmt.setInt(6, medico.getCantidadConsultas());
+            //stmt.setInt(6, medico.getCantidadConsultas());
             stmt.setString(7, medico.getMatricula());
 
             int filas = stmt.executeUpdate();
@@ -140,16 +140,16 @@ public class ControllerMedico {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
             	Medico medico = new Medico(
-            		    rs.getInt("id"),
+            		    rs.getInt("idMedico"),
             		    rs.getString("nombre"),
             		    rs.getString("apellido"),
             		    rs.getString("email"),
             		    rs.getString("contrasenia"),
             		    rs.getString("especialidad"),
             		    rs.getString("matricula"),
-            		    rs.getBoolean("activo")
+            		    rs.getInt("activo")
             		);
-            	medico.setCantidadConsultas(rs.getInt("cantidadConsultas"));
+            	//medico.setCantidadConsultas(rs.getInt("cantidadConsultas"));
                 return medico;
             }
 
