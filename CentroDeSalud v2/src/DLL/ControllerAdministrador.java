@@ -7,7 +7,10 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import BLL.Administrador;
+import BLL.Paciente;
 import BLL.Usuario;
 import repository.*;
 
@@ -19,6 +22,7 @@ public class ControllerAdministrador {
 		
 		//METODOS
 		
+		//METODO LOGIN DEL ADMINISTRADOR
 		public static Administrador login(String email, String contrasenia) {
 	        Administrador administrador = new Administrador();
 	        JOptionPane.showMessageDialog(null, administrador);
@@ -46,6 +50,7 @@ public class ControllerAdministrador {
 	        return administrador;
 	    }
 
+		//METODO AGREGAR ADMINISTRADOR
 	    public static void agregarAdministrador(Administrador usuario) {
 	        try {
 	            PreparedStatement statement = con.prepareStatement(
@@ -67,6 +72,7 @@ public class ControllerAdministrador {
 	        }
 	    }
 
+	    //METODO DE REGISTRAR ADMINISTRADOR CREANDOLO EN EL METODO
 	    public static void RegistrarAdministrador() {
 
 	        String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
@@ -88,11 +94,58 @@ public class ControllerAdministrador {
 	        if (flag) {
 	            agregarAdministrador(nuevo);
 	        }else {
-	            JOptionPane.showMessageDialog(null, "Usuario ya creado");
+	            JOptionPane.showMessageDialog(null, "Administrador ya creado");
 	        }
 
 
 	    }
+	    
+	    //ESTE ES EL METODO DE REGISTRAR ADMINISTRADOR PERO SE ENVIA EL ADMINISTRADOR DESDE FUERA DEL METODO
+	    public static void RegistrarAdministrador(Administrador nuevo) {
+	        LinkedList<Administrador> existentes = mostrarAdministrador();
+	        boolean flag = true;
+	        for (Usuario existente : existentes) {
+	            if (existente.getEmail().equals(nuevo.getEmail())) {
+	                flag = false;
+	                break;
+	            }
+	        }
+	        if (flag) {
+	            agregarAdministrador(nuevo);
+	        }else {
+	            JOptionPane.showMessageDialog(null, "Administrador ya creado");
+	        }
+
+
+	    }
+	    
+	  //ESTA ES LA PARTE DE EDITAR ADMINISTRADOR
+		public static String EditarAdministrador(Administrador Admin) {
+			try {
+				PreparedStatement statement = con
+						.prepareStatement(
+								"UPDATE `administrador` SET `nombre`=?,`apellido`=?,`email`=?,`contrasenia`=? WHERE idAdministrador= ?");
+				statement.setString(1, Admin.getNombre());
+				statement.setString(2, Admin.getApellido());
+				statement.setString(5, Admin.getEmail());
+				statement.setString(6,Admin.encriptar(Admin.getContrasenia()));
+				statement.setInt(7,Admin.getId());
+
+				int filas = statement.executeUpdate();
+				if (filas > 0) {
+					return "Administrador editado correctamente.";
+				}
+				
+			}catch (MySQLIntegrityConstraintViolationException e) {
+				return "Error mail existente";
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "Error";
+		}
+		
+		//ESTA ES LA PARTE DE MOSTRAR ADMINISTRADOR
 	    public static LinkedList<Administrador> mostrarAdministrador() {
 	        LinkedList<Administrador> usuarios = new LinkedList<>();
 	        try {
@@ -114,6 +167,7 @@ public class ControllerAdministrador {
 	        }
 	        return usuarios;
 	    }
+<<<<<<< HEAD
 	    //  Método para editar un administrador
 	    public static boolean editarAdministrador(Administrador admin) {
 	        try {
@@ -125,6 +179,10 @@ public class ControllerAdministrador {
 	            stmt.setString(3, admin.getEmail());
 	            stmt.setString(4, admin.encriptar(admin.getContrasenia()));
 	            stmt.setInt(5, admin.getId());
+=======
+	    
+	    //METODO ELIMINAR ADMINISTRADOR
+>>>>>>> Juan
 
 	            int filas = stmt.executeUpdate();
 	            return filas > 0;
