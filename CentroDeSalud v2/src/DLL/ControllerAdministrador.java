@@ -167,8 +167,7 @@ public class ControllerAdministrador {
 	        }
 	        return usuarios;
 	    }
-<<<<<<< HEAD
-	    //  Método para editar un administrador
+	    
 	    public static boolean editarAdministrador(Administrador admin) {
 	        try {
 	            PreparedStatement stmt = con.prepareStatement(
@@ -179,10 +178,6 @@ public class ControllerAdministrador {
 	            stmt.setString(3, admin.getEmail());
 	            stmt.setString(4, admin.encriptar(admin.getContrasenia()));
 	            stmt.setInt(5, admin.getId());
-=======
-	    
-	    //METODO ELIMINAR ADMINISTRADOR
->>>>>>> Juan
 
 	            int filas = stmt.executeUpdate();
 	            return filas > 0;
