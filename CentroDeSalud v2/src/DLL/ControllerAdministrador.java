@@ -167,27 +167,8 @@ public class ControllerAdministrador {
 	        }
 	        return usuarios;
 	    }
-	    
-	    public static boolean editarAdministrador(Administrador admin) {
-	        try {
-	            PreparedStatement stmt = con.prepareStatement(
-	                "UPDATE administrador SET nombre = ?, apellido = ?, email = ?, contrasenia = ? WHERE idAdministrador = ?"
-	            );
-	            stmt.setString(1, admin.getNombre());
-	            stmt.setString(2, admin.getApellido());
-	            stmt.setString(3, admin.getEmail());
-	            stmt.setString(4, admin.encriptar(admin.getContrasenia()));
-	            stmt.setInt(5, admin.getId());
 
-	            int filas = stmt.executeUpdate();
-	            return filas > 0;
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            return false;
-	        }
-	    }
-
-	    // Método para eliminar un administrador (físicamente)
+	    // METODO PARA ELIMINAR UN ADMINISTRADOR (físicamente)
 	    public static boolean eliminarAdministrador(int id) {
 	        try {
 	            PreparedStatement stmt = con.prepareStatement(
