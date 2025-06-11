@@ -77,7 +77,7 @@ public class Administrador extends Usuario implements Encriptador {
 
 	    @Override
 	    public String toString() {
-	        return "Paciente{" + "id=" + id + "} " + super.toString();
+	        return "Administrador{" + "id=" + id + "} " + super.toString();
 	    }
 	    
 	    public static Administrador login(String email, String contrasenia) {
