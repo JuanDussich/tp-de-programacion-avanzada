@@ -64,13 +64,13 @@ public class PantallaMedico extends JFrame {
                 	String apellido = (String) modeloTabla.getValueAt(fila, 2);
                 	String matricula = (String) modeloTabla.getValueAt(fila, 3);
                 	String email = (String) modeloTabla.getValueAt(fila, 4);
-                	
-                    // Solicita la contraseña del médico (simulada)
+                	String contrasenia = (String) modeloTabla.getValueAt(fila, 5);
+                    /*// Solicita la contraseña del médico (simulada)
                     String contrasenia = JOptionPane.showInputDialog("Ingrese la contraseña del médico (obligatorio):");
                     if (contrasenia == null || contrasenia.trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "La contraseña es obligatoria.");
                         return;
-                    }
+                    }*/
 
                     // Pide nueva especialidad
                     String nuevaEspecialidad = JOptionPane.showInputDialog("Nueva especialidad:");
