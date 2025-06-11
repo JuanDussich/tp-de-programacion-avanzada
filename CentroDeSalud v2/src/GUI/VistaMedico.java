@@ -12,7 +12,11 @@ import java.util.LinkedList;
 
 public class VistaMedico extends JFrame {
 
-    private JPanel contentPane;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7945647544248119807L;
+	private JPanel contentPane;
     private JTable table;
     private DefaultTableModel model;
     private Medico usuarioSeleccionado;  // Médico seleccionado en la tabla

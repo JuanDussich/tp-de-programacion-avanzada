@@ -12,7 +12,11 @@ import java.util.LinkedList;
 
 public class PantallaMedico extends JFrame {
 
-    // Componentes de la GUI
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1496404291286514983L;
+	// Componentes de la GUI
     private JTable tablaMedicos;
     private DefaultTableModel modeloTabla;
     private JButton btnEditar, btnEliminar, btnRefrescar;
@@ -58,12 +62,9 @@ public class PantallaMedico extends JFrame {
                 	int id = (int) modeloTabla.getValueAt(fila, 0);
                 	String nombre = (String) modeloTabla.getValueAt(fila, 1);
                 	String apellido = (String) modeloTabla.getValueAt(fila, 2);
-                	String email = (String) modeloTabla.getValueAt(fila, 3);
+                	String matricula = (String) modeloTabla.getValueAt(fila, 3);
+                	String email = (String) modeloTabla.getValueAt(fila, 4);
                 	
-                	String matricula = (String) modeloTabla.getValueAt(fila, 5);
-                	String especialidad = (String) modeloTabla.getValueAt(fila, 6);
-                	int activo = (int) modeloTabla.getValueAt(fila, 7);
-
                     // Solicita la contraseña del médico (simulada)
                     String contrasenia = JOptionPane.showInputDialog("Ingrese la contraseña del médico (obligatorio):");
                     if (contrasenia == null || contrasenia.trim().isEmpty()) {
@@ -78,18 +79,11 @@ public class PantallaMedico extends JFrame {
                         return;
                     }
 
-                    /*Pide nueva cantidad de consultas
-                    String cantConsultasStr = JOptionPane.showInputDialog("Cantidad de consultas actualizada:");
-                    int nuevaCantidad;
-                    try {
-                        nuevaCantidad = Integer.parseInt(cantConsultasStr);
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Cantidad de consultas inválida.");
-                        return;
-                    }*/
-
+                    // Obtener estado activo desde columna 7 (si contiene "Activo"/"De Baja")
+                    int activo = modeloTabla.getValueAt(fila, 7).toString().equalsIgnoreCase("Activo") ? 1 : 0;
+                    
                     // Crear nuevo objeto médico con los datos modificados
-                    Medico medico = new Medico(id, nombre, apellido, email, contrasenia, nuevaEspecialidad, matricula, activo);
+                    Medico medico = new Medico(id, nombre, apellido, matricula, email,contrasenia, nuevaEspecialidad,  activo);
                     //medico.setCantidadConsultas(nuevaCantidad);
 
                     // Llama al controlador para actualizar
@@ -148,10 +142,15 @@ public class PantallaMedico extends JFrame {
         for (Medico m : medicos) {
             if (m.getActivo() == 1) { // Solo muestra médicos activos
                 modeloTabla.addRow(new Object[]{
-                    m.getId(), m.getNombre(), m.getApellido(), m.getEmail(), m.getMatricula(),
-                    m.getEspecialidad(), m.getActivo()
-                    /*m.getCantidadConsultas()*/
-                });
+                    m.getId(), 
+                    m.getNombre(), 
+                    m.getApellido(),
+                    m.getMatricula(), 
+                    m.getEmail(), 
+                    m.getContrasenia(), 
+                    m.getEspecialidad(), 
+                    m.getActivo() == 1 ? "Activo" : "De Baja"}
+                    );
             }
         }
     }

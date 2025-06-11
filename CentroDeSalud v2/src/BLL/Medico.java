@@ -8,10 +8,8 @@ public class Medico extends Usuario implements Encriptador{
 	private int idMedico;
     private int activo = 1; // true 1 false 0
 	private String matricula;
-    private String especialidad;
-    //private int cantidadConsultas;
-
-    
+    private String especialidad; // se cambio el campo especialidad a string eliminar tabla especialidad!!
+       
     public Medico() {
 
     }
@@ -23,7 +21,15 @@ public class Medico extends Usuario implements Encriptador{
         this.matricula = matricula;
         this.activo = activo;
     }
-    // Validación 
+    // constructor sin id 
+    public Medico(String nombre, String apellido, String matricula, String email, String contrasenia, String especialidad, int activo) {
+        super(nombre, apellido, email, contrasenia);
+        this.matricula = matricula;
+        this.especialidad = especialidad;
+        this.activo = activo;
+    }
+
+    // Validación constructir matricula y especialidad
     public Medico(String matricula, String especialidad) {
         if (matricula != null && especialidad != null) {
             this.matricula = matricula;
@@ -32,11 +38,11 @@ public class Medico extends Usuario implements Encriptador{
         } else {
             this.matricula = "Desconocida";
             this.especialidad = "Desconocida";
-           // this.cantidadConsultas = 0;
+          
         }
     }
 
-    
+    // menu inicial primera entrega ¿BORRAR? consultar con teem
     public void MenuMedico() {
         int opcion;
 
@@ -123,28 +129,16 @@ public class Medico extends Usuario implements Encriptador{
         this.especialidad = especialidad;
     }
     
-    /*public int getCantidadConsultas() {
-        return cantidadConsultas;
-    }
-
-    public void setCantidadConsultas(int cantidadConsultas) {
-        if (cantidadConsultas >= 0) {
-            this.cantidadConsultas = cantidadConsultas;
-        } else {
-            this.cantidadConsultas = 0; // Establece un valor predeterminado si es negativo
-        }
-    }*/
-
     @Override
     public String toString() {
         return "Medico{" +
-                "idMedico=" + idMedico +
-                ", activo=" + activo +
-                ", nombre=" + getNombre() +
-                ", apellido=" + getApellido() +
-                ", email=" + getEmail() +
-                ", especialidad='" + especialidad + '\'' +
-                ", matricula='" + matricula + '\'' +
+                "idMedico= " + idMedico +
+                ", nombre= " + getNombre() +
+                ", apellido= " + getApellido() +
+                ", matricula= '" + matricula + '\'' +
+                ", email= " + getEmail() +
+                ", especialidad= '" + especialidad + '\'' +
+                ", activo= " + activo +
                 '}';
     }
 }
