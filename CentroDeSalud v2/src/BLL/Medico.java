@@ -16,7 +16,7 @@ public class Medico extends Usuario implements Encriptador{
 
     }
     
-    public Medico(int idMedico, String nombre, String apellido, String email, String contrasenia, String especialidad, String matricula, int activo) {
+    public Medico(int idMedico, String nombre, String apellido, String matricula, String email, String contrasenia, String especialidad, int activo) {
         super(nombre, apellido, email, contrasenia); // Hereda de Usuario
         this.idMedico = idMedico;
         this.especialidad = especialidad;
@@ -24,8 +24,8 @@ public class Medico extends Usuario implements Encriptador{
         this.activo = activo;
     }
     // Validación 
-    public Medico(String matricula, String especialidad, int cantidadConsultas) {
-        if (matricula != null && especialidad != null && cantidadConsultas >= 0) {
+    public Medico(String matricula, String especialidad) {
+        if (matricula != null && especialidad != null) {
             this.matricula = matricula;
             this.especialidad = especialidad;
             //this.cantidadConsultas = cantidadConsultas;
@@ -75,7 +75,19 @@ public class Medico extends Usuario implements Encriptador{
         } while (opcion != 3);
     }
 
- 
+    public static String EditarMedico(Medico usuario) {
+        if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty() || usuario.getContrasenia().isEmpty()) {
+            return "No se pudo editar";
+        } else {
+            boolean exito = DLL.ControllerMedico.EditarMedico(usuario);
+            if (exito) {
+                return "Medico actualizado correctamente";
+            } else {
+                return "No se pudo actualizar el medico";
+            }
+        }
+    }
+    
     // ------------------- MÉTODOS GETTERS & SETTERS -------------------
 
     public int getId() {

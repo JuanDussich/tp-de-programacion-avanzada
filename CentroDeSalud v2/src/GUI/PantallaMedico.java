@@ -27,7 +27,7 @@ public class PantallaMedico extends JFrame {
 
         // Crea el modelo de la tabla con las columnas
         modeloTabla = new DefaultTableModel(
-            new Object[]{"ID", "Nombre", "Apellido", "Email", "Matrícula", "Especialidad", "Consultas", "Activo"}, 0
+            new Object[]{"ID", "Nombre", "Apellido", "Matrícula", "Email", "Contrasenia", "Especialidad", "Activo"}, 0
         );
         tablaMedicos = new JTable(modeloTabla);
         JScrollPane scroll = new JScrollPane(tablaMedicos); // Scroll para la tabla
@@ -59,8 +59,9 @@ public class PantallaMedico extends JFrame {
                 	String nombre = (String) modeloTabla.getValueAt(fila, 1);
                 	String apellido = (String) modeloTabla.getValueAt(fila, 2);
                 	String email = (String) modeloTabla.getValueAt(fila, 3);
-                	String matricula = (String) modeloTabla.getValueAt(fila, 4);
-                	String especialidad = (String) modeloTabla.getValueAt(fila, 5);
+                	
+                	String matricula = (String) modeloTabla.getValueAt(fila, 5);
+                	String especialidad = (String) modeloTabla.getValueAt(fila, 6);
                 	int activo = (int) modeloTabla.getValueAt(fila, 7);
 
                     // Solicita la contraseña del médico (simulada)
@@ -92,7 +93,7 @@ public class PantallaMedico extends JFrame {
                     //medico.setCantidadConsultas(nuevaCantidad);
 
                     // Llama al controlador para actualizar
-                    if (ControllerMedico.editarMedico(medico)) {
+                    if (ControllerMedico.EditarMedico(medico)) {
                         JOptionPane.showMessageDialog(null, "Médico actualizado correctamente");
                         cargarMedicos(); // Recarga la tabla
                     } else {
@@ -155,13 +156,4 @@ public class PantallaMedico extends JFrame {
         }
     }
 
-    // -------------------- Método principal para pruebas --------------------
-   /* public static void main(String[] args) {
-        // Agrega algunos médicos de ejemplo al iniciar
-        ControllerMedico.agregarMedico(new Medico("Ana", "Pérez", "ana@mail.com", "1234", "MAT001", "Cardiología"));
-        ControllerMedico.agregarMedico(new Medico("Luis", "García", "luis@mail.com", "abcd", "MAT002", "Pediatría"));
-
-        // Lanza la ventana de forma asíncrona (buena práctica en Swing)
-        SwingUtilities.invokeLater(() -> new PantallaMedico());
-    }*/
 }

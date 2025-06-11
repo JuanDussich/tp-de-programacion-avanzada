@@ -6,15 +6,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import BLL.Medico;
+import BLL.Usuario;
 
 public class ControllerMedico {
 
     private static Connection con = Conexion.getInstance().getConnection();
 
-    // LOGIN: sólo permite iniciar sesión si el médico está activo
+    /**
+     * LOGIN: Permite iniciar sesión sólo si el médico está activo.
+     * Busca en la tabla 'medicos' por email, contraseña y que esté activo.
+     * Retorna un objeto Medico si encuentra coincidencia, sino null.
+     */
     public static Medico login(String email, String contrasenia) {
-        String sql = "SELECT * FROM medicos WHERE email = ? AND contrasenia = ? AND activo = TRUE";
+        String sql = "SELECT * FROM medico WHERE email = ? AND contrasenia = ? AND activo = TRUE";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, email);
@@ -22,17 +29,17 @@ public class ControllerMedico {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-            	Medico medico = new Medico(
-            		    rs.getInt("idMedico"),
-            		    rs.getString("nombre"),
-            		    rs.getString("apellido"),
-            		    rs.getString("email"),
-            		    rs.getString("contrasenia"),
-            		    rs.getString("especialidad"),
-            		    rs.getString("matricula"),
-            		    rs.getInt("activo")
-            		);
-                //medico.setCantidadConsultas(rs.getInt("cantidadConsultas"));
+                Medico medico = new Medico(
+                    rs.getInt("idMedico"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("email"),
+                    rs.getString("contrasenia"),
+                    rs.getString("especialidad"),
+                    rs.getString("matricula"),
+                    rs.getInt("activo")
+                );
+                
                 return medico;
             }
         } catch (SQLException e) {
@@ -41,18 +48,23 @@ public class ControllerMedico {
         return null;
     }
 
-    // AGREGAR médico nuevo
+    /**
+     * AGREGAR un nuevo médico a la base de datos.
+     * Inserta los datos recibidos en el objeto Medico en la tabla 'medicos'.
+     * El campo 'activo' se setea en TRUE por defecto al crear.
+     */
     public static void agregarMedico(Medico medico) {
-        String sql = "INSERT INTO medicos (nombre, apellido, email, contrasenia, matricula, especialidad, cantidadConsultas, activo) VALUES (?, ?, ?, ?, ?, ?, ?, TRUE)";
+        String sql = "INSERT INTO medico (nombre, apellido, matricula, email, contrasenia, especialidad, activo) VALUES ( ?, ?, ?, ?, ?, ?, TRUE)";
         try {
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, medico.getNombre());
-            stmt.setString(2, medico.getApellido());
-            stmt.setString(3, medico.getEmail());
-            stmt.setString(4, medico.getContrasenia());
-            stmt.setString(5, medico.getMatricula());
-            stmt.setString(6, medico.getEspecialidad());
-            //stmt.setInt(7, medico.getCantidadConsultas());
+        	PreparedStatement stmt = con.prepareStatement(sql);
+        	stmt.setString(1, medico.getNombre());
+        	stmt.setString(2, medico.getApellido());
+        	stmt.setString(5, medico.getMatricula());  // WHERE matricula = ?
+        	stmt.setString(3, medico.getEmail());
+        	stmt.setString(4, medico.getContrasenia());
+        	stmt.setString(6, medico.getEspecialidad());
+
+                       
 
             int filas = stmt.executeUpdate();
             if (filas > 0) {
@@ -65,26 +77,29 @@ public class ControllerMedico {
         }
     }
 
-    // MOSTRAR médicos activos
+    /**
+     * MOSTRAR todos los médicos activos.
+     * Recupera todos los registros con activo = TRUE y los devuelve en una lista.
+     */
     public static LinkedList<Medico> mostrarMedicos() {
         LinkedList<Medico> lista = new LinkedList<>();
-        String sql = "SELECT * FROM medicos WHERE activo = TRUE";
+        String sql = "SELECT * FROM medico WHERE activo = TRUE";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-            	Medico medico = new Medico(
-            		    rs.getInt("idMedico"),
-            		    rs.getString("nombre"),
-            		    rs.getString("apellido"),
-            		    rs.getString("email"),
-            		    rs.getString("contrasenia"),
-            		    rs.getString("especialidad"),
-            		    rs.getString("matricula"),
-            		    rs.getInt("activo")
-            		);
-               // medico.setCantidadConsultas(rs.getInt("cantidadConsultas"));
+                Medico medico = new Medico(
+                    rs.getInt("idMedico"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("matricula"),
+                    rs.getString("email"),
+                    rs.getString("contrasenia"),
+                    rs.getString("especialidad"),
+                    rs.getInt("activo")
+                );
+                // medico.setCantidadConsultas(rs.getInt("cantidadConsultas")); //
                 lista.add(medico);
             }
 
@@ -95,19 +110,26 @@ public class ControllerMedico {
         return lista;
     }
 
-    // EDITAR datos del médico identificado por matrícula
-    public static boolean editarMedico(Medico medico) {
-        String sql = "UPDATE medicos SET nombre = ?, apellido = ?, email = ?, contrasenia = ?, especialidad = ?, cantidadConsultas = ? WHERE matricula = ? AND activo = TRUE";
+    /**
+     * EDITAR datos de un médico identificado por su matrícula.
+     * Actualiza el nombre, apellido, email, contraseña, especialidad y cantidadConsultas
+     * para el médico con esa matrícula y que esté activo.
+     * Retorna true si se actualizó correctamente, false si no.
+     */
+    public static boolean EditarMedico(Medico medico) {
+        String sql = "UPDATE medico SET nombre = ?, apellido = ?, matricula = ?, email = ?, contrasenia = ?, especialidad = ? "
+        		+ "WHERE matricula = ? AND activo = TRUE";
         try {
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, medico.getNombre());
-            stmt.setString(2, medico.getApellido());
-            stmt.setString(3, medico.getEmail());
-            stmt.setString(4, medico.getContrasenia());
-            stmt.setString(5, medico.getEspecialidad());
-            //stmt.setInt(6, medico.getCantidadConsultas());
-            stmt.setString(7, medico.getMatricula());
+        	PreparedStatement stmt = con.prepareStatement(sql);
+        	stmt.setString(1, medico.getNombre());
+        	stmt.setString(2, medico.getApellido());
+        	stmt.setString(6, medico.getMatricula());  // WHERE matricula = ?
+        	stmt.setString(3, medico.getEmail());
+        	stmt.setString(4, medico.getContrasenia());
+        	stmt.setString(5, medico.getEspecialidad());
+        	
 
+            
             int filas = stmt.executeUpdate();
             return filas > 0;
         } catch (SQLException e) {
@@ -116,12 +138,37 @@ public class ControllerMedico {
         }
     }
 
-    // ELIMINACIÓN lógica: marcar como inactivo
+    /**
+     * REGISTRAR un médico nuevo.
+     * Verifica que no exista otro médico con el mismo email antes de agregar.
+     * Muestra mensaje si ya existe email duplicado.
+     */
+    public static void RegistrarMedico(Medico nuevo) {
+        LinkedList<Medico> existentes = mostrarMedicos(); // Método corregido
+        boolean flag = true;
+        for (Medico existente : existentes) { // Tipo corregido en el foreach
+            if (existente.getEmail().equals(nuevo.getEmail())) {
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            agregarMedico(nuevo);
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario ya creado con ese email");
+        }
+    }
+
+    /**
+     * ELIMINACIÓN lógica de un médico.
+     * Cambia el campo 'activo' a FALSE para marcarlo como inactivo, sin borrar físicamente.
+     * Retorna true si la operación fue exitosa.
+     */
     public static boolean eliminarMedico(int id) { 
-        String sql = "UPDATE medicos SET activo = FALSE WHERE id = ?";
+        String sql = "UPDATE medico SET activo = FALSE WHERE idMedico = ?"; // Campo corregido
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, id);  // <-- corregido aquí
+            stmt.setInt(1, id);
             int filas = stmt.executeUpdate();
             return filas > 0;
         } catch (SQLException e) {
@@ -130,26 +177,29 @@ public class ControllerMedico {
         }
     }
     
-    // BUSCAR médico activo por matrícula
+    /**
+     * BUSCAR un médico activo por matrícula.
+     * Devuelve el objeto Medico si lo encuentra, o null si no.
+     */
     public static Medico buscarPorMatricula(String matricula) {
-        String sql = "SELECT * FROM medicos WHERE matricula = ? AND activo = TRUE";
+        String sql = "SELECT * FROM medico WHERE matricula = ? AND activo = TRUE";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, matricula);
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-            	Medico medico = new Medico(
-            		    rs.getInt("idMedico"),
-            		    rs.getString("nombre"),
-            		    rs.getString("apellido"),
-            		    rs.getString("email"),
-            		    rs.getString("contrasenia"),
-            		    rs.getString("especialidad"),
-            		    rs.getString("matricula"),
-            		    rs.getInt("activo")
-            		);
-            	//medico.setCantidadConsultas(rs.getInt("cantidadConsultas"));
+                Medico medico = new Medico(
+                    rs.getInt("idMedico"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("matricula"),
+                    rs.getString("email"),
+                    rs.getString("contrasenia"),
+                    rs.getString("especialidad"),
+                    rs.getInt("activo")
+                );
+                // medico.setCantidadConsultas(rs.getInt("cantidadConsultas")); // Si usas este campo
                 return medico;
             }
 
