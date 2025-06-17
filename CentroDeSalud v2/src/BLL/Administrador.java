@@ -134,7 +134,7 @@ public class Administrador extends Usuario implements Encriptador {
 	    public static void EliminarAdministrador(Administrador admin) {
 	    	
 	    	JOptionPane.showMessageDialog(null, "Estas eliminando un usuario");
-	    	ControllerAdministrador.EliminarAdministrador(admin);
+	    	ControllerAdministrador.EliminarAdministrador(id);
 	    	
 	    }
 }

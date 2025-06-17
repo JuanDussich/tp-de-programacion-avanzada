@@ -168,8 +168,8 @@ public class ControllerAdministrador {
 	        return usuarios;
 	    }
 
-	    // METODO PARA ELIMINAR UN ADMINISTRADOR (físicamente)
-	    public static String EliminarAdministrador(Administrador admin) {
+	 // Método para eliminar un administrador (físicamente)
+	    public static boolean EliminarAdministrador(int id) {
 	        try {
 	            PreparedStatement stmt = con.prepareStatement(
 	                "DELETE FROM administrador WHERE idAdministrador = ?"
