@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
-public class PantallaAdministrador extends JFrame {
+public class VistaAdministrador extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class PantallaAdministrador extends JFrame {
     private DefaultTableModel modeloTabla;
     private JButton btnEditar, btnEliminar, btnRefrescar;
 
-    public PantallaAdministrador() {
+    public VistaAdministrador() {
         setTitle("Gestión de Administradores");
         setSize(800, 400);
         setLocationRelativeTo(null);
@@ -79,7 +79,7 @@ public class PantallaAdministrador extends JFrame {
                     // Si no está en el modelo, podrías manejar sólo el activo para mostrar.
 
                     // Llamar a método de edición (necesitas implementarlo en ControllerAdministrador)
-                    boolean exito = ControllerAdministrador.editarAdministrador(admin);
+                    boolean exito = ControllerAdministrador.EditarAdministrador(admin);
                     if (exito) {
                         JOptionPane.showMessageDialog(null, "Administrador actualizado correctamente");
                         cargarAdministradores();
