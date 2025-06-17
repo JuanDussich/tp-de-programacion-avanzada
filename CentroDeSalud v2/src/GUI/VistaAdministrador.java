@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
-public class VistaAdministrador extends JFrame {
+public class PantallaAdministrador extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class VistaAdministrador extends JFrame {
     private DefaultTableModel modeloTabla;
     private JButton btnEditar, btnEliminar, btnRefrescar;
 
-    public VistaAdministrador() {
+    public PantallaAdministrador() {
         setTitle("Gestión de Administradores");
         setSize(800, 400);
         setLocationRelativeTo(null);
@@ -79,7 +79,7 @@ public class VistaAdministrador extends JFrame {
                     // Si no está en el modelo, podrías manejar sólo el activo para mostrar.
 
                     // Llamar a método de edición (necesitas implementarlo en ControllerAdministrador)
-                    String exito = ControllerAdministrador.EditarAdministrador(admin);
+                    boolean exito = ControllerAdministrador.editarAdministrador(admin);
                     if (exito) {
                         JOptionPane.showMessageDialog(null, "Administrador actualizado correctamente");
                         cargarAdministradores();
@@ -101,7 +101,7 @@ public class VistaAdministrador extends JFrame {
                     int id = (int) modeloTabla.getValueAt(fila, 0);
                     int confirm = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar al administrador?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (confirm == JOptionPane.YES_OPTION) {
-                        boolean exito = ControllerAdministrador.eliminarAdministrador(id);
+                        boolean exito = ControllerAdministrador.EliminarAdministrador(id);
                         if (exito) {
                             JOptionPane.showMessageDialog(null, "Administrador eliminado.");
                             cargarAdministradores();
