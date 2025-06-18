@@ -10,6 +10,11 @@ import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class PantallaPaciente extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
@@ -42,7 +47,47 @@ public class PantallaPaciente extends JFrame {
 		JLabel LblTitulo = new JLabel("Centro De Salud");
 		LblTitulo.setForeground(Color.GRAY);
 		LblTitulo.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 30));
-		LblTitulo.setBounds(225, 34, 293, 137);
+		LblTitulo.setBounds(0, 0, 293, 107);
 		contentPane.add(LblTitulo);
+		
+		JLabel Paciente = new JLabel("");
+		Paciente.setIcon(new ImageIcon("/imagenes/Paciente.jpg"));
+		Paciente.setBounds(328, 0, 137, 107);
+		contentPane.add(Paciente);
+		
+		JButton btnNewButton = new JButton("Ver turnos");
+		btnNewButton.setBounds(609, 251, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Ver Perfil");
+		btnNewButton_1.setBounds(267, 251, 89, 23);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Registro");
+		btnNewButton_2.setBounds(152, 251, 89, 23);
+		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Login");
+		btnNewButton_3.setBounds(25, 251, 89, 23);
+		contentPane.add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("Solicitar turno");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_4.setBounds(480, 251, 119, 23);
+		contentPane.add(btnNewButton_4);
+		
+		JButton btnNewButton_5 = new JButton("Cerrar Sesion");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaPrincipal vista = new PantallaPrincipal();
+				vista.setVisible(true);
+			}
+		});
+		btnNewButton_5.setBackground(new Color(255, 0, 0));
+		btnNewButton_5.setBounds(539, 50, 119, 23);
+		contentPane.add(btnNewButton_5);
 	}
 }
