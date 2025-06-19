@@ -51,8 +51,8 @@ public class PantallaPaciente extends JFrame {
 		contentPane.add(LblTitulo);
 		
 		JLabel Paciente = new JLabel("");
-		Paciente.setIcon(new ImageIcon("/imagenes/Paciente.jpg"));
-		Paciente.setBounds(328, 0, 137, 107);
+		Paciente.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\paciente.jpg"));
+		Paciente.setBounds(327, 11, 137, 107);
 		contentPane.add(Paciente);
 		
 		JButton btnNewButton = new JButton("Ver turnos");

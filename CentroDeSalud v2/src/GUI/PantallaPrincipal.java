@@ -48,7 +48,7 @@ public class PantallaPrincipal extends JFrame {
 		JLabel LblTitulo = new JLabel("Centro De Salud");
 		LblTitulo.setForeground(Color.GRAY);
 		LblTitulo.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 30));
-		LblTitulo.setBounds(190, 34, 293, 137);
+		LblTitulo.setBounds(190, 32, 293, 137);
 		contentPane.add(LblTitulo);
 		
 		JButton btnPaciente = new JButton("Menu Paciente");
@@ -85,24 +85,24 @@ public class PantallaPrincipal extends JFrame {
 		
 		// Cargar la imagen
         JLabel Logo = new JLabel("");
-		Logo.setIcon(new ImageIcon("/imagenes/Logo.png"));
-		Logo.setBounds(553, 34, 137, 137);
+		Logo.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\logo.jpg"));
+		Logo.setBounds(553, 32, 137, 137);
 		contentPane.add(Logo);
 		
 		
 		JLabel Medico = new JLabel("");
-		Medico.setIcon(new ImageIcon("imagenes/Medico.jpg"));
-		Medico.setBounds(553, 199, 137, 137);
+		Medico.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\Medico.jpg"));
+		Medico.setBounds(553, 213, 137, 123);
 		contentPane.add(Medico);
 		
-		JLabel Paciente = new JLabel("");
-		Paciente.setIcon(new ImageIcon("/imagenes/Paciente.jpg"));
-		Paciente.setBounds(50, 199, 137, 137);
-		contentPane.add(Paciente);
-		
 		JLabel Administrador = new JLabel("");
-		Administrador.setIcon(new ImageIcon("/imagenes/Logo.png"));
-		Administrador.setBounds(303, 199, 137, 137);
+		Administrador.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\Admin.jpg"));
+		Administrador.setBounds(303, 213, 137, 123);
 		contentPane.add(Administrador);
+		
+		JLabel Paciente = new JLabel("");
+		Paciente.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\paciente.jpg"));
+		Paciente.setBounds(50, 213, 137, 123);
+		contentPane.add(Paciente);
 	}
 }

@@ -37,8 +37,8 @@ public class PantallaAdministrador extends JFrame {
 		contentPane.add(LblTitulo);
 		
 		JLabel Administrador = new JLabel("");
-		Administrador.setIcon(new ImageIcon("/imagenes/Logo.png"));
-		Administrador.setBounds(369, 11, 137, 137);
+		Administrador.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\logo.jpg"));
+		Administrador.setBounds(324, 11, 137, 137);
 		contentPane.add(Administrador);
 		
 		JButton btnNewButton = new JButton("Ver Pacientes");
@@ -66,9 +66,11 @@ public class PantallaAdministrador extends JFrame {
 		btnNewButton_2.setBounds(539, 298, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
+		
 		JButton btnNewButton_3 = new JButton("Ver Administradores");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnNewButton_3.setBounds(539, 235, 140, 23);
@@ -76,7 +78,7 @@ public class PantallaAdministrador extends JFrame {
 		
 		JButton btnNewButton_5 = new JButton("Cerrar Sesion");
 		btnNewButton_5.setBackground(Color.RED);
-		btnNewButton_5.setBounds(560, 76, 119, 23);
+		btnNewButton_5.setBounds(506, 76, 119, 23);
 		contentPane.add(btnNewButton_5);
 		
 		JButton btnNewButton_4 = new JButton("Login");
