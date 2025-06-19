@@ -1,20 +1,37 @@
 package BLL;
-import java.util.ArrayList;
+
+import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
+
+import DLL.ControllerPaciente;
 
 public class ListaPaciente {
 
-    private ArrayList<Paciente> pacientes;
-
-    public ListaPaciente() {
-        this.pacientes = new ArrayList<>();
+    public void registrarPaciente() {
+        ControllerPaciente.RegistrarPaciente();
     }
 
     public void agregarPaciente(Paciente paciente) {
-        pacientes.add(paciente);
+        ControllerPaciente.agregarPaciente(paciente);
+    }
+
+    public LinkedList<Paciente> mostrarTodos() {
+        return ControllerPaciente.mostrarPaciente();
+    }
+
+    public boolean actualizarPaciente(Paciente paciente) {
+        String mensaje = ControllerPaciente.EditarPaciente(paciente);
+        if (mensaje.equals("Usuario editado correctamente.")) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, mensaje);
+            return false;
+        }
     }
 
     public Paciente buscarPorDni(int dni) {
-        for (Paciente p : pacientes) {
+        for (Paciente p : mostrarTodos()) {
             if (p.getDni() == dni) {
                 return p;
             }
@@ -22,44 +39,8 @@ public class ListaPaciente {
         return null;
     }
 
-    public void mostrarTodos() {
-        for (Paciente p : pacientes) {
-            System.out.println(p);
-        }
-    }
-
-    public boolean actualizarPaciente(int dni, String nuevoNombre, String nuevoApellido, String nuevaFechaNacimiento, String nuevoEmail, String nuevaContrasenia) {
-        Paciente paciente = buscarPorDni(dni);
-        if (paciente != null) {
-            paciente.setNombre(nuevoNombre);
-            paciente.setApellido(nuevoApellido);
-            paciente.setFechaNacimiento(nuevaFechaNacimiento);
-            paciente.setEmail(nuevoEmail);
-            paciente.setContrasenia(nuevaContrasenia);
-            return true;
-        }
-        return false;
-    }
-
     public boolean eliminarPorDni(int dni) {
-        Paciente paciente = buscarPorDni(dni);
-        if (paciente != null) {
-            pacientes.remove(paciente);
-            return true;
-        }
         return false;
     }
 
-    public ArrayList<Paciente> getPacientes() {
-        return pacientes;
-    }
-
-    public void setPacientes(ArrayList<Paciente> pacientes) {
-        this.pacientes = pacientes;
-    }
-
-    @Override
-    public String toString() {
-        return "ListaPaciente{" + "pacientes=" + pacientes + '}';
-    }
 }

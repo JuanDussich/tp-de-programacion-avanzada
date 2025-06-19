@@ -10,7 +10,7 @@ import BLL.Medico;
 
 public class ControllerMedico {
 
-    private static Connection con = Conexion.getInstance().getConnection();
+	private static Connection con = Conexion.getInstance().getConnection();
 
     // LOGIN: sólo permite iniciar sesión si el médico está activo
     public static Medico login(String email, String contrasenia) {
@@ -96,7 +96,7 @@ public class ControllerMedico {
     }
 
     // EDITAR datos del médico identificado por matrícula
-    public static boolean editarMedico(Medico medico) {
+    public static boolean EditarMedico(Medico medico) {
         String sql = "UPDATE medicos SET nombre = ?, apellido = ?, email = ?, contrasenia = ?, especialidad = ?, cantidadConsultas = ? WHERE matricula = ? AND activo = TRUE";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -159,4 +159,5 @@ public class ControllerMedico {
 
         return null;
     }
+    
 }
