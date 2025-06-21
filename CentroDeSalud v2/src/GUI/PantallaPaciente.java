@@ -10,6 +10,8 @@ import BLL.Paciente;
 import BLL.Usuario;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -128,6 +130,8 @@ public class PantallaPaciente extends JFrame {
 		contentPane.add(lblError);
 		
 		JButton btnLogin = new JButton("Inciar sesión");
+		btnLogin.setBounds(10, 204, 121, 23);
+		panel_1.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -135,14 +139,15 @@ public class PantallaPaciente extends JFrame {
 				if (logueado == null) {
 					lblError.setText("No se encontró");
 				} else {
+					JOptionPane.showMessageDialog(null, "estas logueado");
 					//VistaUsuarios tabla = new VistaUsuarios();
 					//tabla.setVisible(true);
 					//dispose();
 				}
 			}
 		});
-		btnLogin.setBounds(40, 451, 121, 23);
-		contentPane.add(btnLogin);
+		
+		
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
