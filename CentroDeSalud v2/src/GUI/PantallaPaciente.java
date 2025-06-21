@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import BLL.Paciente;
+import BLL.Usuario;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.BorderLayout;
@@ -14,11 +18,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTabbedPane;
+import javax.swing.JComboBox;
+import java.awt.Panel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class PantallaPaciente extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField inpEmail;
+	private JPasswordField inpContrasenia;
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -55,25 +67,19 @@ public class PantallaPaciente extends JFrame {
 		Paciente.setBounds(327, 11, 137, 107);
 		contentPane.add(Paciente);
 		
+		
 		JButton btnNewButton = new JButton("Ver turnos");
 		btnNewButton.setBounds(609, 251, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Ver Perfil");
-		btnNewButton_1.setBounds(267, 251, 89, 23);
+		btnNewButton_1.setBounds(560, 173, 89, 23);
 		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Registro");
-		btnNewButton_2.setBounds(152, 251, 89, 23);
-		contentPane.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("Login");
-		btnNewButton_3.setBounds(25, 251, 89, 23);
-		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Solicitar turno");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		btnNewButton_4.setBounds(480, 251, 119, 23);
@@ -86,8 +92,64 @@ public class PantallaPaciente extends JFrame {
 				vista.setVisible(true);
 			}
 		});
+		
 		btnNewButton_5.setBackground(new Color(255, 0, 0));
 		btnNewButton_5.setBounds(539, 50, 119, 23);
 		contentPane.add(btnNewButton_5);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(40, 173, 424, 266);
+		contentPane.add(tabbedPane);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		tabbedPane.addTab("New tab", null, panel_1, null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Email");
+		lblNewLabel_1.setBounds(10, 65, 200, 14);
+		panel_1.add(lblNewLabel_1);
+				
+		inpEmail = new JTextField();
+		inpEmail.setBounds(10, 90, 200, 32);
+		panel_1.add(inpEmail);
+		inpEmail.setColumns(10);
+				
+		JLabel lblNewLabel_1_1 = new JLabel("Contraseña");
+		lblNewLabel_1_1.setBounds(10, 133, 200, 14);
+		panel_1.add(lblNewLabel_1_1);
+						
+		inpContrasenia = new JPasswordField();
+		inpContrasenia.setBounds(10, 158, 200, 32);
+		panel_1.add(inpContrasenia);
+		
+		JLabel lblError = new JLabel("");
+		lblError.setForeground(Color.RED);
+		lblError.setBounds(40, 355, 265, 32);
+		contentPane.add(lblError);
+		
+		JButton btnLogin = new JButton("Inciar sesión");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Paciente logueado = BLL.Paciente.login(inpEmail.getText(), inpContrasenia.getText());
+				if (logueado == null) {
+					lblError.setText("No se encontró");
+				} else {
+					//VistaUsuarios tabla = new VistaUsuarios();
+					//tabla.setVisible(true);
+					//dispose();
+				}
+			}
+		});
+		btnLogin.setBounds(40, 451, 121, 23);
+		contentPane.add(btnLogin);
+		
+		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setLayout(null);
+		tabbedPane.addTab("New tab", null, panel_1_1, null);
+		
+		JButton btnNewButton_2_1 = new JButton("Registrarse");
+		btnNewButton_2_1.setBounds(10, 201, 89, 23);
+		panel_1_1.add(btnNewButton_2_1);
 	}
 }
