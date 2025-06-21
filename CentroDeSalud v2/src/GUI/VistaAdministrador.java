@@ -19,6 +19,19 @@ public class VistaAdministrador extends JFrame {
     private DefaultTableModel modeloTabla;
     private JButton btnEditar, btnEliminar, btnRefrescar;
 
+    
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+            	VistaAdministrador frame = new VistaAdministrador();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    
     public VistaAdministrador() {
         setTitle("Gestión de Administradores");
         setSize(800, 400);
@@ -114,14 +127,13 @@ public class VistaAdministrador extends JFrame {
                 }
             }
         });
-
-        // Acción botón REFRESCAR
-        btnRefrescar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAdministradores();
-            }
-        });
+		/*
+		 * // Acción botón REFRESCAR btnRefrescar.addActionListener(new ActionListener()
+		 * {
+		 * 
+		 * @Override public void actionPerformed(ActionEvent e) {
+		 * cargarAdministradores(); } });
+		 */
 
         setVisible(true);
     }
@@ -129,9 +141,14 @@ public class VistaAdministrador extends JFrame {
     private void cargarAdministradores() {
         modeloTabla.setRowCount(0);
         LinkedList<Administrador> admins = ControllerAdministrador.mostrarAdministrador();
-        for (Administrador admin : admins) {
+        for (Administrador a : admins) {
             modeloTabla.addRow(new Object[] {
-                admin.getId(), admin.getNombre(), admin.getApellido(), admin.getEmail(), admin.getContrasenia(), "Activo"
+                a.getId(),
+                a.getNombre(),
+                a.getApellido(),
+                a.getEmail(),
+                a.getContrasenia(),
+                "Activo"
             });
         }
     }

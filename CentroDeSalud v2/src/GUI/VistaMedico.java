@@ -40,36 +40,43 @@ public class VistaMedico extends JFrame {
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        
+        // titulo de la ventana medico
+        JLabel lblTitulo = new JLabel("Centro De Salud - Medicos Activos");
+        lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 19));
+        lblTitulo.setBounds(10, 10, 700 , 15);
+        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblTitulo);
 
         JLabel lblSeleccionado = new JLabel("Seleccionado:");
-        lblSeleccionado.setBounds(10, 10, 760, 20);
+        lblSeleccionado.setBounds(10, 40, 760, 15);
         contentPane.add(lblSeleccionado);
 
         // Definir columnas según atributos de Medico (id, nombre, apellido, matricula, email, contrasenia, especialidad, activo)
         model = new DefaultTableModel(new String[]{
-            "ID Medico", "Nombre", "Apellido", "Matricula", "Email", "Contraseña", "Especialidad", "Activo"
+            "ID Medico", "Nombre", "Apellido", "Matricula", "Email", "Contraseña", "Especialidad", "Estado"
         }, 0);
 
         table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(10, 40, 760, 200);
+        scrollPane.setBounds(10, 70, 760, 200);
         contentPane.add(scrollPane);
 
         // Botones
         JButton btnAgregar = new JButton("Agregar");
         btnAgregar.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btnAgregar.setBounds(112, 269, 124, 55);
+        btnAgregar.setBounds(112, 299, 124, 55);
         contentPane.add(btnAgregar);
 
         JButton btnEditar = new JButton("Editar");
         btnEditar.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btnEditar.setBounds(322, 269, 124, 55);
+        btnEditar.setBounds(322, 299, 124, 55);
         contentPane.add(btnEditar);
         
 
         JButton btnEliminar = new JButton("Eliminar");
         btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btnEliminar.setBounds(531, 269, 124, 55);
+        btnEliminar.setBounds(531, 299, 124, 55);
         contentPane.add(btnEliminar);
 
         // Al seleccionar fila, actualizar la variable usuarioSeleccionado y mostrar datos en el label
@@ -190,4 +197,5 @@ public class VistaMedico extends JFrame {
             });
         }
     }
+
 }

@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import BLL.Medico;
+import BLL.Paciente;
 
 public class ControllerMedico {
 
@@ -58,7 +59,7 @@ public class ControllerMedico {
         	PreparedStatement stmt = con.prepareStatement(sql);
         	stmt.setString(1, medico.getNombre());
         	stmt.setString(2, medico.getApellido());
-        	stmt.setString(3, medico.getMatricula());  // WHERE matricula = ?
+        	stmt.setString(3, medico.getMatricula());  // 
         	stmt.setString(4, medico.getEmail());
         	stmt.setString(5, medico.getContrasenia());
         	stmt.setString(6, medico.getEspecialidad());
@@ -115,22 +116,20 @@ public class ControllerMedico {
      * Retorna true si se actualizó correctamente, false si no.
      */
     public static boolean EditarMedico(Medico medico) {
-        String sql = "UPDATE medico SET nombre = ?, apellido = ?, matricula = ?, email = ?, contrasenia = ?, especialidad = ? "
-                   + "WHERE matricula = ? AND activo = TRUE";
+        String sql = "UPDATE medico SET nombre = ?, email = ?, contrasenia = ? "
+        		+ "WHERE matricula = ? "
+        		+ "AND activo = TRUE";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, medico.getNombre());
-            stmt.setString(2, medico.getApellido());
-            stmt.setString(3, medico.getMatricula()); // nuevo valor
-            stmt.setString(4, medico.getEmail());
-            stmt.setString(5, medico.getContrasenia());
-            stmt.setString(6, medico.getEspecialidad());
-            stmt.setString(7, medico.getMatricula()); // valor para el WHERE
+            stmt.setString(2, medico.getEmail());
+            stmt.setString(3, medico.getContrasenia());
+            stmt.setString(4, medico.getMatricula()); // usamos el dni como filtro no lo guarde en una otra variable xq no edito DNI!!
 
             int filas = stmt.executeUpdate();
             return filas > 0;
         } catch (SQLException e) {
-            System.err.println("Error al editar médico: " + e.getMessage());
+            System.err.println("Error al editar paciente: " + e.getMessage());
             return false;
         }
     }

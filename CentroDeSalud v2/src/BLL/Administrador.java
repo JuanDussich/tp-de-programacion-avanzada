@@ -119,21 +119,25 @@ public class Administrador extends Usuario implements Encriptador {
 	    	
 	    }
 	    
-	    //METODO PARA EDITAR ADMINISTRADOR
-	    public static String EditarAdministrador(Administrador usuario) {
-			
-			if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty()|| usuario.getContrasenia().isEmpty()) {
-				return "No se pudo editar";
-			}else {
-				return DLL.ControllerAdministrador.EditarAdministrador(usuario);
-			}
-			
-		}
+	    //METODO PARA EDITAR ADMINISTRADOR verificar
+	    public static String EditarAdministrador(Administrador administrador) {
+	        if (administrador.getEmail().isEmpty() || administrador.getNombre().isEmpty() 
+	        		|| administrador.getContrasenia().isEmpty()) {
+	            return "No se pudo editar";
+	        } else {
+	            boolean exito = DLL.ControllerAdministrador.EditarAdministrador(administrador);
+	            if (exito) {
+	                return "Administrador actualizado correctamente";
+	            } else {
+	                return "No se pudo actualizar el Administrador";
+	            }
+	        }
+	    }
 		
-	    //METODO PARA ELIMINAR ADMINISTRADOR
+	    //METODO PARA ELIMINAR ADMINISTRADOR verificar
 	    public static void EliminarAdministrador(int id) {
 	    	
-	    	JOptionPane.showMessageDialog(null, "Estas eliminando un usuario");
+	    	JOptionPane.showMessageDialog(null, "Estas eliminando un Administrador");
 	    	ControllerAdministrador.EliminarAdministrador(id);
 	    	
 	    }

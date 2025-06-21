@@ -3,12 +3,14 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import BLL.Paciente;
@@ -18,8 +20,9 @@ public class EditarPaciente extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField inpNombre;
+	private JTextField inpApellido;
 	private JTextField inpMail;
-	private JTextField inpContraseña;
+	private JTextField inpContrasenia;
 	
 	public EditarPaciente(Paciente usuario) {
 		
@@ -30,72 +33,100 @@ public class EditarPaciente extends JFrame{
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("nombre");
-		lblNewLabel.setBounds(116, 108, 96, 20);
-		contentPane.add(lblNewLabel);
-		
+		// Etiqueta para el campo Nombre
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setBounds(116, 80, 96, 20); // posición más arriba
+		contentPane.add(lblNombre);
+
+		// Campo de texto para el nombre
 		inpNombre = new JTextField();
 		inpNombre.setText(usuario.getNombre());
-		inpNombre.setBounds(116, 139, 184, 20);
-		contentPane.add(inpNombre);
+		inpNombre.setBounds(116, 105, 184, 20);
 		inpNombre.setColumns(10);
-		
+		contentPane.add(inpNombre);
+
+		// Etiqueta para el campo Apellido
+		JLabel lblApellido = new JLabel("Apellido");
+		lblApellido.setBounds(116, 135, 96, 20);
+		contentPane.add(lblApellido);
+
+		// Campo de texto para el apellido
+		inpApellido = new JTextField();
+		inpApellido.setText(usuario.getApellido());
+		inpApellido.setBounds(116, 160, 184, 20);
+		inpApellido.setColumns(10);
+		contentPane.add(inpApellido);
+
+		// Etiqueta para el campo Email
+		JLabel lblMail = new JLabel("Email");
+		lblMail.setBounds(116, 190, 96, 14);
+		contentPane.add(lblMail);
+
+		// Campo de texto para el email
 		inpMail = new JTextField();
 		inpMail.setText(usuario.getEmail());
+		inpMail.setBounds(116, 215, 184, 20);
 		inpMail.setColumns(10);
-		inpMail.setBounds(116, 206, 184, 20);
 		contentPane.add(inpMail);
-		
-		JLabel lblMail = new JLabel("Mail");
-		lblMail.setBounds(116, 181, 96, 14);
-		contentPane.add(lblMail);
-	    inpContraseña = new JTextField();
-		inpContraseña.setText(usuario.getContrasenia());
-		inpContraseña.setColumns(10);
-		inpContraseña.setBounds(116, 279, 184, 20);
-		contentPane.add(inpContraseña);
-		JButton btnNewButton = new JButton("Editar");
 
-		JLabel lblMensaje = new JLabel("");
-		lblMensaje.setBounds(55, 341, 277, 14);
-		contentPane.add(lblMensaje);
-		btnNewButton.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				Paciente editar = usuario;
-				editar.setNombre(inpNombre.getText());
-				editar.setEmail(inpMail.getText());
-				editar.setContrasenia(inpContraseña.getText());
-				String mensaje = Paciente.EditarPaciente(editar);
+		// Etiqueta para el campo Contraseña
+		JLabel lblContrasenia = new JLabel("Contraseña");
+		lblContrasenia.setBounds(116, 245, 96, 14);
+		contentPane.add(lblContrasenia);
+
+		// Campo de texto para la contraseña
+		inpContrasenia = new JTextField(usuario.getContrasenia());
+		inpContrasenia.setBounds(116, 270, 184, 20);
+		inpContrasenia.setColumns(10);
+		contentPane.add(inpContrasenia);
+
+         // Label para mostrar mensajes al usuario (éxito o error)
+        JLabel lblMensaje = new JLabel("");
+        lblMensaje.setBounds(55, 310, 277, 30);            // posicion de la etiqueta del mensjae
+        lblMensaje.setHorizontalAlignment(SwingConstants.CENTER);  // texto centrado horizontalmente
+        lblMensaje.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // padding interno
+        contentPane.add(lblMensaje);
+		
+     	// Botón para guardar los cambios realizados
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds(65, 352, 113, 51);
+		btnEditar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+				//Paciente editar = usuario;
+			    usuario.setNombre(inpNombre.getText());
+			    usuario.setApellido(inpNombre.getText());
+			    usuario.setEmail(inpMail.getText());
+			    usuario.setContrasenia(inpContrasenia.getText());
+				
+				String mensaje = Paciente.EditarPaciente(usuario);
+				
 				lblMensaje.setText(mensaje);
 				
 			}
 		});
-		btnNewButton.setBounds(65, 352, 113, 51);
-		contentPane.add(btnNewButton);
+		contentPane.add(btnEditar);
 		
-		JLabel lblContrasea = new JLabel("contraseña");
-		lblContrasea.setBounds(116, 254, 96, 14);
-		contentPane.add(lblContrasea);
-		
-		JButton btnNewButton_1 = new JButton("Volver");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VistaPacientes vista = new VistaPacientes();
-				vista.setVisible(true);
-				dispose();
-			}
-		});
-		btnNewButton_1.setBounds(258, 352, 119, 50);
-		contentPane.add(btnNewButton_1);
-		
-		JLabel lblCentroDeSalud = new JLabel("Centro De Salud Editar Paciente");
-		lblCentroDeSalud.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblCentroDeSalud.setBounds(65, 11, 312, 53);
-		contentPane.add(lblCentroDeSalud);
-		
-		
-		
-	}
+		// Botón para volver a la ventana anterior sin guardar cambios
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setBounds(258, 352, 119, 50);
+        btnVolver.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Abre la ventana VistaPaciente y cierra esta ventana
+                VistaPacientes vista = new VistaPacientes();
+                vista.setVisible(true);
+                dispose();
+            }
+        });
+        contentPane.add(btnVolver);
+
+        // Título de la ventana
+        JLabel lblTitulo = new JLabel("Centro De Salud - Editar Paciente");
+        lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 19));
+        lblTitulo.setBounds(20, 11, 400, 53);
+        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lblTitulo);
+    }
 }
+		
+		
+	
