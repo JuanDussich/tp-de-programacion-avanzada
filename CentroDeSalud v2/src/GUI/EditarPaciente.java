@@ -90,11 +90,12 @@ public class EditarPaciente extends JFrame{
      	// Botón para guardar los cambios realizados
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setBounds(65, 352, 113, 51);
+		
 		btnEditar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 				//Paciente editar = usuario;
 			    usuario.setNombre(inpNombre.getText());
-			    usuario.setApellido(inpNombre.getText());
+			    usuario.setApellido(inpApellido.getText());
 			    usuario.setEmail(inpMail.getText());
 			    usuario.setContrasenia(inpContrasenia.getText());
 				

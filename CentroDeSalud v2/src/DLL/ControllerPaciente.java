@@ -144,7 +144,7 @@ public class ControllerPaciente {
         if (flag) {
             agregarPaciente(nuevo);
         }else {
-            JOptionPane.showMessageDialog(null, "Paciente ya creado");
+            JOptionPane.showMessageDialog(null, "Existe un Paciente creado con ese mail");
         }
 
     }
@@ -172,7 +172,7 @@ public class ControllerPaciente {
         if (flag) {
             agregarPaciente(nuevo);
         }else {
-            JOptionPane.showMessageDialog(null, "Usuario ya creado");
+            JOptionPane.showMessageDialog(null, "Existe un Usuario creado con el mail");
         }
 
 

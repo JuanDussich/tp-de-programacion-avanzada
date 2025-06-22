@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.*;
+import com.toedter.calendar.JDateChooser; // oara calendario
 import javax.swing.border.EmptyBorder;
 
 import BLL.Paciente;
@@ -9,6 +10,8 @@ import DLL.ControllerPaciente;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+
 
 public class AgregarPaciente extends JFrame {
 
@@ -16,6 +19,7 @@ public class AgregarPaciente extends JFrame {
     private JPanel contentPane;
     private JTextField inpNombre, inpApellido, inpDni, inpFechaNacimiento, inpEmail;
     private JPasswordField inpContrasenia;
+    private JDateChooser dateChooser;
 
     public AgregarPaciente() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,9 +72,10 @@ public class AgregarPaciente extends JFrame {
         lblFecha.setBounds(50, y, 180, 20);
         contentPane.add(lblFecha);
 
-        inpFechaNacimiento = new JTextField();
-        inpFechaNacimiento.setBounds(230, y, 170, 20);
-        contentPane.add(inpFechaNacimiento);
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(230, y, 170, 20);
+        dateChooser.setDateFormatString("yyyy-MM-dd"); // formato de la base
+        contentPane.add(dateChooser);
 
         y += 40;
 
@@ -118,7 +123,7 @@ public class AgregarPaciente extends JFrame {
                         inpNombre.getText(),
                         inpApellido.getText(),
                         Integer.parseInt(inpDni.getText()),
-                        inpFechaNacimiento.getText(),
+                        new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate()),
                         inpEmail.getText(),
                         new String(inpContrasenia.getPassword())
                     );
@@ -128,7 +133,8 @@ public class AgregarPaciente extends JFrame {
                     limpiarCampos();
 
                 } catch (Exception ex) {
-                    lblMensaje.setText("Error al registrar paciente. Revisá los datos.");
+                    //lblMensaje.setText("Error al registrar paciente. Revisá los datos."); //aca da el mensaje que no guardo
+                	ex.printStackTrace(); // prueba ara ver el error
                 }
             }
         });
@@ -147,7 +153,7 @@ public class AgregarPaciente extends JFrame {
         inpNombre.setText("");
         inpApellido.setText("");
         inpDni.setText("");
-        inpFechaNacimiento.setText("");
+        dateChooser.setDate(null);
         inpEmail.setText("");
         inpContrasenia.setText("");
     }
