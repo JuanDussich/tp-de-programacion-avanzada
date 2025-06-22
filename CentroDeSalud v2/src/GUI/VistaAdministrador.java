@@ -170,33 +170,13 @@ public class VistaAdministrador extends JFrame {
         // Cargar datos de la BD en la tabla al iniciar la ventana
         cargarTabla();
         
-        // Acción botón Agregar: Mostrar diálogo para ingresar datos y luego registrar nuevo adm
+        // Acción botón Agregar
         btnAgregar.addActionListener(e -> {
-            JTextField nombreField = new JTextField();
-            JTextField apellidoField = new JTextField();
-            JTextField emailField = new JTextField();
-            JPasswordField contraseniaField = new JPasswordField();
-            
-            Object[] fields = {
-                "Nombre:", nombreField,
-                "Apellido:", apellidoField,
-                "Email:", emailField,
-                "Contraseña:", contraseniaField,
-            };
-
-            int option = JOptionPane.showConfirmDialog(null, fields, "Agregar Administrador", JOptionPane.OK_CANCEL_OPTION);
-            if (option == JOptionPane.OK_OPTION) {
-                Administrador nuevo = new Administrador(
-                    0, // id (se genera en la base)
-                    nombreField.getText(),
-                    apellidoField.getText(),
-                    emailField.getText(),
-                    new String(contraseniaField.getPassword())
-                );
-                ControllerAdministrador.RegistrarAdministrador(nuevo);
-                cargarTabla();
-            }
+            AgregarAdministrador agregar = new AgregarAdministrador();
+            agregar.setVisible(true);
+            dispose();
         });
+
         
      // Acción botón Editar: abrir ventana de edición si hay admin seleccionado
         btnEditar.addActionListener(e -> {

@@ -2,10 +2,12 @@ package GUI;
 
 import javax.swing.*;
 
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import BLL.Medico;
+import BLL.Especialidad;
 import BLL.Usuario;
 import DLL.ControllerMedico;
 
@@ -112,6 +114,8 @@ public class VistaMedico extends JFrame {
             if (!e.getValueIsAdjusting()) {
                 int row = table.getSelectedRow();
                 if (row != -1) {
+                	Especialidad especialidadEnum = (Especialidad) model.getValueAt(row, 6);
+                	
                     // Crear un objeto Medico con datos de la fila seleccionada
                     usuarioSeleccionado = new Medico(
                         (int) model.getValueAt(row, 0),               // idMedico (int)
@@ -120,7 +124,7 @@ public class VistaMedico extends JFrame {
                         (String) model.getValueAt(row, 3),            // matricula (String)
                         (String) model.getValueAt(row, 4),            // email (String)
                         (String) model.getValueAt(row, 5),            // contrasenia (String)
-                        (String) model.getValueAt(row, 6),            // especialidad (String)
+                        especialidadEnum,            				  // especialidad (String)
                         (int) model.getValueAt(row, 7)                // activo (int)
                     );
 

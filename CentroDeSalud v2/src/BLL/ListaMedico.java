@@ -33,7 +33,7 @@ public class ListaMedico {
     }
 
 
-    public boolean actualizarMedico(String matricula, String nuevaEspecialidad, int nuevaCantidadConsultas) {
+    public boolean actualizarMedico(String matricula, Especialidad nuevaEspecialidad, int nuevaCantidadConsultas) {
         Medico medico = buscarPorMatricula(matricula);
         if (medico != null) {
             medico.setEspecialidad(nuevaEspecialidad);

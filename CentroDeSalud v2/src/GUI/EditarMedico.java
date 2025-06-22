@@ -91,6 +91,7 @@ public class EditarMedico extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Actualiza el objeto usuario con los valores editados
                 usuario.setNombre(inpNombre.getText());
+                usuario.setApellido(inpApellido.getText());
                 usuario.setEmail(inpMail.getText());
                 usuario.setContrasenia(inpContrasenia.getText());
 

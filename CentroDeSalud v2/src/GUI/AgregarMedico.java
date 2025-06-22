@@ -1,6 +1,8 @@
 package GUI;
 
 import BLL.Medico;
+import BLL.Especialidad;
+
 import DLL.ControllerMedico;
 
 import javax.swing.*;
@@ -12,7 +14,8 @@ import java.awt.event.ActionListener;
 public class AgregarMedico extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField inpNombre, inpApellido, inpMatricula, inpEmail, inpEspecialidad;
+    private JTextField inpNombre, inpApellido, inpMatricula, inpEmail;
+    private JComboBox<Especialidad> inpEspecialidad;
     private JPasswordField inpContrasenia;
 
     public AgregarMedico() {
@@ -86,7 +89,7 @@ public class AgregarMedico extends JFrame {
         lblEspecialidad.setBounds(50, y, 100, 20);
         contentPane.add(lblEspecialidad);
 
-        inpEspecialidad = new JTextField();
+        inpEspecialidad = new JComboBox<>(Especialidad.values());
         inpEspecialidad.setBounds(150, y, 200, 20);
         contentPane.add(inpEspecialidad);
 
@@ -111,6 +114,7 @@ public class AgregarMedico extends JFrame {
         btnGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	try {
+            		
                 Medico nuevo = new Medico(
                     0,
                     inpNombre.getText(),
@@ -118,12 +122,12 @@ public class AgregarMedico extends JFrame {
                     inpMatricula.getText(),
                     inpEmail.getText(),
                     new String(inpContrasenia.getPassword()),
-                    inpEspecialidad.getText(),
+                    (Especialidad) inpEspecialidad.getSelectedItem(),
                     1 // Activo por defecto
                 );
 
                 ControllerMedico.RegistrarMedico(nuevo);
-                lblMensaje.setText("👩‍⚕️ Médico registrado correctamente 👨‍⚕️");
+                lblMensaje.setText("Médico registrado correctamente");
                 limpiarCampos();
             	} catch (Exception ex) {
                     lblMensaje.setText("Error al registrar paciente. Revisá los datos.");
@@ -148,6 +152,6 @@ public class AgregarMedico extends JFrame {
         inpMatricula.setText("");
         inpEmail.setText("");
         inpContrasenia.setText("");
-        inpEspecialidad.setText("");
+        inpEspecialidad.setSelectedIndex(-1); // Limpia la selección del combo
     }
 }

@@ -1,6 +1,7 @@
 package DLL;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import BLL.Medico;
 import BLL.Paciente;
+import BLL.Especialidad;
 
 public class ControllerMedico {
 
@@ -29,6 +31,7 @@ public class ControllerMedico {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+            	Especialidad especialidadEnum = Especialidad.valueOf(rs.getString("especialidad"));
                 Medico medico = new Medico(
                     rs.getInt("idMedico"),
                     rs.getString("nombre"),
@@ -36,7 +39,7 @@ public class ControllerMedico {
                     rs.getString("matricula"),
                     rs.getString("email"),
                     rs.getString("contrasenia"),
-                    rs.getString("especialidad"),
+                    especialidadEnum,
                     rs.getInt("activo")
                 );
                 
@@ -62,7 +65,7 @@ public class ControllerMedico {
         	stmt.setString(3, medico.getMatricula());  // 
         	stmt.setString(4, medico.getEmail());
         	stmt.setString(5, medico.getContrasenia());
-        	stmt.setString(6, medico.getEspecialidad());
+        	stmt.setString(6, medico.getEspecialidad().name());;
 
                        
             int filas = stmt.executeUpdate();
@@ -88,6 +91,7 @@ public class ControllerMedico {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+            	Especialidad especialidadEnum = Especialidad.valueOf(rs.getString("especialidad"));
                 Medico medico = new Medico(
                     rs.getInt("idMedico"),
                     rs.getString("nombre"),
@@ -95,7 +99,7 @@ public class ControllerMedico {
                     rs.getString("matricula"),
                     rs.getString("email"),
                     rs.getString("contrasenia"),
-                    rs.getString("especialidad"),
+                    especialidadEnum,
                     rs.getInt("activo")
                 );
                 
@@ -116,15 +120,16 @@ public class ControllerMedico {
      * Retorna true si se actualizó correctamente, false si no.
      */
     public static boolean EditarMedico(Medico medico) {
-        String sql = "UPDATE medico SET nombre = ?, email = ?, contrasenia = ? "
+        String sql = "UPDATE medico SET nombre = ?, apellido = ?, email = ?, contrasenia = ? "
         		+ "WHERE matricula = ? "
         		+ "AND activo = TRUE";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, medico.getNombre());
-            stmt.setString(2, medico.getEmail());
-            stmt.setString(3, medico.getContrasenia());
-            stmt.setString(4, medico.getMatricula()); // usamos el dni como filtro no lo guarde en una otra variable xq no edito DNI!!
+            stmt.setString(2, medico.getApellido());
+            stmt.setString(3, medico.getEmail());
+            stmt.setString(4, medico.getContrasenia());
+            stmt.setString(5, medico.getMatricula()); // usamos el matricula como filtro no lo guarde en una otra variable xq no edito Matricula!!
 
             int filas = stmt.executeUpdate();
             return filas > 0;
@@ -186,6 +191,7 @@ public class ControllerMedico {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+            	Especialidad especialidadEnum = Especialidad.valueOf(rs.getString("especialidad"));
                 Medico medico = new Medico(
                     rs.getInt("idMedico"),
                     rs.getString("nombre"),
@@ -193,7 +199,7 @@ public class ControllerMedico {
                     rs.getString("matricula"),
                     rs.getString("email"),
                     rs.getString("contrasenia"),
-                    rs.getString("especialidad"),
+                    especialidadEnum,
                     rs.getInt("activo")
                 );
                 // medico.setCantidadConsultas(rs.getInt("cantidadConsultas")); // Si usas este campo
