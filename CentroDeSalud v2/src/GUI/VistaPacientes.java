@@ -178,7 +178,6 @@ public class VistaPacientes extends JFrame {
 
 	        
 	     // Acción: Editar usuario
-	        //FIJATE ACA DE VER DONDE O COMO FUNCIONA EL EDITAR PORQUE NO LO ESTAS PUDIENDO IMPLEMENTAR ASI LO ARREGLAS Y PODES TAMBIEN TENER
 	        // EL BOTON DE EDITAR 
 	        btnEditar.addActionListener(e -> {
 	            if (usuarioSeleccionado != null) {
