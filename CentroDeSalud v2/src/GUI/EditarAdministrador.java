@@ -1,15 +1,16 @@
 package GUI;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
 import javax.swing.*;
 
-import BLL.Medico;
+import BLL.Administrador;
 import java.awt.Font;
 
-public class EditarMedico extends JFrame {
+public class EditarAdministrador extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField inpNombre;
@@ -17,8 +18,8 @@ public class EditarMedico extends JFrame {
     private JTextField inpMail;
     private JTextField inpContrasenia; //
 
-    // Constructor que recibe un objeto Medico a editar
-    public EditarMedico(Medico usuario) {
+    // Constructor que recibe un objeto Admin a editar
+    public EditarAdministrador(Administrador usuario) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 547);
         
@@ -74,10 +75,7 @@ public class EditarMedico extends JFrame {
 
 
         // Label para mostrar mensajes al usuario (exito o error)
-        //JLabel lblMensaje = new JLabel("");
-        //lblMensaje.setBounds(55, 341, 277, 14);
-        //contentPane.add(lblMensaje);
-        // Label para mostrar mensajes al usuario (exito o error)
+        
         JLabel lblMensaje = new JLabel("");
         lblMensaje.setBounds(55, 310, 277, 30);            // posicion de la etiqueta del mensjae
         lblMensaje.setHorizontalAlignment(SwingConstants.CENTER);  // texto centrado horizontalmente
@@ -91,12 +89,11 @@ public class EditarMedico extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Actualiza el objeto usuario con los valores editados
                 usuario.setNombre(inpNombre.getText());
-                usuario.setApellido(inpApellido.getText());
                 usuario.setEmail(inpMail.getText());
                 usuario.setContrasenia(inpContrasenia.getText());
 
                 // Llama al método de la lógica de negocio para actualizar en la BD y obtiene el mensaje resultado
-                String mensaje = Medico.EditarMedico(usuario);
+                String mensaje = Administrador.EditarAdministrador(usuario);
 
                 // Muestra el mensaje en la interfaz
                 lblMensaje.setText(mensaje);
@@ -109,8 +106,8 @@ public class EditarMedico extends JFrame {
         btnVolver.setBounds(258, 352, 119, 50);
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Abre la ventana VistaMedico y cierra esta ventana
-                VistaMedico vista = new VistaMedico();
+                // Abre la ventana VistaAdmin y cierra esta ventana
+                VistaAdministrador vista = new VistaAdministrador();
                 vista.setVisible(true);
                 dispose();
             }
@@ -118,7 +115,7 @@ public class EditarMedico extends JFrame {
         contentPane.add(btnVolver);
 
         // Título de la ventana
-        JLabel lblTitulo = new JLabel("Centro De Salud - Editar Medico");
+        JLabel lblTitulo = new JLabel("Centro De Salud - Editar Administrador");
         lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 19));
         lblTitulo.setBounds(20, 11, 400, 53);
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
