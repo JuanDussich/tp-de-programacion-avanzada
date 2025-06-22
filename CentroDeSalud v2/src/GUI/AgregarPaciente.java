@@ -1,19 +1,23 @@
 package GUI;
 
 import javax.swing.*;
+
 import com.toedter.calendar.JDateChooser; // oara calendario
 import javax.swing.border.EmptyBorder;
 
 import BLL.Paciente;
 import DLL.ControllerPaciente;
+import repository.Validaciones;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.function.Function;
 
 
-public class AgregarPaciente extends JFrame {
+
+public class AgregarPaciente extends JFrame implements Validaciones {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -118,11 +122,12 @@ public class AgregarPaciente extends JFrame {
         btnGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
+                	                	
                     Paciente nuevo = new Paciente(
                     	0,
                         inpNombre.getText(),
                         inpApellido.getText(),
-                        Integer.parseInt(inpDni.getText()),
+                        validardni(inpDni.getText()),
                         new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate()),
                         inpEmail.getText(),
                         new String(inpContrasenia.getPassword())
@@ -133,8 +138,8 @@ public class AgregarPaciente extends JFrame {
                     limpiarCampos();
 
                 } catch (Exception ex) {
-                    //lblMensaje.setText("Error al registrar paciente. Revisá los datos."); //aca da el mensaje que no guardo
-                	ex.printStackTrace(); // prueba ara ver el error
+                    lblMensaje.setText("Error al registrar paciente. Revisá los datos."); //aca da el mensaje que no guardo
+                	//ex.printStackTrace(); // prueba ara ver el error
                 }
             }
         });
