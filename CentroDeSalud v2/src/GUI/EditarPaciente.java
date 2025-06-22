@@ -94,7 +94,7 @@ public class EditarPaciente extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 				//Paciente editar = usuario;
 			    usuario.setNombre(inpNombre.getText());
-			    usuario.setApellido(inpNombre.getText());
+			    usuario.setApellido(inpApellido.getText());
 			    usuario.setEmail(inpMail.getText());
 			    usuario.setContrasenia(inpContrasenia.getText());
 				
