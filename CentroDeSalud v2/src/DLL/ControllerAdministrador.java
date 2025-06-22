@@ -165,18 +165,16 @@ public class ControllerAdministrador {
 	        return lista;
 	    }
 
-	 // Método para eliminar un administrador (físicamente)
+	 // Método para eliminar un administrador (logicamente)
 	    public static boolean EliminarAdministrador(int id) {
+	        String sql = "UPDATE administrador SET activo = FALSE WHERE idAdministrador = ?"; // Campo corregido
 	        try {
-	            PreparedStatement stmt = con.prepareStatement(
-	                "DELETE FROM administrador WHERE idAdministrador = ?"
-	            );
+	            PreparedStatement stmt = con.prepareStatement(sql);
 	            stmt.setInt(1, id);
-
 	            int filas = stmt.executeUpdate();
 	            return filas > 0;
-	        } catch (Exception e) {
-	            e.printStackTrace();
+	        } catch (SQLException e) {
+	            System.err.println("Error al eliminar Administrador: " + e.getMessage());
 	            return false;
 	        }
 	    }

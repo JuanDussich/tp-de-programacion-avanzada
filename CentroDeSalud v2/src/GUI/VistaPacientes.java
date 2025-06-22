@@ -1,15 +1,12 @@
 package GUI;
 
 import javax.swing.*;
+
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import BLL.Medico;
+
 import BLL.Paciente;
-import BLL.Usuario;
-import DLL.ControllerMedico;
 import DLL.ControllerPaciente;
 
 import java.awt.*;
@@ -53,7 +50,7 @@ public class VistaPacientes extends JFrame {
 	        contentPane.add(lblTitulo);
 	        
 	        
-	     // Imagen de medico al costado
+	     // Imagen de paciente al costado
 	        ImageIcon iconoOriginal = new ImageIcon(getClass().getResource("/img/logo_pacientes.png"));
 	        Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(100, 60, Image.SCALE_SMOOTH);
 	        ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
@@ -266,7 +263,7 @@ public class VistaPacientes extends JFrame {
 	    private void cargarTablaFiltradaStream(String filtro) {
 	    	
 	    	LinkedList<Paciente> filtradasPorLetra = ControllerPaciente.mostrarPacientes().stream()
-	    			.filter(medico -> medico.getEmail() != null && medico.getEmail().startsWith(filtro))
+	    			.filter(paciente -> paciente.getEmail() != null && paciente.getEmail().startsWith(filtro))
 	    			.collect(Collectors.toCollection(LinkedList::new));
 
 	    	

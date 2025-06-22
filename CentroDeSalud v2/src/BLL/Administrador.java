@@ -10,6 +10,7 @@ public class Administrador extends Usuario implements Encriptador {
 	
 		//ATRIBUTOS
 		private int id;
+		private int activo;
 	    // CONSTRUCTOR
 	    public Administrador() {
 	    }
@@ -17,6 +18,13 @@ public class Administrador extends Usuario implements Encriptador {
 	    public Administrador(int id, String nombre, String apellido, String mail, String contrasenia) {
 	        super(nombre,apellido,mail,contrasenia);
 	        this.id = id;
+
+	    }
+	    
+	    public Administrador(int id, String nombre, String apellido, String mail, String contrasenia, int activo) {
+	        super(nombre,apellido,mail,contrasenia);
+	        this.id = id;
+	        this.setActivo(activo);
 
 	    }
 	    
@@ -141,4 +149,12 @@ public class Administrador extends Usuario implements Encriptador {
 	    	ControllerAdministrador.EliminarAdministrador(id);
 	    	
 	    }
+
+		public int getActivo() {
+			return activo;
+		}
+
+		public void setActivo(int activo) {
+			this.activo = activo;
+		}
 }
