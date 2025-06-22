@@ -199,5 +199,23 @@ public class ControllerPaciente {
         }
     }
 
+    
+    // para validar que el dn sea unico
+    public static boolean existeDNI(int dni) {
+        String sql = "SELECT COUNT(*) FROM paciente WHERE dni = ? AND activo = TRUE";
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, dni);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 }
