@@ -153,7 +153,8 @@ public class ControllerAdministrador {
 	                rs.getString("nombre"),
 	                rs.getString("apellido"),
 	                rs.getString("email"),
-	                rs.getString("contrasenia")
+	                rs.getString("contrasenia"),
+	                rs.getInt("activo")
 	            	);
 	                
 	                lista.add(administrador);

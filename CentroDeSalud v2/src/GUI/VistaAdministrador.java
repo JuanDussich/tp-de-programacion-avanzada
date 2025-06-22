@@ -117,7 +117,7 @@ public class VistaAdministrador extends JFrame {
                         (String) model.getValueAt(row, 2),            // apellido (String)
                         (String) model.getValueAt(row, 3),            // email (String)
                         (String) model.getValueAt(row, 4),            // contrasenia (String)
-                        (int) model.getValueAt(row, 5)
+                        (int) model.getValueAt(row, 5) //ESTADO
                     );
 
                     // Mostrar datos seleccionados en el label
