@@ -183,39 +183,32 @@ public class VistaMedico extends JFrame {
         cargarTabla();
 
         // Acción botón Agregar: Mostrar diálogo para ingresar datos y luego registrar nuevo médico
+		/*
+		 * btnAgregar.addActionListener(e -> { JTextField nombreField = new
+		 * JTextField(); JTextField apellidoField = new JTextField(); JTextField
+		 * matriculaField = new JTextField(); JTextField emailField = new JTextField();
+		 * JPasswordField contraseniaField = new JPasswordField(); JTextField
+		 * especialidadField = new JTextField();
+		 * 
+		 * Object[] fields = { "Nombre:", nombreField, "Apellido:", apellidoField,
+		 * "Matrícula:", matriculaField, "Email:", emailField, "Contraseña:",
+		 * contraseniaField, "Especialidad:", especialidadField };
+		 * 
+		 * int option = JOptionPane.showConfirmDialog(null, fields, "Agregar Médico",
+		 * JOptionPane.OK_CANCEL_OPTION); if (option == JOptionPane.OK_OPTION) { Medico
+		 * nuevo = new Medico( 0, // id (se genera en la base) nombreField.getText(),
+		 * apellidoField.getText(), matriculaField.getText(), emailField.getText(), new
+		 * String(contraseniaField.getPassword()), especialidadField.getText(), 1 //
+		 * activo por defecto = 1 (true) ); ControllerMedico.RegistrarMedico(nuevo);
+		 * cargarTabla(); } });
+		 */
+        
         btnAgregar.addActionListener(e -> {
-            JTextField nombreField = new JTextField();
-            JTextField apellidoField = new JTextField();
-            JTextField matriculaField = new JTextField();
-            JTextField emailField = new JTextField();
-            JPasswordField contraseniaField = new JPasswordField();
-            JTextField especialidadField = new JTextField();
-
-            Object[] fields = {
-                "Nombre:", nombreField,
-                "Apellido:", apellidoField,
-                "Matrícula:", matriculaField,
-                "Email:", emailField,
-                "Contraseña:", contraseniaField,
-                "Especialidad:", especialidadField
-            };
-
-            int option = JOptionPane.showConfirmDialog(null, fields, "Agregar Médico", JOptionPane.OK_CANCEL_OPTION);
-            if (option == JOptionPane.OK_OPTION) {
-                Medico nuevo = new Medico(
-                    0, // id (se genera en la base)
-                    nombreField.getText(),
-                    apellidoField.getText(),
-                    matriculaField.getText(),
-                    emailField.getText(),
-                    new String(contraseniaField.getPassword()),
-                    especialidadField.getText(),
-                    1 // activo por defecto = 1 (true)
-                );
-                ControllerMedico.RegistrarMedico(nuevo);
-                cargarTabla();
-            }
+            AgregarMedico agregar = new AgregarMedico(); // abre nueva ventana
+            agregar.setVisible(true);
+            dispose(); // opcional: cerrar la ventana actual
         });
+
 
         // Acción botón Editar: abrir ventana de edición si hay médico seleccionado
         btnEditar.addActionListener(e -> {

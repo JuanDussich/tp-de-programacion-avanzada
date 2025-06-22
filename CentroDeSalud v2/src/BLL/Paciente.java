@@ -46,6 +46,15 @@ public class Paciente extends Usuario implements Encriptador{
         this.fechaNacimiento = fechaNacimiento;
               
     }
+    
+    // constructor sin id
+    public Paciente( int idPaciente, String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia) {
+        super(nombre,apellido,email,contrasenia);
+        this.idPaciente = idPaciente;
+        this.dni = dni;
+        this.fechaNacimiento = fechaNacimiento;
+              
+    }
     // METODOS
     
     //METODO PARA HACER LOGIN DE PACIENTE

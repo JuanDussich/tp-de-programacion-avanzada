@@ -54,17 +54,19 @@ public class ControllerPaciente {
 	
 	//ESTE ES EL METODO DE AGREGAR PACIENTE
     public static void agregarPaciente(Paciente usuario) {
+    	String sql = "INSERT INTO `paciente`( `nombre`, `apellido`, `dni`, `fecha_De_Nacimiento`, `email`, `contrasenia`, `activo`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    	          
         try {
-            PreparedStatement statement = con.prepareStatement(
-                    "INSERT INTO `paciente`( `nombre`, `apellido`, `dni`, `fecha_De_Nacimiento`, `email`, `contrasenia`) VALUES (?,?,?,?,?,?)"
-            );
-            statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getApellido());
-            statement.setInt(3,usuario.getDni());
-            statement.setString(4, usuario.getFechaNacimiento());
-            statement.setString(5, usuario.getEmail());
-            statement.setString(6, usuario.encriptar(usuario.getContrasenia()));
-            //statement.setString(6, usuario.getContrasenia());
+        	PreparedStatement statement = con.prepareStatement(sql);
+        	statement.setString(1, usuario.getNombre());
+        	statement.setString(2, usuario.getApellido());
+        	statement.setInt(3, usuario.getDni());
+        	statement.setString(4, usuario.getFechaNacimiento());
+        	statement.setString(5, usuario.getEmail());
+        	statement.setString(6, usuario.encriptar(usuario.getContrasenia()));
+        	statement.setInt(7, 1); // Activo = 1 (true)
+
 
             int filas = statement.executeUpdate();
             if (filas > 0) {

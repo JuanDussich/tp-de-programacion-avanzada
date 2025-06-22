@@ -171,42 +171,11 @@ public class VistaPacientes extends JFrame {
 	        
 	     // Acción: Agregar usuario
 	        btnAgregar.addActionListener(e -> {
-	            JTextField nombreField = new JTextField();
-	            JTextField apellidoField = new JTextField();
-	            JTextField dniField = new JTextField ();
-	            JTextField fecha_De_NacimientoField = new JTextField();
-	            JTextField emailField = new JTextField();
-	            JPasswordField contraseniaField = new JPasswordField();
-	            // JTextField ActivoField = new JTextField ();
-	
-	            Object[] fields = {
-	                "Nombre:", nombreField,
-	                "Apellido:", apellidoField,
-	                "Dni:", dniField,
-	                "Fecha nacimiento (AAAA-MM-DD):", fecha_De_NacimientoField,
-	                "Email", emailField,
-	                "Contraseña:", contraseniaField,
-	                //"Activo:", ActivoField
-	            };
-	
-	            int option = JOptionPane.showConfirmDialog(null, fields, "Agregar Paciente", JOptionPane.OK_CANCEL_OPTION);
-	            //FIJATE DE ARREGLAR ACA PORQUE EN EL METODO DE REGISTRO YA TE PIDE LOS DATOS, FIJATE DE VER CUAL SE QUEDA Y CUAL SE VA
-	            if (option == JOptionPane.OK_OPTION) {
-	                Paciente nuevo = new Paciente(
-	                		nombreField.getText(),
-	                        apellidoField.getText(),
-	                        Integer.parseInt(dniField.getText()),
-	                        fecha_De_NacimientoField.getText(),
-	                        emailField.getText(),
-	                        new String(contraseniaField.getPassword())
-	                        //Integer.parseInt(ActivoField.getText())
-	                );
-	
-	                ControllerPaciente.RegistrarPaciente(nuevo);
-	                //ControllerPaciente.RegistrarPaciente();
-	                cargarTabla();
-	            }
+	            AgregarPaciente agregar = new AgregarPaciente();
+	            agregar.setVisible(true);
+	            dispose(); // cerrar vista actual si querés
 	        });
+
 	        
 	     // Acción: Editar usuario
 	        //FIJATE ACA DE VER DONDE O COMO FUNCIONA EL EDITAR PORQUE NO LO ESTAS PUDIENDO IMPLEMENTAR ASI LO ARREGLAS Y PODES TAMBIEN TENER
