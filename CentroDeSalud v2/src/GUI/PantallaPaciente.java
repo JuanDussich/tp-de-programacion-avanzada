@@ -32,6 +32,13 @@ public class PantallaPaciente extends JFrame {
 	private JPanel contentPane;
 	private JTextField inpEmail;
 	private JPasswordField inpContrasenia;
+	private JTextField inpNombre;
+	private JTextField inpApellido;
+	private JTextField inpDni;
+	private JTextField inpFechaDeNacimiento;
+	private JTextField inpMail;
+	private JTextField inpContra;
+	private Paciente logueado;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -71,12 +78,8 @@ public class PantallaPaciente extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("Ver turnos");
-		btnNewButton.setBounds(609, 251, 89, 23);
+		btnNewButton.setBounds(498, 190, 89, 23);
 		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Ver Perfil");
-		btnNewButton_1.setBounds(560, 173, 89, 23);
-		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_4 = new JButton("Solicitar turno");
 		btnNewButton_4.addActionListener(new ActionListener() {
@@ -84,7 +87,7 @@ public class PantallaPaciente extends JFrame {
 				
 			}
 		});
-		btnNewButton_4.setBounds(480, 251, 119, 23);
+		btnNewButton_4.setBounds(597, 190, 119, 23);
 		contentPane.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("Cerrar Sesion");
@@ -99,29 +102,38 @@ public class PantallaPaciente extends JFrame {
 		btnNewButton_5.setBounds(539, 50, 119, 23);
 		contentPane.add(btnNewButton_5);
 		
+		JButton btnNewButton_1 = new JButton("Ver Perfil");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, logueado);
+			}
+		});
+		btnNewButton_1.setBounds(378, 190, 89, 23);
+		contentPane.add(btnNewButton_1);
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(40, 173, 424, 266);
+		tabbedPane.setBounds(39, 173, 329, 266);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
-		tabbedPane.addTab("New tab", null, panel_1, null);
+		tabbedPane.addTab("Login ", null, panel_1, null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Email");
-		lblNewLabel_1.setBounds(10, 65, 200, 14);
+		lblNewLabel_1.setBounds(10, 59, 200, 14);
 		panel_1.add(lblNewLabel_1);
 				
 		inpEmail = new JTextField();
-		inpEmail.setBounds(10, 90, 200, 32);
+		inpEmail.setBounds(10, 84, 200, 32);
 		panel_1.add(inpEmail);
 		inpEmail.setColumns(10);
 				
 		JLabel lblNewLabel_1_1 = new JLabel("Contraseña");
-		lblNewLabel_1_1.setBounds(10, 133, 200, 14);
+		lblNewLabel_1_1.setBounds(10, 127, 200, 14);
 		panel_1.add(lblNewLabel_1_1);
 						
 		inpContrasenia = new JPasswordField();
-		inpContrasenia.setBounds(10, 158, 200, 32);
+		inpContrasenia.setBounds(10, 152, 200, 32);
 		panel_1.add(inpContrasenia);
 		
 		JLabel lblError = new JLabel("");
@@ -134,12 +146,13 @@ public class PantallaPaciente extends JFrame {
 		panel_1.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				Paciente logueado = BLL.Paciente.login(inpEmail.getText(), inpContrasenia.getText());
+				
+				logueado = BLL.Paciente.login(inpEmail.getText(), inpContrasenia.getText());
 				if (logueado == null) {
 					lblError.setText("No se encontró");
 				} else {
 					JOptionPane.showMessageDialog(null, "estas logueado");
+					JOptionPane.showMessageDialog(null, "Bienvenido "  +  logueado.getNombre());
 					//VistaUsuarios tabla = new VistaUsuarios();
 					//tabla.setVisible(true);
 					//dispose();
@@ -147,14 +160,94 @@ public class PantallaPaciente extends JFrame {
 			}
 		});
 		
-		
-		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		tabbedPane.addTab("New tab", null, panel_1_1, null);
+		tabbedPane.addTab("Registrarse", null, panel_1_1, null);
+		
+		
+		
+		JLabel lblNewLabel_1_3_2 = new JLabel("Nombre");
+		lblNewLabel_1_3_2.setBounds(10, 21, 140, 14);
+		panel_1_1.add(lblNewLabel_1_3_2);
+		
+		inpNombre = new JTextField();
+		inpNombre.setColumns(10);
+		inpNombre.setBounds(10, 33, 140, 32);
+		panel_1_1.add(inpNombre);
+		
+		JLabel lblNewLabel_1_3_1 = new JLabel("Apellido");
+		lblNewLabel_1_3_1.setBounds(10, 90, 140, 14);
+		panel_1_1.add(lblNewLabel_1_3_1);
+		
+		inpApellido = new JTextField();
+		inpApellido.setColumns(10);
+		inpApellido.setBounds(10, 103, 140, 32);
+		panel_1_1.add(inpApellido);
+		
+		JLabel lblNewLabel_1_3_3 = new JLabel("Dni");
+		lblNewLabel_1_3_3.setBounds(10, 146, 140, 14);
+		panel_1_1.add(lblNewLabel_1_3_3);
+		
+		inpDni = new JTextField();
+		inpDni.setColumns(10);
+		inpDni.setBounds(10, 163, 140, 32);
+		panel_1_1.add(inpDni);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Fecha de Nacimiento");
+		lblNewLabel_1_2.setBounds(174, 21, 140, 14);
+		panel_1_1.add(lblNewLabel_1_2);
+		
+		inpFechaDeNacimiento = new JTextField();
+		inpFechaDeNacimiento.setColumns(10);
+		inpFechaDeNacimiento.setBounds(174, 33, 140, 32);
+		panel_1_1.add(inpFechaDeNacimiento);
+		
+		JLabel lblNewLabel_1_3 = new JLabel("Email");
+		lblNewLabel_1_3.setBounds(174, 90, 140, 14);
+		panel_1_1.add(lblNewLabel_1_3);
+		
+		inpMail = new JTextField();
+		inpMail.setColumns(10);
+		inpMail.setBounds(174, 103, 140, 32);
+		panel_1_1.add(inpMail);
+		
+		JLabel lblNewLabel_1_4 = new JLabel("Contraseña");
+		lblNewLabel_1_4.setBounds(174, 146, 140, 14);
+		panel_1_1.add(lblNewLabel_1_4);
+		
+		inpContra = new JTextField();
+		inpContra.setColumns(10);
+		inpContra.setBounds(174, 162, 140, 32);
+		panel_1_1.add(inpContra);
+		
 		
 		JButton btnNewButton_2_1 = new JButton("Registrarse");
-		btnNewButton_2_1.setBounds(10, 201, 89, 23);
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Paciente Registrado = new Paciente(0,inpNombre.getText(), inpApellido.getText(), Integer.parseInt(inpDni.getText())  , inpFechaDeNacimiento.getText(),inpMail.getText(), inpContra.getText());
+				
+				BLL.Paciente.RegistrarPaciente(Registrado);
+				
+				if (Registrado == null) {
+					lblError.setText("No se encontró");
+				} else {
+					JOptionPane.showMessageDialog(null, "estas logueado");
+					JOptionPane.showMessageDialog(null, "Bienvenido "  +  Registrado.getNombre());
+					//VistaUsuarios tabla = new VistaUsuarios();
+					//tabla.setVisible(true);
+					//dispose();
+				}
+			}
+		});
+		btnNewButton_2_1.setBounds(10, 206, 89, 23);
 		panel_1_1.add(btnNewButton_2_1);
+		
+		
+		
+		
+		
+		
+		
 	}
 }

@@ -25,7 +25,7 @@ public class ControllerAdministrador {
 		//METODO LOGIN DEL ADMINISTRADOR
 		public static Administrador login(String email, String contrasenia) {
 	        Administrador administrador = new Administrador();
-	        JOptionPane.showMessageDialog(null, administrador);
+	        //JOptionPane.showMessageDialog(null, administrador);
 	        try {
 	            PreparedStatement stmt = con.prepareStatement(
 	                    "SELECT * FROM administrador WHERE email = ? AND contrasenia = ?"

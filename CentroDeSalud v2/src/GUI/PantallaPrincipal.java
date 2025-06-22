@@ -48,7 +48,7 @@ public class PantallaPrincipal extends JFrame {
 		JLabel LblTitulo = new JLabel("Centro De Salud");
 		LblTitulo.setForeground(Color.GRAY);
 		LblTitulo.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 30));
-		LblTitulo.setBounds(190, 32, 293, 137);
+		LblTitulo.setBounds(0, 0, 293, 137);
 		contentPane.add(LblTitulo);
 		
 		JButton btnPaciente = new JButton("Menu Paciente");
@@ -86,7 +86,7 @@ public class PantallaPrincipal extends JFrame {
 		// Cargar la imagen
         JLabel Logo = new JLabel("");
 		Logo.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\logo.jpg"));
-		Logo.setBounds(553, 32, 137, 137);
+		Logo.setBounds(239, 0, 137, 137);
 		contentPane.add(Logo);
 		
 		
