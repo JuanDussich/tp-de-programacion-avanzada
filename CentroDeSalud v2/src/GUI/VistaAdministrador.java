@@ -57,7 +57,7 @@ public class VistaAdministrador extends JFrame {
 		contentPane.setLayout(null);
 
 		// titulo de la ventana admin
-		JLabel lblTitulo = new JLabel("Centro De Salud - Administradores Activos");
+		JLabel lblTitulo = new JLabel("Centro De Salud - Administradores");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblTitulo.setBounds(10, 10, 800, 15);
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
