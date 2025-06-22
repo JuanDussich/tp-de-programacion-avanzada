@@ -1,28 +1,30 @@
 package DLL;
 
 import BLL.HistoriaClinica;
+
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ControllerHistoriaClinica {
 
-	private static Connection con = Conexion.getInstance().getConnection();
-
-    public ControllerHistoriaClinica() {
-        
-    }
+    private static Connection con = Conexion.getInstance().getConnection();
 
     // CREATE
-    public void crearHistoriaClinica(String observaciones, String fecha,
-                                     int turnoId, int pacienteId, int tratamientoId,
-                                     int medicamentoId, int medicoId) {
+    public void crearHistoriaClinica(HistoriaClinica hc) {
+        String sql = "INSERT INTO historia_clinica (observaciones, fecha, turnoId, pacienteId, tratamientoId, medicamentoId, medicoId) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
-            Statement stmt = con.createStatement();
-            String sql = "INSERT INTO historia_clinica (observaciones, fecha, turno_idTurno, turno_Paciente_idPaciente, " +
-                         "tratamiento_idTratamiento, medicamento_idMedicamento, medico_idMedico) VALUES (" +
-                         "'" + observaciones + "', '" + fecha + "', " + turnoId + ", " + pacienteId + ", " +
-                         tratamientoId + ", " + medicamentoId + ", " + medicoId + ")";
-            stmt.executeUpdate(sql);
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, hc.getObservaciones());
+            stmt.setDate(2, Date.valueOf(hc.getFecha()));
+            stmt.setInt(3, hc.getTurnoId());
+            stmt.setInt(4, hc.getPacienteId());
+            stmt.setInt(5, hc.getTratamientoId());
+            stmt.setInt(6, hc.getMedicamentoId());
+            stmt.setInt(7, hc.getMedicoId());
+            stmt.executeUpdate();
+
             System.out.println("Historia clínica creada correctamente.");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,14 +34,22 @@ public class ControllerHistoriaClinica {
     // READ
     public ArrayList<HistoriaClinica> obtenerHistoriasClinicas() {
         ArrayList<HistoriaClinica> lista = new ArrayList<>();
+        String sql = "SELECT * FROM historia_clinica";
         try {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM historia_clinica");
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                HistoriaClinica hc = new HistoriaClinica();
-                hc.agregarNotaMedica(rs.getString("observaciones"));
-                hc.agregarReceta("Medicamento ID: " + rs.getInt("medicamento_idMedicamento")); // ejemplo
+                HistoriaClinica hc = new HistoriaClinica(
+                    rs.getInt("idHistorialMedico"),
+                    rs.getString("observaciones"),
+                    rs.getDate("fecha").toLocalDate(),
+                    rs.getInt("turnoId"),
+                    rs.getInt("pacienteId"),
+                    rs.getInt("tratamientoId"),
+                    rs.getInt("medicamentoId"),
+                    rs.getInt("medicoId")
+                );
                 lista.add(hc);
             }
         } catch (SQLException e) {
@@ -50,11 +60,12 @@ public class ControllerHistoriaClinica {
 
     // UPDATE
     public void actualizarHistoriaClinica(int id, String nuevasObservaciones) {
+        String sql = "UPDATE historia_clinica SET observaciones = ? WHERE idHistorialMedico = ?";
         try {
-            Statement stmt = con.createStatement();
-            String sql = "UPDATE historia_clinica SET observaciones = '" + nuevasObservaciones +
-                         "' WHERE idHistorial_Medico = " + id;
-            stmt.executeUpdate(sql);
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nuevasObservaciones);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
             System.out.println("Historia clínica actualizada.");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,10 +74,11 @@ public class ControllerHistoriaClinica {
 
     // DELETE
     public void eliminarHistoriaClinica(int id) {
+        String sql = "DELETE FROM historia_clinica WHERE idHistorialMedico = ?";
         try {
-            Statement stmt = con.createStatement();
-            String sql = "DELETE FROM historia_clinica WHERE idHistorial_Medico = " + id;
-            stmt.executeUpdate(sql);
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
             System.out.println("Historia clínica eliminada.");
         } catch (SQLException e) {
             e.printStackTrace();

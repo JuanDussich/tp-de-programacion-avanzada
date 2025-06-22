@@ -21,6 +21,7 @@ public class HistoriaClinica {
     private List<String> recetas;
 
     // CONSTRUCTORES
+
     public HistoriaClinica() {
         this.notasMedicas = new ArrayList<>();
         this.recetas = new ArrayList<>();
@@ -45,6 +46,7 @@ public class HistoriaClinica {
     }
 
     // MÉTODOS PERSONALIZADOS
+
     public void agregarNotaMedica(String nota) {
         this.notasMedicas.add(nota);
     }
@@ -123,22 +125,31 @@ public class HistoriaClinica {
         return notasMedicas;
     }
 
+    public void setNotasMedicas(List<String> notasMedicas) {
+        this.notasMedicas = notasMedicas;
+    }
+
     public List<String> getRecetas() {
         return recetas;
     }
 
+    public void setRecetas(List<String> recetas) {
+        this.recetas = recetas;
+    }
+
     // TO STRING
+
     @Override
     public String toString() {
-        return "HistoriaClinica{" +
-                "idHistorialMedico=" + idHistorialMedico +
-                ", observaciones='" + observaciones + '\'' +
-                ", fecha=" + fecha +
-                ", turnoId=" + turnoId +
-                ", pacienteId=" + pacienteId +
-                ", tratamientoId=" + tratamientoId +
-                ", medicamentoId=" + medicamentoId +
-                ", medicoId=" + medicoId +
-                '}';
+        return "HistoriaClinica {" +
+                "\n  ID: " + idHistorialMedico +
+                "\n  Observaciones: '" + observaciones + '\'' +
+                "\n  Fecha: " + fecha +
+                "\n  Turno ID: " + turnoId +
+                "\n  Paciente ID: " + pacienteId +
+                "\n  Tratamiento ID: " + tratamientoId +
+                "\n  Medicamento ID: " + medicamentoId +
+                "\n  Médico ID: " + medicoId +
+                "\n}";
     }
 }
