@@ -4,9 +4,6 @@ import BLL.Turno;
 import javax.swing.*;
 import java.sql.*;
 import java.util.LinkedList;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 
 public class ControllerTurno {
 
@@ -16,9 +13,10 @@ public class ControllerTurno {
     public static void agregarTurno(Turno turno) {
         try {
             Statement stmt = con.createStatement();
-            String sql = "INSERT INTO turno (fechaTurno, horaTurno, tipoConsulta, estado, paciente_idPaciente, medico_idMedico) " +
-                         "VALUES ('" + turno.getFechaTurno() + "', '" + turno.getHoraTurno() + "', '" + turno.getTipoConsulta() + "', '" +
-                         turno.getEstado() + "', " + turno.getIdPaciente() + ", " + turno.getIdMedico() + ")";
+            String sql = "INSERT INTO turno (fechaTurno, horaTurno, tipoConsulta, estado, paciente_idPaciente, medico_idMedico, especialidad, motivoConsulta, resultadoConsulta) " +
+                    "VALUES ('" + turno.getFechaTurno() + "', '" + turno.getHoraTurno() + "', '" + turno.getTipoConsulta() + "', '" +
+                    turno.getEstado() + "', " + turno.getIdPaciente() + ", " + turno.getIdMedico() + ", '" +
+                    turno.getEspecialidad() + "', '" + turno.getMotivoConsulta() + "', '" + turno.getResultadoConsulta() + "')";
             stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Turno agregado correctamente.");
         } catch (Exception e) {
@@ -32,6 +30,7 @@ public class ControllerTurno {
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM turno");
+
             while (rs.next()) {
                 Turno t = new Turno();
                 t.setIdTurno(rs.getInt("idTurno"));
@@ -41,6 +40,9 @@ public class ControllerTurno {
                 t.setEstado(rs.getString("estado"));
                 t.setIdPaciente(rs.getInt("paciente_idPaciente"));
                 t.setIdMedico(rs.getInt("medico_idMedico"));
+                t.setEspecialidad(rs.getString("especialidad"));
+                t.setMotivoConsulta(rs.getString("motivoConsulta"));
+                t.setResultadoConsulta(rs.getString("resultadoConsulta"));
                 lista.add(t);
             }
         } catch (Exception e) {
@@ -58,11 +60,15 @@ public class ControllerTurno {
             String nuevoEstado = JOptionPane.showInputDialog("Nuevo estado:");
             int nuevoIdPaciente = Integer.parseInt(JOptionPane.showInputDialog("Nuevo ID de paciente:"));
             int nuevoIdMedico = Integer.parseInt(JOptionPane.showInputDialog("Nuevo ID de médico:"));
+            String nuevaEspecialidad = JOptionPane.showInputDialog("Nueva especialidad:");
+            String nuevoMotivo = JOptionPane.showInputDialog("Nuevo motivo de consulta:");
+            String nuevoResultado = JOptionPane.showInputDialog("Nuevo resultado de consulta:");
 
             Statement stmt = con.createStatement();
             String sql = "UPDATE turno SET fechaTurno='" + nuevaFecha + "', horaTurno='" + nuevaHora + "', tipoConsulta='" + nuevoTipo +
-                         "', estado='" + nuevoEstado + "', paciente_idPaciente=" + nuevoIdPaciente + ", medico_idMedico=" + nuevoIdMedico +
-                         " WHERE idTurno=" + id;
+                    "', estado='" + nuevoEstado + "', paciente_idPaciente=" + nuevoIdPaciente + ", medico_idMedico=" + nuevoIdMedico +
+                    ", especialidad='" + nuevaEspecialidad + "', motivoConsulta='" + nuevoMotivo + "', resultadoConsulta='" + nuevoResultado +
+                    "' WHERE idTurno=" + id;
             int filas = stmt.executeUpdate(sql);
 
             if (filas > 0) {
