@@ -20,6 +20,7 @@ public class ListaPaciente {
         return ControllerPaciente.mostrarPacientes();
     }
 
+    //ACA HAY UN ERROR EN LA FORMA EN LA QUE SE ESTA LLAMANDO A ACTUALIZAR PACIENTE
     public boolean actualizarPaciente(Paciente paciente) {
         String mensaje = ControllerPaciente.EditarPaciente(paciente);
         if (mensaje.equals("Usuario editado correctamente.")) {

@@ -193,9 +193,9 @@ public class PantallaMedico extends JFrame {
 		inpMatricula.setBounds(10, 137, 140, 32);
 		panel_1_1.add(inpMatricula);
 		
-		//JLabel lblNewLabel_1_2 = new JLabel("Especialidad");
-		//lblNewLabel_1_2.setBounds(174, 64, 140, 14);
-		//panel_1_1.add(lblNewLabel_1_2);
+		JLabel lblNewLabel_1_2 = new JLabel("Especialidad");
+		lblNewLabel_1_2.setBounds(174, 64, 140, 14);
+		panel_1_1.add(lblNewLabel_1_2);
 		
 		//LO QUE DEBERIA DE CAMBIAR AMALIA SERIA ESTO DE ACA QUE ESTA PARTE DE ACA ES PARA REGISTRAR LA ESPECIALIDAD
 		//inpEspecialidad = new JTextField();
@@ -208,7 +208,7 @@ public class PantallaMedico extends JFrame {
             Combodoctores.addItem(esp.name());
         }
 		
-		Combodoctores.setBounds(174, 120, 105, 20);
+		Combodoctores.setBounds(176, 81, 138, 32);
 		panel_1_1.add(Combodoctores);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("Email");

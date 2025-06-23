@@ -141,7 +141,7 @@ public class HistoriaClinica {
 
     @Override
     public String toString() {
-        return "HistoriaClinica {" +
+        return "HistoriaClinica " +
                 "\n  ID: " + idHistorialMedico +
                 "\n  Observaciones: '" + observaciones + '\'' +
                 "\n  Fecha: " + fecha +
@@ -151,16 +151,6 @@ public class HistoriaClinica {
                 "\n  Medicamento ID: " + medicamentoId +
                 "\n  Médico ID: " + medicoId +
                 "\n}";
-    }
-}       return "HistoriaClinica {" +
-                "\n  ID: " + idHistorialMedico +
-                "\n  Observaciones: '" + observaciones + '\'' +
-                "\n  Fecha: " + fecha +
-                "\n  Turno ID: " + turnoId +
-                "\n  Paciente ID: " + pacienteId +
-                "\n  Tratamiento ID: " + tratamientoId +
-                "\n  Medicamento ID: " + medicamentoId +
-                "\n  Médico ID: " + medicoId +
-                "\n}";
-    }
+    
+}       
 }
