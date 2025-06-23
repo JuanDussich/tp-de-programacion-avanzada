@@ -1,68 +1,60 @@
 package BLL;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HistoriaClinica {
-		
-		//ATRIBUTOS
-		private ArrayList<String> notasMedicas;
-		private ArrayList<String> recetas;
 
-		//CONSTRUCTOR
-		public HistoriaClinica() {
-			this.notasMedicas = new ArrayList<>();
-			this.recetas = new ArrayList<>();
-		}
+    // ATRIBUTOS
+    private int idHistorialMedico;
+    private String observaciones;
+    private LocalDate fecha;
 
-		//METODOS
-		public void agregarNotaMedica(String nota) {
-		        notasMedicas.add(nota);
-		}
+    private int turnoId;
+    private int pacienteId;
+    private int tratamientoId;
+    private int medicamentoId;
+    private int medicoId;
 
-		public void agregarReceta(String receta) {
-		        recetas.add(receta);
-		}
+    private List<String> notasMedicas;
+    private List<String> recetas;
 
-<<<<<<< HEAD
-		//GETTERS Y SETTERS
-		public ArrayList<String> getNotasMedicas() {
-		        return notasMedicas;
-		}
-=======
     // CONSTRUCTORES
 
     public HistoriaClinica() {
         this.notasMedicas = new ArrayList<>();
         this.recetas = new ArrayList<>();
     }
->>>>>>> Brian
 
-		public ArrayList<String> getRecetas() {
-		        return recetas;
-		}
+    public HistoriaClinica(String observaciones, LocalDate fecha, int turnoId, int pacienteId,
+                           int tratamientoId, int medicamentoId, int medicoId) {
+        this();
+        this.observaciones = observaciones;
+        this.fecha = fecha;
+        this.turnoId = turnoId;
+        this.pacienteId = pacienteId;
+        this.tratamientoId = tratamientoId;
+        this.medicamentoId = medicamentoId;
+        this.medicoId = medicoId;
+    }
 
-		public void setNotasMedicas(ArrayList<String> notasMedicas) {
-		        this.notasMedicas = notasMedicas;
-		}
+    public HistoriaClinica(int idHistorialMedico, String observaciones, LocalDate fecha, int turnoId,
+                           int pacienteId, int tratamientoId, int medicamentoId, int medicoId) {
+        this(observaciones, fecha, turnoId, pacienteId, tratamientoId, medicamentoId, medicoId);
+        this.idHistorialMedico = idHistorialMedico;
+    }
 
-<<<<<<< HEAD
-		public void setRecetas(ArrayList<String> recetas) {
-		        this.recetas = recetas;
-		}
-=======
     // MÉTODOS PERSONALIZADOS
 
     public void agregarNotaMedica(String nota) {
         this.notasMedicas.add(nota);
     }
->>>>>>> Brian
 
-		@Override
-		public String toString() {
-			return "HistoriaClinica{" + "notasMedicas=" + notasMedicas + ", recetas=" + recetas + '}';
-		}
+    public void agregarReceta(String receta) {
+        this.recetas.add(receta);
+    }
 
-<<<<<<< HEAD
-=======
     // GETTERS Y SETTERS
 
     public int getIdHistorialMedico() {
@@ -160,5 +152,15 @@ public class HistoriaClinica {
                 "\n  Médico ID: " + medicoId +
                 "\n}";
     }
->>>>>>> Brian
+}       return "HistoriaClinica {" +
+                "\n  ID: " + idHistorialMedico +
+                "\n  Observaciones: '" + observaciones + '\'' +
+                "\n  Fecha: " + fecha +
+                "\n  Turno ID: " + turnoId +
+                "\n  Paciente ID: " + pacienteId +
+                "\n  Tratamiento ID: " + tratamientoId +
+                "\n  Medicamento ID: " + medicamentoId +
+                "\n  Médico ID: " + medicoId +
+                "\n}";
+    }
 }
