@@ -77,7 +77,6 @@ public class PantallaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GUI.PantallaMedico vista = new PantallaMedico();
 				vista.setVisible(true);
-				JOptionPane.showMessageDialog(null,"programa de mierda funciona");
 			}
 		});
 		btnMedico.setBounds(553, 374, 137, 61);
