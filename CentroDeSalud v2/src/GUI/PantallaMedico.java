@@ -242,6 +242,9 @@ public class PantallaMedico extends JFrame {
 		panel_1_1.add(btnNewButton_2_1);
 		
 		JComboBox Combodoctores = new JComboBox();
+		//for (Especialidad esp : Especialidad.values()) {
+        //    Combodoctores.addItem(esp.name());
+        //}
 		
 		Combodoctores.setBounds(174, 120, 105, 20);
 		panel_1_1.add(Combodoctores);
