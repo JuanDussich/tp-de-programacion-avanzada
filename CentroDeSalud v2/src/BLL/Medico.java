@@ -1,7 +1,12 @@
 package BLL;
 import javax.swing.*;
 
+<<<<<<< HEAD
 
+=======
+import DLL.ControllerMedico;
+import DLL.ControllerPaciente;
+>>>>>>> Juan
 import repository.Encriptador;
 import repository.OpcionesMedico;
 
@@ -99,6 +104,37 @@ public class Medico extends Usuario implements Encriptador{
                 return "No se pudo actualizar el medico";
             }
         }
+    }
+    
+  //METODO PARA HACER LOGIN DE PACIENTE
+    public static Medico login(String email, String contrasenia) {
+    	
+    	//Paciente usuario = new Paciente() ;
+    	if (email.isEmpty() || contrasenia.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Hay un error, no puede ser vacio");
+		}else {
+			//usuario = ControllerPaciente.login(email, contrasenia);
+			return ControllerMedico.login(email,contrasenia);
+			
+		}
+    	//return usuario;
+    	return null;
+    }
+    
+    //METODO PARA REGISTRAR MEDICO PERO ENVIANDO EL MEDICO ANTES DE IR AL CONTROLADOR
+    public static void RegistrarMedico(Medico medico) {
+    	
+    	JOptionPane.showMessageDialog(null, "Estas registrandote");
+    	ControllerMedico.RegistrarMedico(medico);
+    	
+    }
+    
+    //METODO REGISTRAR MEDICO QUE LLAMA AL CONTROLADOR
+    public static void RegitrarMedico() {
+    	
+    	ControllerMedico.RegistrarMedico();;
+    	
+    	
     }
     
     // ------------------- MÉTODOS GETTERS & SETTERS -------------------

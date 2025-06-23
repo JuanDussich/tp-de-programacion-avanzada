@@ -10,8 +10,12 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import BLL.Medico;
+<<<<<<< HEAD
 import BLL.Paciente;
 import BLL.Especialidad;
+=======
+import BLL.Usuario;
+>>>>>>> Juan
 
 public class ControllerMedico {
 
@@ -159,6 +163,36 @@ public class ControllerMedico {
         } else {
             JOptionPane.showMessageDialog(null, "Usuario ya creado con ese email");
         }
+    }
+    
+    //METODO DE REGISTRAR PACIENTE PERO EL PACIENTE SE CREA DENTRO DEL METODO
+    public static void RegistrarMedico() {
+
+        String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
+        String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
+        String matricula = JOptionPane.showInputDialog("ingresa tu dni");
+        String especialidad = JOptionPane.showInputDialog("ingresa la fecha");
+
+        String email = JOptionPane.showInputDialog("ingresa tu email");
+        String contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
+        int estado = Integer.parseInt(JOptionPane.showInputDialog("ingrese 1 o 0 para ver si esta activo o no"));
+        Medico nuevo = new Medico(0,nombre,apellido,matricula,email,contrasenia,especialidad,estado);
+
+        LinkedList<Medico> existentes = mostrarMedicos();
+        boolean flag = true;
+        for (Usuario existente : existentes) {
+            if (existente.getEmail().equals(nuevo.getEmail())) {
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            agregarMedico(nuevo);
+        }else {
+            JOptionPane.showMessageDialog(null, "Usuario ya creado");
+        }
+
+
     }
 
     /**
