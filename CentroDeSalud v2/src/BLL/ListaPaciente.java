@@ -17,7 +17,7 @@ public class ListaPaciente {
     }
 
     public LinkedList<Paciente> mostrarTodos() {
-        return ControllerPaciente.mostrarPaciente();
+        return ControllerPaciente.mostrarPacientes();
     }
 
     public boolean actualizarPaciente(Paciente paciente) {
