@@ -46,7 +46,7 @@ public class Turno{
                     //VerTurnoAtendido
                     break;
                 case 4:
-                    JOptionPane.showMessageDialog(null, "Salio del menu Turno");
+                    JOptionPane.showMessageDialog(null, "Te fuiste del menu Turno");
                     break;
             }
         }while (opcion != 4);
