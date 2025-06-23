@@ -51,33 +51,30 @@ public class ControllerTurno {
         return lista;
     }
 
-    // UPDATE
-    public static void modificarTurno(int id) {
+    //UPDATE
+     
+    public static boolean modificarTurno(Turno turno) {
+        String sql = "UPDATE turno SET fechaTurno = ?, horaTurno = ?, tipoConsulta = ?, estado = ?, " +
+                     "paciente_idPaciente = ?, medico_idMedico = ?, especialidad = ?, motivoConsulta = ?, resultadoConsulta = ? " +
+                     "WHERE idTurno = ?";
         try {
-            String nuevaFecha = JOptionPane.showInputDialog("Nueva fecha (YYYY-MM-DD):");
-            String nuevaHora = JOptionPane.showInputDialog("Nueva hora (HH:MM):");
-            String nuevoTipo = JOptionPane.showInputDialog("Nuevo tipo de consulta:");
-            String nuevoEstado = JOptionPane.showInputDialog("Nuevo estado:");
-            int nuevoIdPaciente = Integer.parseInt(JOptionPane.showInputDialog("Nuevo ID de paciente:"));
-            int nuevoIdMedico = Integer.parseInt(JOptionPane.showInputDialog("Nuevo ID de médico:"));
-            String nuevaEspecialidad = JOptionPane.showInputDialog("Nueva especialidad:");
-            String nuevoMotivo = JOptionPane.showInputDialog("Nuevo motivo de consulta:");
-            String nuevoResultado = JOptionPane.showInputDialog("Nuevo resultado de consulta:");
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setDate(1, Date.valueOf(turno.getFechaTurno()));
+            stmt.setTime(2, Time.valueOf(turno.getHoraTurno()));
+            stmt.setString(3, turno.getTipoConsulta());
+            stmt.setString(4, turno.getEstado());
+            stmt.setInt(5, turno.getIdPaciente());
+            stmt.setInt(6, turno.getIdMedico());
+            stmt.setString(7, turno.getEspecialidad());
+            stmt.setString(8, turno.getMotivoConsulta());
+            stmt.setString(9, turno.getResultadoConsulta());
+            stmt.setInt(10, turno.getIdTurno()); // Este es el filtro
 
-            Statement stmt = con.createStatement();
-            String sql = "UPDATE turno SET fechaTurno='" + nuevaFecha + "', horaTurno='" + nuevaHora + "', tipoConsulta='" + nuevoTipo +
-                    "', estado='" + nuevoEstado + "', paciente_idPaciente=" + nuevoIdPaciente + ", medico_idMedico=" + nuevoIdMedico +
-                    ", especialidad='" + nuevaEspecialidad + "', motivoConsulta='" + nuevoMotivo + "', resultadoConsulta='" + nuevoResultado +
-                    "' WHERE idTurno=" + id;
-            int filas = stmt.executeUpdate(sql);
-
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Turno modificado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró un turno con ese ID.");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al modificar el turno: " + e.getMessage());
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al modificar el turno: " + e.getMessage());
+            return false;
         }
     }
 
