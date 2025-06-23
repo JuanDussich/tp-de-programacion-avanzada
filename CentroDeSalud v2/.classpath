@@ -6,7 +6,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.13.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Kavadie/Documents/Escuela Da VINCI/Programacion Avanzada/jcalendar-1.4.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/Agustin/Da Vinci/mysql-connector-java-5.1.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Agustin/Downloads/jcalendar-1.4.zip"/>
+>>>>>>> Agustin
 	<classpathentry kind="output" path="bin"/>
 </classpath>
