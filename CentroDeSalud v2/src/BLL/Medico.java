@@ -1,42 +1,50 @@
 package BLL;
 import javax.swing.*;
 
+import DLL.ControllerMedico;
+import DLL.ControllerPaciente;
 import repository.Encriptador;
 import repository.OpcionesMedico;
 
 public class Medico extends Usuario implements Encriptador{
-	private int id;
-    private boolean activo = true;
+	private int idMedico;
+    private int activo = 1; // true 1 false 0
 	private String matricula;
-    private String especialidad;
-    private int cantidadConsultas;
-
-    
+    private String especialidad; // se cambio el campo especialidad a string eliminar tabla especialidad!!
+       
     public Medico() {
 
     }
     
-    public Medico(int id, String nombre, String apellido, String email, String contrasenia, String especialidad, String matricula, boolean activo) {
+    public Medico(int idMedico, String nombre, String apellido, String matricula, String email, String contrasenia, String especialidad, int activo) {
         super(nombre, apellido, email, contrasenia); // Hereda de Usuario
-        this.id = id;
+        this.idMedico = idMedico;
         this.especialidad = especialidad;
         this.matricula = matricula;
         this.activo = activo;
     }
-    // Validación 
-    public Medico(String matricula, String especialidad, int cantidadConsultas) {
-        if (matricula != null && especialidad != null && cantidadConsultas >= 0) {
+    // constructor sin id 
+    public Medico(String nombre, String apellido, String matricula, String email, String contrasenia, String especialidad, int activo) {
+        super(nombre, apellido, email, contrasenia);
+        this.matricula = matricula;
+        this.especialidad = especialidad;
+        this.activo = activo;
+    }
+
+    // Validación constructir matricula y especialidad
+    public Medico(String matricula, String especialidad) {
+        if (matricula != null && especialidad != null) {
             this.matricula = matricula;
             this.especialidad = especialidad;
-            this.cantidadConsultas = cantidadConsultas;
+            //this.cantidadConsultas = cantidadConsultas;
         } else {
             this.matricula = "Desconocida";
             this.especialidad = "Desconocida";
-            this.cantidadConsultas = 0;
+          
         }
     }
 
-    
+    // menu inicial primera entrega ¿BORRAR? consultar con teem
     public void MenuMedico() {
         int opcion;
 
@@ -75,22 +83,65 @@ public class Medico extends Usuario implements Encriptador{
         } while (opcion != 3);
     }
 
- 
+    public static String EditarMedico(Medico usuario) {
+        if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty() || usuario.getContrasenia().isEmpty()) {
+            return "No se pudo editar";
+        } else {
+            boolean exito = DLL.ControllerMedico.EditarMedico(usuario);
+            if (exito) {
+                return "Medico actualizado correctamente";
+            } else {
+                return "No se pudo actualizar el medico";
+            }
+        }
+    }
+    
+  //METODO PARA HACER LOGIN DE PACIENTE
+    public static Medico login(String email, String contrasenia) {
+    	
+    	//Paciente usuario = new Paciente() ;
+    	if (email.isEmpty() || contrasenia.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Hay un error, no puede ser vacio");
+		}else {
+			//usuario = ControllerPaciente.login(email, contrasenia);
+			return ControllerMedico.login(email,contrasenia);
+			
+		}
+    	//return usuario;
+    	return null;
+    }
+    
+    //METODO PARA REGISTRAR MEDICO PERO ENVIANDO EL MEDICO ANTES DE IR AL CONTROLADOR
+    public static void RegistrarMedico(Medico medico) {
+    	
+    	JOptionPane.showMessageDialog(null, "Estas registrandote");
+    	ControllerMedico.RegistrarMedico(medico);
+    	
+    }
+    
+    //METODO REGISTRAR MEDICO QUE LLAMA AL CONTROLADOR
+    public static void RegitrarMedico() {
+    	
+    	ControllerMedico.RegistrarMedico();;
+    	
+    	
+    }
+    
     // ------------------- MÉTODOS GETTERS & SETTERS -------------------
 
     public int getId() {
-        return id;
+        return idMedico;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idMedico = id;
     }
     
-    public boolean getActivo() {
+    public int getActivo() {
         return activo;
     }
 
-    public void setActivo(boolean activo) {
+    public void setActivo(int activo) {
         this.activo = activo;
     }
 
@@ -111,28 +162,16 @@ public class Medico extends Usuario implements Encriptador{
         this.especialidad = especialidad;
     }
     
-    public int getCantidadConsultas() {
-        return cantidadConsultas;
-    }
-
-    public void setCantidadConsultas(int cantidadConsultas) {
-        if (cantidadConsultas >= 0) {
-            this.cantidadConsultas = cantidadConsultas;
-        } else {
-            this.cantidadConsultas = 0; // Establece un valor predeterminado si es negativo
-        }
-    }
-
     @Override
     public String toString() {
         return "Medico{" +
-                "id=" + id +
-                ", activo=" + activo +
-                ", nombre=" + getNombre() +
-                ", apellido=" + getApellido() +
-                ", email=" + getEmail() +
-                ", especialidad='" + especialidad + '\'' +
-                ", matricula='" + matricula + '\'' +
+                "idMedico= " + idMedico +
+                ", nombre= " + getNombre() +
+                ", apellido= " + getApellido() +
+                ", matricula= '" + matricula + '\'' +
+                ", email= " + getEmail() +
+                ", especialidad= '" + especialidad + '\'' +
+                ", activo= " + activo +
                 '}';
     }
 }
