@@ -198,20 +198,6 @@ public class ControllerPaciente {
             return false;
         }
     }
-    
-    
-    // MÉTODO PARA ELIMINAR PACIENTE
-    public static boolean eliminarPaciente(int dni) {
-        try {
-            PreparedStatement stmt = con.prepareStatement("DELETE FROM paciente WHERE dni = ?");
-            stmt.setInt(1, dni);
-            int filas = stmt.executeUpdate();
-            return filas > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     
     // para validar que el dn sea unico
