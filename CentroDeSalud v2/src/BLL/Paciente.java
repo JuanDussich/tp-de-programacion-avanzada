@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import DLL.Conexion;
-import DLL.ControllerAdministrador;
 import repository.Encriptador;
 import repository.OpcionesPaciente;
 import DLL.ControllerPaciente;
