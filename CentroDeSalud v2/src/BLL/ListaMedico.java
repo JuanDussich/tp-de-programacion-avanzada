@@ -32,48 +32,7 @@ public class ListaMedico {
         return ControllerMedico.buscarPorMatricula(matricula);
     }
 
-<<<<<<< HEAD
-    public void mostrarTodos() {
-        for (Medico m : medicos) {
-            System.out.println(m);
-        }
-    }
-
-
-    public boolean actualizarMedico(String matricula, Especialidad nuevaEspecialidad, int nuevaCantidadConsultas) {
-        Medico medico = buscarPorMatricula(matricula);
-        if (medico != null) {
-            medico.setEspecialidad(nuevaEspecialidad);
-            //medico.setCantidadConsultas(nuevaCantidadConsultas);
-            return true;
-        }
-        return false;
-    }
-
-
-    public boolean eliminarPorMatricula(String matricula) {
-        Medico medico = buscarPorMatricula(matricula);
-        if (medico != null) {
-            medicos.remove(medico);
-            return true;
-        }
-        return false;
-    }
-
-    public ArrayList<Medico> getMedicos() {
-        return medicos;
-    }
-
-    public void setMedicos(ArrayList<Medico> medicos) {
-        this.medicos = medicos;
-    }
-
-    @Override
-    public String toString() {
-        return "ListaMedico{" + "medicos=" + medicos + '}';
-=======
     public boolean eliminarPorId(int id) {
         return ControllerMedico.eliminarMedico(id);
->>>>>>> Brian
     }
 }
