@@ -43,12 +43,12 @@ public class PantallaAdministrador extends JFrame {
 		JLabel LblTitulo = new JLabel("Centro De Salud");
 		LblTitulo.setForeground(Color.GRAY);
 		LblTitulo.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 30));
-		LblTitulo.setBounds(24, 11, 293, 137);
+		LblTitulo.setBounds(0, 0, 293, 137);
 		contentPane.add(LblTitulo);
 		
 		JLabel Administrador = new JLabel("");
 		Administrador.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\logo.jpg"));
-		Administrador.setBounds(324, 11, 137, 137);
+		Administrador.setBounds(276, 0, 137, 137);
 		contentPane.add(Administrador);
 		
 		JButton btnNewButton = new JButton("Ver Pacientes");
@@ -63,7 +63,7 @@ public class PantallaAdministrador extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(506, 11, 140, 23);
+		btnNewButton.setBounds(576, 11, 140, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Ver turnos");
@@ -77,7 +77,7 @@ public class PantallaAdministrador extends JFrame {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(516, 45, 89, 23);
+		btnNewButton_1.setBounds(627, 113, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Ver Medicos");
@@ -91,7 +91,7 @@ public class PantallaAdministrador extends JFrame {
 				}
 			}
 		});
-		btnNewButton_2.setBounds(60, 110, 89, 23);
+		btnNewButton_2.setBounds(627, 45, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
 		
@@ -106,7 +106,7 @@ public class PantallaAdministrador extends JFrame {
 				}
 			}
 		});
-		btnNewButton_3.setBounds(506, 110, 140, 23);
+		btnNewButton_3.setBounds(576, 79, 140, 23);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_5 = new JButton("Cerrar Sesion");
@@ -117,7 +117,7 @@ public class PantallaAdministrador extends JFrame {
 			}
 		});
 		btnNewButton_5.setBackground(Color.RED);
-		btnNewButton_5.setBounds(506, 76, 119, 23);
+		btnNewButton_5.setBounds(423, 65, 119, 23);
 		contentPane.add(btnNewButton_5);
 		
 		JLabel lblError = new JLabel("");
@@ -261,7 +261,12 @@ public class PantallaAdministrador extends JFrame {
 		tabbedPane_2.addTab("Registro turnos", null, panel_1_2_3, null);
 		
 		JButton btnNewButton_1_1 = new JButton("Ver Perfil");
-		btnNewButton_1_1.setBounds(627, 45, 89, 23);
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, admin);
+			}
+		});
+		btnNewButton_1_1.setBounds(423, 31, 89, 23);
 		contentPane.add(btnNewButton_1_1);
     	
     }
