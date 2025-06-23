@@ -3,7 +3,10 @@ import javax.swing.*;
 
 import DLL.ControllerMedico;
 import DLL.ControllerPaciente;
+<<<<<<< HEAD
 
+=======
+>>>>>>> Brian
 import repository.Encriptador;
 import repository.OpcionesMedico;
 
@@ -11,13 +14,21 @@ public class Medico extends Usuario implements Encriptador{
 	private int idMedico;
     private int activo = 1; // true 1 false 0
 	private String matricula;
+<<<<<<< HEAD
     private Especialidad especialidad; // especialidad tipo enum
+=======
+    private String especialidad; // se cambio el campo especialidad a string eliminar tabla especialidad!!
+>>>>>>> Brian
        
     public Medico() {
 
     }
     
+<<<<<<< HEAD
     public Medico(int idMedico, String nombre, String apellido, String matricula, String email, String contrasenia, Especialidad especialidad, int activo) {
+=======
+    public Medico(int idMedico, String nombre, String apellido, String matricula, String email, String contrasenia, String especialidad, int activo) {
+>>>>>>> Brian
         super(nombre, apellido, email, contrasenia); // Hereda de Usuario
         this.idMedico = idMedico;
         this.especialidad = especialidad;
@@ -25,12 +36,17 @@ public class Medico extends Usuario implements Encriptador{
         this.activo = activo;
     }
     // constructor sin id 
+<<<<<<< HEAD
     public Medico(String nombre, String apellido, String matricula, String email, String contrasenia, Especialidad especialidad, int activo) {
+=======
+    public Medico(String nombre, String apellido, String matricula, String email, String contrasenia, String especialidad, int activo) {
+>>>>>>> Brian
         super(nombre, apellido, email, contrasenia);
         this.matricula = matricula;
         this.especialidad = especialidad;
         this.activo = activo;
     }
+<<<<<<< HEAD
     
    // constructor para editar
     public Medico(String nombre, String apellido, String email, String contrasenia, String matricula) {
@@ -40,13 +56,22 @@ public class Medico extends Usuario implements Encriptador{
 
     // Validación constructir matricula y especialidad
     public Medico(String matricula, Especialidad especialidad) {
+=======
+
+    // Validación constructir matricula y especialidad
+    public Medico(String matricula, String especialidad) {
+>>>>>>> Brian
         if (matricula != null && especialidad != null) {
             this.matricula = matricula;
             this.especialidad = especialidad;
             //this.cantidadConsultas = cantidadConsultas;
         } else {
             this.matricula = "Desconocida";
+<<<<<<< HEAD
             this.especialidad = Especialidad.OTRA;
+=======
+            this.especialidad = "Desconocida";
+>>>>>>> Brian
           
         }
     }

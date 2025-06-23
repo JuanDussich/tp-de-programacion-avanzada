@@ -10,10 +10,14 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import BLL.Medico;
+<<<<<<< HEAD
 import BLL.Paciente;
 import BLL.Especialidad;
 import BLL.Usuario;
 
+=======
+import BLL.Usuario;
+>>>>>>> Brian
 
 public class ControllerMedico {
 
@@ -33,7 +37,10 @@ public class ControllerMedico {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+<<<<<<< HEAD
             	Especialidad especialidadEnum = Especialidad.valueOf(rs.getString("especialidad"));
+=======
+>>>>>>> Brian
                 Medico medico = new Medico(
                     rs.getInt("idMedico"),
                     rs.getString("nombre"),
@@ -41,7 +48,11 @@ public class ControllerMedico {
                     rs.getString("matricula"),
                     rs.getString("email"),
                     rs.getString("contrasenia"),
+<<<<<<< HEAD
                     especialidadEnum,
+=======
+                    rs.getString("especialidad"),
+>>>>>>> Brian
                     rs.getInt("activo")
                 );
                 
@@ -64,10 +75,17 @@ public class ControllerMedico {
         	PreparedStatement stmt = con.prepareStatement(sql);
         	stmt.setString(1, medico.getNombre());
         	stmt.setString(2, medico.getApellido());
+<<<<<<< HEAD
         	stmt.setString(3, medico.getMatricula());  // 
         	stmt.setString(4, medico.getEmail());
         	stmt.setString(5, medico.getContrasenia());
         	stmt.setString(6, medico.getEspecialidad().name());;
+=======
+        	stmt.setString(3, medico.getMatricula());  // WHERE matricula = ?
+        	stmt.setString(4, medico.getEmail());
+        	stmt.setString(5, medico.getContrasenia());
+        	stmt.setString(6, medico.getEspecialidad());
+>>>>>>> Brian
 
                        
             int filas = stmt.executeUpdate();
@@ -93,7 +111,10 @@ public class ControllerMedico {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+<<<<<<< HEAD
             	Especialidad especialidadEnum = Especialidad.valueOf(rs.getString("especialidad"));
+=======
+>>>>>>> Brian
                 Medico medico = new Medico(
                     rs.getInt("idMedico"),
                     rs.getString("nombre"),
@@ -101,7 +122,11 @@ public class ControllerMedico {
                     rs.getString("matricula"),
                     rs.getString("email"),
                     rs.getString("contrasenia"),
+<<<<<<< HEAD
                     especialidadEnum,
+=======
+                    rs.getString("especialidad"),
+>>>>>>> Brian
                     rs.getInt("activo")
                 );
                 
@@ -122,16 +147,29 @@ public class ControllerMedico {
      * Retorna true si se actualizó correctamente, false si no.
      */
     public static boolean EditarMedico(Medico medico) {
+<<<<<<< HEAD
         String sql = "UPDATE medico SET nombre = ?, apellido = ?, email = ?, contrasenia = ? "
         		+ "WHERE matricula = ? "
         		+ "AND activo = TRUE";
+=======
+        String sql = "UPDATE medico SET nombre = ?, apellido = ?, matricula = ?, email = ?, contrasenia = ?, especialidad = ? "
+                   + "WHERE matricula = ? AND activo = TRUE";
+>>>>>>> Brian
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, medico.getNombre());
             stmt.setString(2, medico.getApellido());
+<<<<<<< HEAD
             stmt.setString(3, medico.getEmail());
             stmt.setString(4, medico.getContrasenia());
             stmt.setString(5, medico.getMatricula()); // usamos el matricula como filtro no lo guarde en una otra variable xq no edito Matricula!!
+=======
+            stmt.setString(3, medico.getMatricula()); // nuevo valor
+            stmt.setString(4, medico.getEmail());
+            stmt.setString(5, medico.getContrasenia());
+            stmt.setString(6, medico.getEspecialidad());
+            stmt.setString(7, medico.getMatricula()); // valor para el WHERE
+>>>>>>> Brian
 
             int filas = stmt.executeUpdate();
             return filas > 0;
@@ -223,7 +261,10 @@ public class ControllerMedico {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+<<<<<<< HEAD
             	Especialidad especialidadEnum = Especialidad.valueOf(rs.getString("especialidad"));
+=======
+>>>>>>> Brian
                 Medico medico = new Medico(
                     rs.getInt("idMedico"),
                     rs.getString("nombre"),
@@ -231,7 +272,11 @@ public class ControllerMedico {
                     rs.getString("matricula"),
                     rs.getString("email"),
                     rs.getString("contrasenia"),
+<<<<<<< HEAD
                     especialidadEnum,
+=======
+                    rs.getString("especialidad"),
+>>>>>>> Brian
                     rs.getInt("activo")
                 );
                 // medico.setCantidadConsultas(rs.getInt("cantidadConsultas")); // Si usas este campo
@@ -245,3 +290,5 @@ public class ControllerMedico {
         return null;
     }
 }
+
+

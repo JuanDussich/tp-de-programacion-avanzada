@@ -1,31 +1,38 @@
 package BLL;
-import java.util.ArrayList;
+
+import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
+
+import DLL.ControllerMedico;
 
 public class ListaMedico {
 
-
-    private ArrayList<Medico> medicos;
-
-
-    public ListaMedico() {
-        this.medicos = new ArrayList<>();
+    public void registrarMedico(Medico medico) {
+        ControllerMedico.RegistrarMedico(medico);
     }
-
 
     public void agregarMedico(Medico medico) {
-        medicos.add(medico);
+        ControllerMedico.agregarMedico(medico);
     }
 
+    public LinkedList<Medico> mostrarTodos() {
+        return ControllerMedico.mostrarMedicos();
+    }
+
+    public boolean actualizarMedico(Medico medico) {
+        boolean actualizado = ControllerMedico.EditarMedico(medico);
+        if (!actualizado) {
+            JOptionPane.showMessageDialog(null, "Error al editar médico");
+        }
+        return actualizado;
+    }
 
     public Medico buscarPorMatricula(String matricula) {
-        for (Medico m : medicos) {
-            if (m.getMatricula().equalsIgnoreCase(matricula)) {
-                return m;
-            }
-        }
-        return null;
+        return ControllerMedico.buscarPorMatricula(matricula);
     }
 
+<<<<<<< HEAD
     public void mostrarTodos() {
         for (Medico m : medicos) {
             System.out.println(m);
@@ -64,5 +71,9 @@ public class ListaMedico {
     @Override
     public String toString() {
         return "ListaMedico{" + "medicos=" + medicos + '}';
+=======
+    public boolean eliminarPorId(int id) {
+        return ControllerMedico.eliminarMedico(id);
+>>>>>>> Brian
     }
 }
