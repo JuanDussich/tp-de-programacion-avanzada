@@ -1,12 +1,9 @@
 package BLL;
 import javax.swing.*;
 
-<<<<<<< HEAD
-
-=======
 import DLL.ControllerMedico;
 import DLL.ControllerPaciente;
->>>>>>> Juan
+
 import repository.Encriptador;
 import repository.OpcionesMedico;
 

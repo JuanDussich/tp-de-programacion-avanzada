@@ -10,12 +10,10 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import BLL.Medico;
-<<<<<<< HEAD
 import BLL.Paciente;
 import BLL.Especialidad;
-=======
 import BLL.Usuario;
->>>>>>> Juan
+
 
 public class ControllerMedico {
 
