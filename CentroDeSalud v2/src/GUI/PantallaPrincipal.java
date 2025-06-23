@@ -13,6 +13,7 @@ import BLL.Usuario;
 
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
@@ -74,9 +75,9 @@ public class PantallaPrincipal extends JFrame {
 		JButton btnMedico = new JButton("Menu Medico");
 		btnMedico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaMedico vista = new PantallaMedico();
+				GUI.PantallaMedico vista = new PantallaMedico();
 				vista.setVisible(true);
-				
+				JOptionPane.showMessageDialog(null,"programa de mierda funciona");
 			}
 		});
 		btnMedico.setBounds(553, 374, 137, 61);
