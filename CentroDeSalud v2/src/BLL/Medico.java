@@ -2,7 +2,6 @@ package BLL;
 import javax.swing.*;
 
 import DLL.ControllerMedico;
-import DLL.ControllerPaciente;
 
 import repository.Encriptador;
 import repository.OpcionesMedico;
@@ -12,7 +11,9 @@ public class Medico extends Usuario implements Encriptador{
     private int activo = 1; // true 1 false 0
 	private String matricula;
     private Especialidad especialidad; // especialidad tipo enum
-       
+    
+    
+    
     public Medico() {
 
     }
