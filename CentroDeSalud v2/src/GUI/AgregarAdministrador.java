@@ -41,8 +41,6 @@ public class AgregarAdministrador extends JFrame {
         inpNombre.setBounds(180, 60, 220, 20);
         contentPane.add(inpNombre);
 
-        //y += 40;
-
         JLabel lblApellido = new JLabel("Apellido:");
         lblApellido.setBounds(50, 100, 120, 20);
         contentPane.add(lblApellido);

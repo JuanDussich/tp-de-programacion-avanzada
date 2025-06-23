@@ -11,8 +11,6 @@ import javax.swing.JOptionPane;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import BLL.Administrador;
-import BLL.Medico;
-import BLL.Paciente;
 import BLL.Usuario;
 import repository.*;
 
@@ -27,7 +25,7 @@ public class ControllerAdministrador {
 		//METODO LOGIN DEL ADMINISTRADOR
 		public static Administrador login(String email, String contrasenia) {
 	        Administrador administrador = new Administrador();
-	        JOptionPane.showMessageDialog(null, administrador);
+	        //JOptionPane.showMessageDialog(null, administrador);
 	        try {
 	            PreparedStatement stmt = con.prepareStatement(
 	                    "SELECT * FROM administrador WHERE email = ? AND contrasenia = ?"

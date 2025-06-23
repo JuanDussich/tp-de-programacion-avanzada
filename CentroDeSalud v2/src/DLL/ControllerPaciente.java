@@ -9,8 +9,6 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
-import BLL.Medico;
 import BLL.Paciente;
 import BLL.Usuario;
 

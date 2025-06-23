@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import DLL.Conexion;
-import DLL.ControllerAdministrador;
 import repository.Encriptador;
 import repository.OpcionesPaciente;
 import DLL.ControllerPaciente;
@@ -59,22 +58,17 @@ public class Paciente extends Usuario implements Encriptador{
     
     //METODO PARA HACER LOGIN DE PACIENTE
     public static Paciente login(String email, String contrasenia) {
-    	Paciente usuario = new Paciente() ;
+    	
+    	//Paciente usuario = new Paciente() ;
     	if (email.isEmpty() || contrasenia.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Hay un error, no puede ser vacio");
 		}else {
-			usuario = ControllerPaciente.login(email, contrasenia);
+			//usuario = ControllerPaciente.login(email, contrasenia);
+			return ControllerPaciente.login(email,contrasenia);
 			
 		}
-    	return usuario;
-    }
-    
-    //METODO REGISTRAR PACIENTE QUE LLAMA AL CONTROLADOR
-    public static void RegistrarPaciente() {
-    	
-    	ControllerPaciente.RegistrarPaciente();;
-    	
-    	
+    	//return usuario;
+    	return null;
     }
     
     //METODO PARA REGISTRAR PACIENTE PERO ENVIANDO EL PACIENTE ANTES DE IR AL CONTROLADOR
@@ -82,6 +76,14 @@ public class Paciente extends Usuario implements Encriptador{
     	
     	JOptionPane.showMessageDialog(null, "Estas registrandote");
     	ControllerPaciente.RegistrarPaciente(paciente);
+    	
+    }
+    
+    //METODO REGISTRAR PACIENTE QUE LLAMA AL CONTROLADOR
+    public static void RegistrarPaciente() {
+    	
+    	ControllerPaciente.RegistrarPaciente();;
+    	
     	
     }
     

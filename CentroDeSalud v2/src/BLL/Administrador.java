@@ -3,7 +3,6 @@ import javax.swing.*;
 
 import repository.OpcionesAdministrador;
 import DLL.ControllerAdministrador;
-import DLL.ControllerPaciente;
 import repository.*;
 
 public class Administrador extends Usuario implements Encriptador {
@@ -101,14 +100,16 @@ public class Administrador extends Usuario implements Encriptador {
 	    
 	    //METODO QUE LLAMA AL LOGIN DEL CONTROLADOR DE ADMINISTRADOR
 	    public static Administrador login(String email, String contrasenia) {
-	    	Administrador usuario = new Administrador() ;
+	    	
+	    	//Administrador usuario = new Administrador() ;
 	    	if (email.isEmpty() || contrasenia.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Hay un error, no puede ser vacio");
 			}else {
-				usuario = ControllerAdministrador.login(email, contrasenia);
-				
+				//usuario = ControllerAdministrador.login(email, contrasenia);
+				return ControllerAdministrador.login(email,contrasenia);
 			}
-	    	return usuario;
+	    	//return usuario;
+	    	return null;
 	    }
 
 	    //METODO REGISTRAR USUARIO QUE LLAMA AL CONTROLADOR
