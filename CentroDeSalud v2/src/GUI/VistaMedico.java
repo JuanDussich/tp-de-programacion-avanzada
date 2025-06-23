@@ -3,12 +3,12 @@ package GUI;
 import javax.swing.*;
 
 
+
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import BLL.Medico;
 import BLL.Especialidad;
-import BLL.Usuario;
 import DLL.ControllerMedico;
 
 import java.awt.*;
