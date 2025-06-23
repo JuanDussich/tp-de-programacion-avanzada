@@ -22,11 +22,11 @@ public class ListaPaciente {
 
     //ACA HAY UN ERROR EN LA FORMA EN LA QUE SE ESTA LLAMANDO A ACTUALIZAR PACIENTE
     public boolean actualizarPaciente(Paciente paciente) {
-        String mensaje = ControllerPaciente.EditarPaciente(paciente);
-        if (mensaje.equals("Usuario editado correctamente.")) {
+        boolean mensaje = ControllerPaciente.EditarPaciente(paciente);
+        if (mensaje) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, mensaje);
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el paciente.");
             return false;
         }
     }
