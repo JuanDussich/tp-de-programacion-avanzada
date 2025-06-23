@@ -33,81 +33,81 @@ public class AgregarMedico extends JFrame {
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblTitulo);
 
-        int y = 60;
+        //int y = 60;
 
         JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setBounds(50, y, 100, 20);
+        lblNombre.setBounds(50, 60, 100, 20);
         contentPane.add(lblNombre);
 
         inpNombre = new JTextField();
-        inpNombre.setBounds(150, y, 200, 20);
+        inpNombre.setBounds(150, 60, 200, 20);
         contentPane.add(inpNombre);
 
-        y += 40;
+        //y += 40;
 
         JLabel lblApellido = new JLabel("Apellido:");
-        lblApellido.setBounds(50, y, 100, 20);
+        lblApellido.setBounds(50, 100, 100, 20);
         contentPane.add(lblApellido);
 
         inpApellido = new JTextField();
-        inpApellido.setBounds(150, y, 200, 20);
+        inpApellido.setBounds(150, 100, 200, 20);
         contentPane.add(inpApellido);
 
-        y += 40;
+        //y += 40;
 
         JLabel lblMatricula = new JLabel("Matrícula:");
-        lblMatricula.setBounds(50, y, 100, 20);
+        lblMatricula.setBounds(50, 140, 100, 20);
         contentPane.add(lblMatricula);
 
         inpMatricula = new JTextField();
-        inpMatricula.setBounds(150, y, 200, 20);
+        inpMatricula.setBounds(150, 140, 200, 20);
         contentPane.add(inpMatricula);
 
-        y += 40;
+        //y += 40;
 
         JLabel lblEmail = new JLabel("Email:");
-        lblEmail.setBounds(50, y, 100, 20);
+        lblEmail.setBounds(50, 180, 100, 20);
         contentPane.add(lblEmail);
 
         inpEmail = new JTextField();
-        inpEmail.setBounds(150, y, 200, 20);
+        inpEmail.setBounds(150, 180, 200, 20);
         contentPane.add(inpEmail);
 
-        y += 40;
+        //y += 40;
 
         JLabel lblContrasenia = new JLabel("Contraseña:");
-        lblContrasenia.setBounds(50, y, 100, 20);
+        lblContrasenia.setBounds(50, 220, 100, 20);
         contentPane.add(lblContrasenia);
 
         inpContrasenia = new JPasswordField();
-        inpContrasenia.setBounds(150, y, 200, 20);
+        inpContrasenia.setBounds(150, 220, 200, 20);
         contentPane.add(inpContrasenia);
 
-        y += 40;
+        //y += 40;
 
         JLabel lblEspecialidad = new JLabel("Especialidad:");
-        lblEspecialidad.setBounds(50, y, 100, 20);
+        lblEspecialidad.setBounds(50, 260, 100, 20);
         contentPane.add(lblEspecialidad);
 
         inpEspecialidad = new JComboBox<>(Especialidad.values());
-        inpEspecialidad.setBounds(150, y, 200, 20);
+        inpEspecialidad.setBounds(150, 260, 200, 20);
         contentPane.add(inpEspecialidad);
 
-        y += 50;
+        //y += 50;
 
         JLabel lblMensaje = new JLabel("");
-        lblMensaje.setBounds(50, y, 300, 30);
+        lblMensaje.setBounds(50, 310, 300, 30);
         lblMensaje.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblMensaje);
 
-        y += 50;
+        //y += 50;
 
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(80, y, 120, 40);
+        btnGuardar.setBounds(80, 360, 120, 40);
         contentPane.add(btnGuardar);
 
         JButton btnVolver = new JButton("Volver");
-        btnVolver.setBounds(220, y, 120, 40);
+        btnVolver.setBounds(220, 360, 120, 40);
         contentPane.add(btnVolver);
 
         // Acción botón Guardar

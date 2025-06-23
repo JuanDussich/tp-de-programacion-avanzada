@@ -1,20 +1,33 @@
 package GUI;
 
 import java.awt.EventQueue;
+
 import java.awt.Font;
 import java.awt.Image;
-
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import java.time.LocalDate;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
+
+
+import BLL.HistoriaClinica;
+import DLL.ControllerHistoriaClinica;
 
 public class VistaHistoriaClinica extends JFrame {
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JComponent contentPane;	
+	private DefaultTableModel model;
+	private JTable table;
+    private HistoriaClinica historiaSeleccionada;  // HC seleccionada en la tabla
+    private JTextField inpFiltro;
 	
 	public static void main(String[] args) {
 	        EventQueue.invokeLater(() -> {
@@ -54,9 +67,200 @@ public class VistaHistoriaClinica extends JFrame {
 	        JLabel lblImagen = new JLabel(iconoEscalado);
 	        lblImagen.setBounds(670, 10, 100, 100); // esquina superior derecha
 	        contentPane.add(lblImagen);
+	        // opcion seleccion
+	        JLabel lblSeleccionado = new JLabel("Seleccionado:");
+	        lblSeleccionado.setBounds(10, 70, 760, 15);
+	        contentPane.add(lblSeleccionado);
 
+	        // Definir columnas según atributos de Historia cliniaca (int idHistorialMedico, String observaciones, LocalDate fecha, int turnoId,
+            //int pacienteId, int tratamientoId, int medicamentoId, int medicoId)
+	        
+	        model = new DefaultTableModel(new String[]{
+					"ID Historial Medico", "Observaciones", "Fecha", "ID Turno" , "ID Paciente", "ID Tratamiento", "ID Medicamento", "ID Medico"
+	        }, 0);
 		
+	        table = new JTable(model);
+	        JScrollPane scrollPane = new JScrollPane(table);
+	        scrollPane.setBounds(10, 100, 760, 200);
+	        contentPane.add(scrollPane);
+	        
+	     // Botones
+	        JButton btnAgregar = new JButton("Agregar");
+	        btnAgregar.setFont(new Font("Tahoma", Font.BOLD, 11));
+	        btnAgregar.setBounds(112, 329, 124, 55);
+	        contentPane.add(btnAgregar);
+
+	        JButton btnEditar = new JButton("Editar");
+	        btnEditar.setFont(new Font("Tahoma", Font.BOLD, 11));
+	        btnEditar.setBounds(322, 329, 124, 55);
+	        contentPane.add(btnEditar);
+	        
+	        JButton btnEliminar = new JButton("Eliminar");
+	        btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 11));
+	        btnEliminar.setBounds(531, 329, 124, 55);
+	        contentPane.add(btnEliminar);
+	        
+	        
+	        // Al seleccionar fila, actualizar la variable historiaSeleccionada y mostrar datos en el label
+	        table.getSelectionModel().addListSelectionListener(e -> {
+	            if (!e.getValueIsAdjusting()) {
+	                int row = table.getSelectedRow();
+	                if (row != -1) {
+	                	
+	                    // Crear un objeto HC con datos de la fila seleccionada
+	                	//(int idHistorialMedico, String observaciones, LocalDate fecha, int turnoId,
+	                    //int pacienteId, int tratamientoId, int medicamentoId, int medicoId)
+	                    historiaSeleccionada = new HistoriaClinica(
+	                        (int) model.getValueAt(row, 0),               // id hc (int)
+	                        (String) model.getValueAt(row, 1),            // obs (String)
+	                        (LocalDate) model.getValueAt(row, 2),            // fecha (LocalDate)
+	                        (int) model.getValueAt(row, 3),            // id turno (int)
+	                        (int) model.getValueAt(row, 4),            // id paciente (int)
+	                        (int) model.getValueAt(row, 5),            // id tratamiento (int)
+	                        (int) model.getValueAt(row, 6),            	 // id medicamento (int)
+	                        (int) model.getValueAt(row, 7)                // id medico (int)
+	                    );
+
+	                    // Mostrar datos seleccionados en el label
+	                    lblSeleccionado.setText("Seleccionado: ID=" + historiaSeleccionada.getIdHistorialMedico()
+	                        + ", Fecha=" + historiaSeleccionada.getFecha()
+	                        + ", ID Paciente=" + historiaSeleccionada.getPacienteId()
+	                        + ", ID Medico=" + historiaSeleccionada.getMedicoId()
+						
+	                    );
+	                }
+	            }
+	        });
 		
-		
-	}
-}
+	        
+	        /* filtros en la vista de HC */
+	        
+	        
+	        inpFiltro = new JTextField(); //112, 329, 124, 55
+	        inpFiltro.setBounds(112, 430, 124, 30);
+	        contentPane.add(inpFiltro);
+	        inpFiltro.setColumns(10);
+	        inpFiltro.setVisible(true);
+	        JButton btnFiltroGeneral = new JButton("Filtrar ID Paciente?");
+	        btnFiltroGeneral.setVisible(true);
+	        btnFiltroGeneral.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		
+	        		cargarTablaFiltradaStream(inpFiltro.getText());
+	        	}
+	        });
+	        btnFiltroGeneral.setBounds(322, 430, 124, 30);
+	        contentPane.add(btnFiltroGeneral);
+	        
+	        JLabel lblNewLabel = new JLabel("Filtrar por id paciente?:");
+	        lblNewLabel.setBounds(112, 400, 124, 30);
+	        contentPane.add(lblNewLabel);
+	        
+	        JButton reinicio = new JButton("Reiniciar filtro");
+	        reinicio.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		inpFiltro.setText("");
+	        		 cargarTabla();
+	        		
+	        	}
+	        });
+	        reinicio.setBounds(322, 470, 124, 30);
+	        contentPane.add(reinicio);
+	        
+	        /* FIN filtros en la vista de HC */
+	        
+	     // Cargar datos de la BD en la tabla al iniciar la ventana
+	        cargarTabla();
+	        
+	        
+	     // Acción botón Agregar: Mostrar diálogo para ingresar datos y luego registrar nueva HC
+	        btnAgregar.addActionListener(e -> {
+	            AgregarHistoriaClinica agregar = new AgregarHistoriaClinica(); // abre nueva ventana crear la vista!!
+	            agregar.setVisible(true);
+	            dispose(); // opcional: cerrar la ventana actual
+	        });
+
+
+	        // Acción botón Editar: abrir ventana de edición si hay HC seleccionado
+	        btnEditar.addActionListener(e -> {
+	            if (historiaSeleccionada != null) {
+	                EditarHistoriaClinica editar = new EditarHistoriaClinica(historiaSeleccionada);
+	                editar.setVisible(true);
+	                dispose(); // cerrar ventana actual
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Seleccione una Historia Clinica.");
+	            }
+	        });
+	        
+	     // Acción botón Eliminar: ELIMINA HC
+	        btnEliminar.addActionListener(e -> {
+	            if (historiaSeleccionada != null) {
+	                int confirm = JOptionPane.showConfirmDialog(
+	                    null,
+	                    "¿Está seguro que desea eliminar esta Historia Clínica?",
+	                    "Confirmar eliminación",
+	                    JOptionPane.YES_NO_OPTION
+	                );
+
+	                if (confirm == JOptionPane.YES_OPTION) {
+	                    try {
+	                    	// creamos una instancia del controlador antes de usar el metodo
+	                        ControllerHistoriaClinica controller = new ControllerHistoriaClinica();
+	                        controller.eliminarHistoriaClinica(historiaSeleccionada.getIdHistorialMedico());
+	                        JOptionPane.showMessageDialog(null, "Historia Clínica eliminada correctamente.");
+	                        cargarTabla(); // Actualiza la tabla después de la eliminación
+	                    } catch (Exception ex) {
+	                        JOptionPane.showMessageDialog(null, "Error al eliminar Historia Clínica.");
+	                        ex.printStackTrace();
+	                    }
+	                }
+	            } else {
+	                JOptionPane.showMessageDialog(null, "Seleccione una Historia Clínica para eliminar.");
+	            }
+	        });
+
+	    
+	} // fin metodo VistaHistoriaClinica()
+	
+	// Método para cargar Las hc desde la base de datos y actualizar la tabla.
+    private void cargarTabla() {
+        model.setRowCount(0); // limpiar tabla
+        ArrayList<HistoriaClinica> historiaClinica = ControllerHistoriaClinica.obtenerHistoriasClinicas(); //
+        for (HistoriaClinica hc : historiaClinica) {
+            model.addRow(new Object[]{
+                hc.getIdHistorialMedico(),
+                hc.getObservaciones(),
+                hc.getFecha(),
+                hc.getTurnoId(),
+                hc.getPacienteId(),
+                hc.getTratamientoId(),
+                hc.getMedicamentoId(),
+                hc.getMedicoId()
+            });
+        }
+    }
+    
+   // tabla para mostrat filtro HC
+    private void cargarTablaFiltradaStream(String filtro) {
+        ArrayList<HistoriaClinica> filtradasPorHc = ControllerHistoriaClinica.obtenerHistoriasClinicas().stream()
+            .filter(hc -> String.valueOf(hc.getIdHistorialMedico()).startsWith(filtro))
+            .collect(Collectors.toCollection(ArrayList::new)); // corregido
+
+        model.setRowCount(0); // limpiar tabla
+
+        for (HistoriaClinica hc : filtradasPorHc) {
+            model.addRow(new Object[]{
+                hc.getIdHistorialMedico(),
+                hc.getObservaciones(),
+                hc.getFecha(),
+                hc.getTurnoId(),
+                hc.getPacienteId(),
+                hc.getTratamientoId(),
+                hc.getMedicamentoId(),
+                hc.getMedicoId()
+            });
+        }
+    }
+
+
+} // fin clase

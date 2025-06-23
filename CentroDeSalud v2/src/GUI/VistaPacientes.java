@@ -16,7 +16,11 @@ import java.util.stream.Collectors;
 
 public class VistaPacientes extends JFrame {
 
-	    private JPanel contentPane;
+	    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+		private JPanel contentPane;
 	    private JTable table;
 	    private DefaultTableModel model;
 	    private Paciente usuarioSeleccionado;

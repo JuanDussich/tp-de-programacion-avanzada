@@ -1,7 +1,7 @@
 package GUI;
 
 import java.awt.event.ActionEvent;
-import java.awt.Color;
+
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
 import javax.swing.*;
