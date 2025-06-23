@@ -99,7 +99,7 @@ public class PantallaPaciente extends JFrame {
 		});
 		
 		btnNewButton_5.setBackground(new Color(255, 0, 0));
-		btnNewButton_5.setBounds(539, 50, 119, 23);
+		btnNewButton_5.setBounds(498, 50, 119, 23);
 		contentPane.add(btnNewButton_5);
 		
 		JButton btnNewButton_1 = new JButton("Ver Perfil");
@@ -108,11 +108,11 @@ public class PantallaPaciente extends JFrame {
 				JOptionPane.showMessageDialog(null, logueado);
 			}
 		});
-		btnNewButton_1.setBounds(378, 190, 89, 23);
+		btnNewButton_1.setBounds(498, 11, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(39, 173, 329, 266);
+		tabbedPane.setBounds(10, 188, 329, 266);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel_1 = new JPanel();
