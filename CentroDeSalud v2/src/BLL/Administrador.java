@@ -3,7 +3,6 @@ import javax.swing.*;
 
 import repository.OpcionesAdministrador;
 import DLL.ControllerAdministrador;
-import DLL.ControllerPaciente;
 import repository.*;
 
 public class Administrador extends Usuario implements Encriptador {
