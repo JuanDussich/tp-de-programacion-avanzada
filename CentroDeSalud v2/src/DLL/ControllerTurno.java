@@ -1,6 +1,9 @@
 package DLL;
 
+import javax.swing.JOptionPane;
+
 public class ControllerTurno {
+	private String dato;
 
 import BLL.Turno;
 import javax.swing.*;
