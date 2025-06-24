@@ -1,7 +1,9 @@
 package GUI;
 
 import BLL.Administrador;
+import BLL.Medico;
 import BLL.Paciente;
+import BLL.Turno;
 import DLL.ControllerAdministrador;
 
 import javax.swing.*;
@@ -11,15 +13,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
+import javax.swing.table.TableModel;
 
 public class PantallaAdministrador extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
     // Componentes GUI
-    private JTable tablaAdministradores;
+    private Paciente usuarioSeleccionado;
+    private DefaultTableModel model;
     private DefaultTableModel modeloTabla;
-    private JButton btnEditar, btnEliminar, btnRefrescar;
 	private JPanel contentPane;
 	private JTextField inpEmail;
 	private JPasswordField inpContrasenia;
@@ -30,7 +33,6 @@ public class PantallaAdministrador extends JFrame {
 	private JTextField inpMail;
 	private JTextField inpContra;
 	private Administrador admin;
-
 	private JTable table_1;
 	private JTable table_2;
 	private JTable table_3;
@@ -48,71 +50,13 @@ public class PantallaAdministrador extends JFrame {
 		JLabel LblTitulo = new JLabel("Centro De Salud");
 		LblTitulo.setForeground(Color.GRAY);
 		LblTitulo.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 30));
-		LblTitulo.setBounds(0, 0, 293, 137);
+		LblTitulo.setBounds(0, 0, 293, 125);
 		contentPane.add(LblTitulo);
 		
 		JLabel Administrador = new JLabel("");
 		Administrador.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\logo.jpg"));
 		Administrador.setBounds(276, 0, 137, 137);
 		contentPane.add(Administrador);
-		
-		JButton btnNewButton = new JButton("Ver Pacientes");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (admin == null) {
-					JOptionPane.showMessageDialog(null, "no puedes ver la lista porque no estas logueado");
-				} else {
-					VistaPacientes vista = new VistaPacientes();
-					vista.setVisible(true);
-				}
-				
-			}
-		});
-		btnNewButton.setBounds(576, 11, 140, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Ver turnos");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//FALTA LA VISTA DE TURNOS Y LINKEARLO ACA
-				if (admin == null) {
-					JOptionPane.showMessageDialog(null, "no puedes ver la lista porque no estas logueado");
-				} else {
-					
-				}
-			}
-		});
-		btnNewButton_1.setBounds(627, 113, 89, 23);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Ver Medicos");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (admin == null) {
-					JOptionPane.showMessageDialog(null, "no puedes ver la lista porque no estas logueado");
-				} else {
-					VistaMedico vista = new VistaMedico();
-					vista.setVisible(true);
-				}
-			}
-		});
-		btnNewButton_2.setBounds(627, 45, 89, 23);
-		contentPane.add(btnNewButton_2);
-		
-		
-		JButton btnNewButton_3 = new JButton("Ver Administradores");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (admin == null) {
-					JOptionPane.showMessageDialog(null, "no puedes ver la lista porque no estas logueado");
-				} else {
-					VistaAdministrador vista = new VistaAdministrador();
-					vista.setVisible(true);
-				}
-			}
-		});
-		btnNewButton_3.setBounds(576, 79, 140, 23);
-		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_5 = new JButton("Cerrar Sesion");
 		btnNewButton_5.addActionListener(new ActionListener() {
@@ -229,7 +173,7 @@ public class PantallaAdministrador extends JFrame {
 				
 				Administrador Registrado = new Administrador(0,inpNombre.getText(), inpApellido.getText(),inpMail.getText(), inpContra.getText());
 				
-				BLL.Administrador.RegistrarAdministrador();
+				BLL.Administrador.RegistrarAdministrador(Registrado);
 				
 				if (Registrado == null) {
 					lblError.setText("No se encontró");
@@ -249,11 +193,10 @@ public class PantallaAdministrador extends JFrame {
 		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane_1.addTab("Registros", null, tabbedPane_2, null);
 		
-		JPanel panel_1_2 = new JPanel();
-		panel_1_2.setLayout(null);
-		tabbedPane_2.addTab("Registro Pacientes", null, panel_1_2, null);
+		JPanel RegistroPaciente = new JPanel();
+		RegistroPaciente.setLayout(null);
+		tabbedPane_2.addTab("Registro Pacientes", null, RegistroPaciente, null);
 		
-
 		//ACA ES PARA VER LA TABLA DE PACIENTES FALTA CORREGIR
 		model = new DefaultTableModel(new String[]{
 	        		"idPaciente", "nombre", "apellido", "dni", "fecha_De_Nacimiento", "email", "contrasenia"}, 0);
@@ -356,7 +299,6 @@ public class PantallaAdministrador extends JFrame {
 				}
 			}
 		});
-
 		
 		JButton btnNewButton_1_1 = new JButton("Ver Perfil");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -367,5 +309,43 @@ public class PantallaAdministrador extends JFrame {
 		btnNewButton_1_1.setBounds(423, 31, 89, 23);
 		contentPane.add(btnNewButton_1_1);
     	
+    }
+    
+    private void cargarTabla() {
+        model.setRowCount(0);
+        LinkedList<Paciente> usuarios = DLL.ControllerPaciente.mostrarPaciente();
+        for (Paciente u : usuarios) {
+            model.addRow(new Object[]{
+            		u.getId(), u.getNombre(), u.getApellido(), u.getDni(),u.getFechaNacimiento(),u.getEmail(),u.getContrasenia()
+            		});
+        }
+    }
+    private void cargarTablaAdmin() {
+        model.setRowCount(0);
+        LinkedList<Administrador> usuarios = DLL.ControllerAdministrador.mostrarAdministrador();
+        for (Administrador u : usuarios) {
+            model.addRow(new Object[]{
+            		u.getId(), u.getNombre(), u.getApellido(),u.getEmail(),u.getContrasenia()
+            		});
+        }
+    }
+    private void cargarTablaMedico() {
+        model.setRowCount(0);
+        LinkedList<Medico> usuarios = DLL.ControllerMedico.mostrarMedicos();
+        for (Medico u : usuarios) {
+            model.addRow(new Object[]{
+            		u.getId(), u.getNombre(), u.getApellido(), u.getMatricula(),u.getEmail(),u.getContrasenia(),u.getEspecialidad()
+            		});
+        }
+    }
+    private void cargarTablaTurno() {
+        model.setRowCount(0);
+        LinkedList<Turno> turno = DLL.ControllerTurno.listarTurnos();
+        for (Turno u : turno) {
+            model.addRow(new Object[]{
+            		//FALTA TERMINAR ESTA PARTE DE ACA
+            		//u.get(), u.getNombre(), u.getApellido(), u.getDni(),u.getFechaNacimiento(),u.getEmail(),u.getContrasenia()
+            		});
+        }
     }
 }
