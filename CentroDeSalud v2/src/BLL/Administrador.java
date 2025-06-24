@@ -3,13 +3,13 @@ import javax.swing.*;
 
 import repository.OpcionesAdministrador;
 import DLL.ControllerAdministrador;
+import DLL.ControllerPaciente;
 import repository.*;
 
 public class Administrador extends Usuario implements Encriptador {
 	
 		//ATRIBUTOS
 		private int id;
-		private int activo;
 	    // CONSTRUCTOR
 	    public Administrador() {
 	    }
@@ -17,13 +17,6 @@ public class Administrador extends Usuario implements Encriptador {
 	    public Administrador(int id, String nombre, String apellido, String mail, String contrasenia) {
 	        super(nombre,apellido,mail,contrasenia);
 	        this.id = id;
-
-	    }
-	    
-	    public Administrador(int id, String nombre, String apellido, String mail, String contrasenia, int activo) {
-	        super(nombre,apellido,mail,contrasenia);
-	        this.id = id;
-	        this.setActivo(activo);
 
 	    }
 	    
@@ -128,34 +121,22 @@ public class Administrador extends Usuario implements Encriptador {
 	    	
 	    }
 	    
-	    //METODO PARA EDITAR ADMINISTRADOR verificar
-	    public static String EditarAdministrador(Administrador administrador) {
-	        if (administrador.getEmail().isEmpty() || administrador.getNombre().isEmpty() 
-	        		|| administrador.getContrasenia().isEmpty()) {
-	            return "No se pudo editar";
-	        } else {
-	            boolean exito = DLL.ControllerAdministrador.EditarAdministrador(administrador);
-	            if (exito) {
-	                return "Administrador actualizado correctamente";
-	            } else {
-	                return "No se pudo actualizar el Administrador";
-	            }
-	        }
-	    }
+	    //METODO PARA EDITAR ADMINISTRADOR
+	    public static String EditarAdministrador(Administrador usuario) {
+			
+			if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty()|| usuario.getContrasenia().isEmpty()) {
+				return "No se pudo editar";
+			}else {
+				return DLL.ControllerAdministrador.EditarAdministrador(usuario);
+			}
+			
+		}
 		
-	    //METODO PARA ELIMINAR ADMINISTRADOR verificar
+	    //METODO PARA ELIMINAR ADMINISTRADOR
 	    public static void EliminarAdministrador(int id) {
 	    	
-	    	JOptionPane.showMessageDialog(null, "Estas eliminando un Administrador");
+	    	JOptionPane.showMessageDialog(null, "Estas eliminando un usuario");
 	    	ControllerAdministrador.EliminarAdministrador(id);
 	    	
 	    }
-
-		public int getActivo() {
-			return activo;
-		}
-
-		public void setActivo(int activo) {
-			this.activo = activo;
-		}
 }

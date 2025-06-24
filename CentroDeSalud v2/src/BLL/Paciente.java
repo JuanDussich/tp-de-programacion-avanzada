@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import DLL.Conexion;
+import DLL.ControllerAdministrador;
 import repository.Encriptador;
 import repository.OpcionesPaciente;
 import DLL.ControllerPaciente;
@@ -19,10 +20,9 @@ import DLL.ControllerPaciente;
 public class Paciente extends Usuario implements Encriptador{
 
 	//ATRIBUTOS
-    private int idPaciente;
+    private int id;
     private int dni;
     private String fechaNacimiento;
-    private int activo = 1; // true 1 false 0
     
 //    private HistoriaClinica historiaClinica;
 
@@ -30,29 +30,11 @@ public class Paciente extends Usuario implements Encriptador{
     public Paciente() {
     }
     
-    public Paciente(int idPaciente, String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia, int activo) {
+    public Paciente(int id, String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia) {
         super(nombre,apellido,email,contrasenia);
-        this.idPaciente = idPaciente;
+        this.id = id;
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
-        this.activo = activo;
-    }
-    // constructor sin id
-    public Paciente( String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia) {
-        super(nombre,apellido,email,contrasenia);
-        
-        this.dni = dni;
-        this.fechaNacimiento = fechaNacimiento;
-              
-    }
-    
-    // constructor sin id
-    public Paciente( int idPaciente, String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia) {
-        super(nombre,apellido,email,contrasenia);
-        this.idPaciente = idPaciente;
-        this.dni = dni;
-        this.fechaNacimiento = fechaNacimiento;
-              
     }
     // METODOS
     
@@ -89,21 +71,16 @@ public class Paciente extends Usuario implements Encriptador{
     
     //METODO PARA EDITAR PACIENTE
     public static String EditarPaciente(Paciente usuario) {
-        if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty() || usuario.getContrasenia().isEmpty()) {
-            return "No se pudo editar";
-        } else {
-            boolean exito = DLL.ControllerPaciente.EditarPaciente(usuario);
-            if (exito) {
-                return "Paciente actualizado correctamente";
-            } else {
-                return "No se pudo actualizar el Paciente";
-            }
-        }
-    }
+		
+		if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty()|| usuario.getContrasenia().isEmpty()) {
+			return "No se pudo editar";
+		}else {
+			return DLL.ControllerPaciente.EditarPaciente(usuario);
+		}
+		
+	}
     
     //METODO PARA ELIMINAR PACIENTE
-    // --
-    
     
     
     public void MenuPaciente() {
@@ -142,7 +119,7 @@ public class Paciente extends Usuario implements Encriptador{
                             mail = JOptionPane.showInputDialog("ingresa tu email");
                             contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
                             
-                            paciente = new Paciente(0,nombre,apellido,dni,fechaNacimiento,mail,contrasenia, activo);
+                            paciente = new Paciente(0,nombre,apellido,dni,fechaNacimiento,mail,contrasenia);
                             Paciente.RegistrarPaciente(paciente);
                             
                             break;
@@ -173,10 +150,10 @@ public class Paciente extends Usuario implements Encriptador{
     
     // GETTERS Y SETTERS
     public int getId() {
-		return idPaciente;
+		return id;
 	}
 	public void setId(int id) {
-		this.idPaciente = idPaciente;
+		this.id = id;
 	}
 
 	// dni
@@ -197,20 +174,11 @@ public class Paciente extends Usuario implements Encriptador{
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    // activo 
-    public int getActivo() {
-        return activo;
-    }
-
-    public void setActivo(int activo) {
-        this.activo = activo;
-    }
-
 
 
     @Override
     public String toString() {
-        return "Paciente{" + "id Paciente=" + idPaciente + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + "} " + super.toString();
+        return "Paciente{" + "id=" + id + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + "} " + super.toString();
     }
 
 }
