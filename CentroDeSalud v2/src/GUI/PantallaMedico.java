@@ -33,16 +33,7 @@ public class PantallaMedico extends JFrame {
 	private JTextField inpContra;
 	private Medico logueado;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                VistaMedico frame = new VistaMedico();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+   
     
     public PantallaMedico() {
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
