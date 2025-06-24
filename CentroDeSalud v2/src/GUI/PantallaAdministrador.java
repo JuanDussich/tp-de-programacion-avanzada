@@ -31,6 +31,11 @@ public class PantallaAdministrador extends JFrame {
 	private JTextField inpContra;
 	private Administrador admin;
 
+	private JTable table_1;
+	private JTable table_2;
+	private JTable table_3;
+	private JTable table_4;
+
     public PantallaAdministrador() {
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 742, 551);
@@ -248,17 +253,110 @@ public class PantallaAdministrador extends JFrame {
 		panel_1_2.setLayout(null);
 		tabbedPane_2.addTab("Registro Pacientes", null, panel_1_2, null);
 		
-		JPanel panel_1_2_1 = new JPanel();
-		panel_1_2_1.setLayout(null);
-		tabbedPane_2.addTab("Registro medicos", null, panel_1_2_1, null);
+
+		//ACA ES PARA VER LA TABLA DE PACIENTES FALTA CORREGIR
+		model = new DefaultTableModel(new String[]{
+	        		"idPaciente", "nombre", "apellido", "dni", "fecha_De_Nacimiento", "email", "contrasenia"}, 0);
+		 
+		table_1 = new JTable(model);
+		table_1.setBounds(0, 0, 682, 253);
+		RegistroPaciente.add(table_1);
 		
-		JPanel panel_1_2_2 = new JPanel();
-		panel_1_2_2.setLayout(null);
-		tabbedPane_2.addTab("Registro Administradores", null, panel_1_2_2, null);
+		JButton btnNewButton = new JButton("Ver Pacientes");
+		btnNewButton.setBounds(0, 252, 140, 23);
+		RegistroPaciente.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (admin == null) {
+					JOptionPane.showMessageDialog(null, "no puedes ver la lista porque no estas logueado");
+				} else {
+					VistaPacientes vista = new VistaPacientes();
+					vista.setVisible(true);
+				}
+				
+			}
+		});
+        // Cargar datos
+        cargarTabla();
+        
+		JPanel RegistroMedico = new JPanel();
+		RegistroMedico.setLayout(null);
+		tabbedPane_2.addTab("Registro medicos", null, RegistroMedico, null);
 		
-		JPanel panel_1_2_3 = new JPanel();
-		panel_1_2_3.setLayout(null);
-		tabbedPane_2.addTab("Registro turnos", null, panel_1_2_3, null);
+		//ACA ES PARA VER LA TABLA DE MEDICOS 
+		model = new DefaultTableModel(new String[]{
+        		"idPaciente", "nombre", "apellido", "dni", "fecha_De_Nacimiento", "email", "contrasenia"}, 0);
+	 
+		table_2 = new JTable(model);
+		table_2.setBounds(0, 0, 672, 253);
+		RegistroMedico.add(table_2);
+		
+		JButton btnNewButton_2 = new JButton("Ver Medicos");
+		btnNewButton_2.setBounds(10, 252, 149, 23);
+		RegistroMedico.add(btnNewButton_2);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (admin == null) {
+					JOptionPane.showMessageDialog(null, "no puedes ver la lista porque no estas logueado");
+				} else {
+					VistaMedico vista = new VistaMedico();
+					vista.setVisible(true);
+				}
+			}
+		});
+		
+		JPanel RegistroAdministradores = new JPanel();
+		RegistroAdministradores.setLayout(null);
+		tabbedPane_2.addTab("Registro Administradores", null, RegistroAdministradores, null);
+		
+		model = new DefaultTableModel(new String[]{
+        		"idPaciente", "nombre", "apellido", "dni", "fecha_De_Nacimiento", "email", "contrasenia"}, 0);
+		
+		//ACA ES PARA VER LA TABLA DE ADMINISTRADORES
+		table_3 = new JTable(model);
+		table_3.setBounds(0, 0, 672, 253);
+		RegistroAdministradores.add(table_3);
+		
+		JButton btnNewButton_3 = new JButton("Ver Administradores");
+		btnNewButton_3.setBounds(10, 252, 150, 23);
+		RegistroAdministradores.add(btnNewButton_3);
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (admin == null) {
+					JOptionPane.showMessageDialog(null, "no puedes ver la lista porque no estas logueado");
+				} else {
+					VistaAdministrador vista = new VistaAdministrador();
+					vista.setVisible(true);
+				}
+			}
+		});
+		
+		JPanel RegistroTurno = new JPanel();
+		RegistroTurno.setLayout(null);
+		tabbedPane_2.addTab("Registro turnos", null, RegistroTurno, null);
+		
+		//ACA ES PARA VER LA TABLA DE TURNO
+		model = new DefaultTableModel(new String[]{
+        		"idPaciente", "nombre", "apellido", "dni", "fecha_De_Nacimiento", "email", "contrasenia"}, 0);
+	 
+		table_4 = new JTable(model);
+		table_4.setBounds(0, 0, 682, 253);
+		RegistroTurno.add(table_4);
+		
+		JButton btnNewButton_1 = new JButton("Ver turnos");
+		btnNewButton_1.setBounds(10, 252, 114, 23);
+		RegistroTurno.add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//FALTA LA VISTA DE TURNOS Y LINKEARLO ACA
+				if (admin == null) {
+					JOptionPane.showMessageDialog(null, "no puedes ver la lista porque no estas logueado");
+				} else {
+					
+				}
+			}
+		});
+
 		
 		JButton btnNewButton_1_1 = new JButton("Ver Perfil");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
