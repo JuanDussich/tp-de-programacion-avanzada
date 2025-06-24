@@ -1,5 +1,6 @@
 package GUI;
 
+import BLL.Especialidad;
 import BLL.Medico;
 import BLL.Paciente;
 import DLL.ControllerMedico;
@@ -33,7 +34,16 @@ public class PantallaMedico extends JFrame {
 	private JTextField inpContra;
 	private Medico logueado;
 
-   
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                VistaMedico frame = new VistaMedico();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
     
     public PantallaMedico() {
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -188,10 +198,18 @@ public class PantallaMedico extends JFrame {
 		panel_1_1.add(lblNewLabel_1_2);
 		
 		//LO QUE DEBERIA DE CAMBIAR AMALIA SERIA ESTO DE ACA QUE ESTA PARTE DE ACA ES PARA REGISTRAR LA ESPECIALIDAD
-		inpEspecialidad = new JTextField();
-		inpEspecialidad.setColumns(10);
-		inpEspecialidad.setBounds(174, 81, 140, 32);
-		panel_1_1.add(inpEspecialidad);
+		//inpEspecialidad = new JTextField();
+		//inpEspecialidad.setColumns(10);
+		//inpEspecialidad.setBounds(174, 81, 140, 32);
+		//panel_1_1.add(inpEspecialidad);
+		
+		JComboBox Combodoctores = new JComboBox();
+		for (Especialidad esp : Especialidad.values()) {
+            Combodoctores.addItem(esp.name());
+        }
+		
+		Combodoctores.setBounds(176, 81, 138, 32);
+		panel_1_1.add(Combodoctores);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("Email");
 		lblNewLabel_1_3.setBounds(10, 180, 140, 14);
@@ -215,7 +233,7 @@ public class PantallaMedico extends JFrame {
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Medico Registrado = new Medico(0,inpNombre.getText(), inpApellido.getText(),inpMatricula.getText(),inpMail.getText(), inpContra.getText(),inpEspecialidad.getText(),1);
+				Medico Registrado = new Medico(0,inpNombre.getText(), inpApellido.getText(),inpMatricula.getText(),inpMail.getText(), inpContra.getText(),Especialidad.valueOf(Combodoctores.getSelectedItem().toString()),1);
 				BLL.Medico.RegistrarMedico(Registrado);
 				
 				if (Registrado == null) {
@@ -232,13 +250,7 @@ public class PantallaMedico extends JFrame {
 		btnNewButton_2_1.setBounds(10, 306, 89, 23);
 		panel_1_1.add(btnNewButton_2_1);
 		
-		JComboBox Combodoctores = new JComboBox();
-		//for (Especialidad esp : Especialidad.values()) {
-        //    Combodoctores.addItem(esp.name());
-        //}
 		
-		Combodoctores.setBounds(174, 120, 105, 20);
-		panel_1_1.add(Combodoctores);
     	
     }
 }
