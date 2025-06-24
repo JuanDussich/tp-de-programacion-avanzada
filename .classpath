@@ -6,11 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="CentroDeSalud v2/src"/>
-	<classpathentry kind="lib" path="C:/Users/33792577/Documents/GitHub/tp-de-programacion-avanzada/CentroDeSalud v2/lib/mysql-connector-java-5.1.13.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="CentroDeSalud v2/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="CentroDeSalud v2/lib/mysql-connector-java-5.1.13.jar"/>
 	<classpathentry kind="output" path="CentroDeSalud v2/bin"/>
 </classpath>
