@@ -61,5 +61,5 @@ Desktop.ini
 # Optional: ignore .env or config files with tokens/keys
 .env
 config.properties
-bin/
+/bin/
 /CentroDeSalud v2/bin
