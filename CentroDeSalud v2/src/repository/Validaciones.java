@@ -1,7 +1,5 @@
 package repository;
 
-import java.util.function.Function;
-
 import javax.swing.JOptionPane;
 
 public interface Validaciones {
@@ -57,40 +55,4 @@ public interface Validaciones {
 		return Integer.parseInt(numero);
 	}
 	
-	// validaciones para dni
-
-	default int validardni(String num) {
-	    String numero = num;
-
-	    while (true) {
-	        if (numero == null || numero.trim().isEmpty()) {
-	            numero = JOptionPane.showInputDialog("Error: DNI no puede estar vacío.");
-	            continue;
-	        }
-
-	        // Elimina espacios en blanco
-	        numero = numero.trim();
-
-	        // Verifica si tiene solo dígitos
-	        if (!numero.matches("\\d+")) {
-	            JOptionPane.showMessageDialog(null, "Error: DNI debe contener solo números.");
-	            numero = JOptionPane.showInputDialog("Ingresá un DNI válido:");
-	            continue;
-	        }
-
-	        // Verifica la cantidad de dígitos
-	        if (numero.length() < 7 || numero.length() > 8) {
-	            JOptionPane.showMessageDialog(null, "Error: DNI debe tener 7 u 8 dígitos.");
-	            numero = JOptionPane.showInputDialog("Ingresá un DNI válido:");
-	            continue;
-	        }
-
-	        break; // Si pasa todas las validaciones, se sale del bucle
-	    }
-
-	    return Integer.parseInt(numero);
-	}
-
-
-
 }

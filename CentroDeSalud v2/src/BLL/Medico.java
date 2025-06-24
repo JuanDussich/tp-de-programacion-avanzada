@@ -2,7 +2,7 @@ package BLL;
 import javax.swing.*;
 
 import DLL.ControllerMedico;
-
+import DLL.ControllerPaciente;
 import repository.Encriptador;
 import repository.OpcionesMedico;
 
@@ -10,15 +10,13 @@ public class Medico extends Usuario implements Encriptador{
 	private int idMedico;
     private int activo = 1; // true 1 false 0
 	private String matricula;
-    private Especialidad especialidad; // especialidad tipo enum
-    
-    
-    
+    private String especialidad; // se cambio el campo especialidad a string eliminar tabla especialidad!!
+       
     public Medico() {
 
     }
     
-    public Medico(int idMedico, String nombre, String apellido, String matricula, String email, String contrasenia, Especialidad especialidad, int activo) {
+    public Medico(int idMedico, String nombre, String apellido, String matricula, String email, String contrasenia, String especialidad, int activo) {
         super(nombre, apellido, email, contrasenia); // Hereda de Usuario
         this.idMedico = idMedico;
         this.especialidad = especialidad;
@@ -26,28 +24,22 @@ public class Medico extends Usuario implements Encriptador{
         this.activo = activo;
     }
     // constructor sin id 
-    public Medico(String nombre, String apellido, String matricula, String email, String contrasenia, Especialidad especialidad, int activo) {
+    public Medico(String nombre, String apellido, String matricula, String email, String contrasenia, String especialidad, int activo) {
         super(nombre, apellido, email, contrasenia);
         this.matricula = matricula;
         this.especialidad = especialidad;
         this.activo = activo;
     }
-    
-   // constructor para editar
-    public Medico(String nombre, String apellido, String email, String contrasenia, String matricula) {
-        super(nombre, apellido, email, contrasenia);
-        this.matricula = matricula;
-    }
 
     // Validación constructir matricula y especialidad
-    public Medico(String matricula, Especialidad especialidad) {
+    public Medico(String matricula, String especialidad) {
         if (matricula != null && especialidad != null) {
             this.matricula = matricula;
             this.especialidad = especialidad;
             //this.cantidadConsultas = cantidadConsultas;
         } else {
             this.matricula = "Desconocida";
-            this.especialidad = Especialidad.OTRA;
+            this.especialidad = "Desconocida";
           
         }
     }
@@ -162,11 +154,11 @@ public class Medico extends Usuario implements Encriptador{
     }
 
    
-    public Especialidad getEspecialidad() {
+    public String getEspecialidad() {
         return especialidad;
     }
 
-    public void setEspecialidad(Especialidad especialidad) {
+    public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
     

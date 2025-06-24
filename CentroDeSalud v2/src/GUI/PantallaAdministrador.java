@@ -224,7 +224,7 @@ public class PantallaAdministrador extends JFrame {
 				
 				Administrador Registrado = new Administrador(0,inpNombre.getText(), inpApellido.getText(),inpMail.getText(), inpContra.getText());
 				
-				BLL.Administrador.RegistrarAdministrador();
+				BLL.Administrador.RegistrarAdministrador(Registrado);
 				
 				if (Registrado == null) {
 					lblError.setText("No se encontró");
