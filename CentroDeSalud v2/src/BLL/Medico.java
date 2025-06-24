@@ -172,9 +172,7 @@ public class Medico extends Usuario implements Encriptador{
     
     @Override
     public String toString() {
-        return "Medico{" +
-                "idMedico= " + idMedico +
-                ", nombre= " + getNombre() +
+        return "Medico{" + "idMedico= " + idMedico +", nombre= " + getNombre() +
                 ", apellido= " + getApellido() +
                 ", matricula= '" + matricula + '\'' +
                 ", email= " + getEmail() +
@@ -182,4 +180,5 @@ public class Medico extends Usuario implements Encriptador{
                 ", activo= " + activo +
                 '}';
     }
+    
 }

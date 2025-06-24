@@ -77,19 +77,25 @@ public class PantallaMedico extends JFrame {
 		contentPane.add(btnNewButton_5);
 		
 		JButton btnNewButton_2 = new JButton("Ver turnos");
-		btnNewButton_2.setBounds(396, 206, 89, 23);
+		btnNewButton_2.setBounds(360, 159, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("solicitar turno");
-		btnNewButton_3.setBounds(388, 246, 97, 23);
+		btnNewButton_3.setBounds(471, 159, 97, 23);
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Ver historiales medicos");
-		btnNewButton_4.setBounds(555, 193, 148, 23);
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VistaHistoriaClinica vista = new VistaHistoriaClinica();
+				vista.setVisible(true);
+			}
+		});
+		btnNewButton_4.setBounds(578, 159, 148, 23);
 		contentPane.add(btnNewButton_4);
 		
 		JButton btnNewButton_6 = new JButton("Modificar Historiales medicos");
-		btnNewButton_6.setBounds(556, 246, 160, 23);
+		btnNewButton_6.setBounds(556, 11, 160, 23);
 		contentPane.add(btnNewButton_6);
 		
 		JButton btnNewButton_1_1 = new JButton("Ver Perfil");
