@@ -32,6 +32,9 @@ public class PantallaAdministrador extends JFrame {
 	private JTextField inpContra;
 	private Administrador admin;
 	private JTable table_1;
+	private JTable table_2;
+	private JTable table_3;
+	private JTable table_4;
 
     public PantallaAdministrador() {
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -197,7 +200,7 @@ public class PantallaAdministrador extends JFrame {
 	        		"idPaciente", "nombre", "apellido", "dni", "fecha_De_Nacimiento", "email", "contrasenia"}, 0);
 		 
 		table_1 = new JTable(model);
-		table_1.setBounds(0, 0, 672, 253);
+		table_1.setBounds(0, 0, 682, 253);
 		RegistroPaciente.add(table_1);
 		
 		JButton btnNewButton = new JButton("Ver Pacientes");
@@ -215,7 +218,7 @@ public class PantallaAdministrador extends JFrame {
 			}
 		});
         // Cargar datos
-        //cargarTabla();
+        cargarTabla();
         
 		JPanel RegistroMedico = new JPanel();
 		RegistroMedico.setLayout(null);
@@ -225,9 +228,9 @@ public class PantallaAdministrador extends JFrame {
 		model = new DefaultTableModel(new String[]{
         		"idPaciente", "nombre", "apellido", "dni", "fecha_De_Nacimiento", "email", "contrasenia"}, 0);
 	 
-		table_1 = new JTable(model);
-		table_1.setBounds(0, 0, 672, 253);
-		RegistroMedico.add(table_1);
+		table_2 = new JTable(model);
+		table_2.setBounds(0, 0, 672, 253);
+		RegistroMedico.add(table_2);
 		
 		JButton btnNewButton_2 = new JButton("Ver Medicos");
 		btnNewButton_2.setBounds(10, 252, 149, 23);
@@ -251,9 +254,9 @@ public class PantallaAdministrador extends JFrame {
         		"idPaciente", "nombre", "apellido", "dni", "fecha_De_Nacimiento", "email", "contrasenia"}, 0);
 		
 		//ACA ES PARA VER LA TABLA DE ADMINISTRADORES
-		table_1 = new JTable(model);
-		table_1.setBounds(0, 0, 672, 253);
-		RegistroAdministradores.add(table_1);
+		table_3 = new JTable(model);
+		table_3.setBounds(0, 0, 672, 253);
+		RegistroAdministradores.add(table_3);
 		
 		JButton btnNewButton_3 = new JButton("Ver Administradores");
 		btnNewButton_3.setBounds(10, 252, 150, 23);
@@ -277,9 +280,9 @@ public class PantallaAdministrador extends JFrame {
 		model = new DefaultTableModel(new String[]{
         		"idPaciente", "nombre", "apellido", "dni", "fecha_De_Nacimiento", "email", "contrasenia"}, 0);
 	 
-		table_1 = new JTable(model);
-		table_1.setBounds(0, 0, 682, 253);
-		RegistroTurno.add(table_1);
+		table_4 = new JTable(model);
+		table_4.setBounds(0, 0, 682, 253);
+		RegistroTurno.add(table_4);
 		
 		JButton btnNewButton_1 = new JButton("Ver turnos");
 		btnNewButton_1.setBounds(10, 252, 114, 23);
