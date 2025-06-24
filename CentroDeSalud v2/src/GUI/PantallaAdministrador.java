@@ -1,7 +1,9 @@
 package GUI;
 
 import BLL.Administrador;
+import BLL.Medico;
 import BLL.Paciente;
+import BLL.Turno;
 import DLL.ControllerAdministrador;
 
 import javax.swing.*;
@@ -320,28 +322,29 @@ public class PantallaAdministrador extends JFrame {
     }
     private void cargarTablaAdmin() {
         model.setRowCount(0);
-        LinkedList<Paciente> usuarios = DLL.ControllerPaciente.mostrarPaciente();
-        for (Paciente u : usuarios) {
+        LinkedList<Administrador> usuarios = DLL.ControllerAdministrador.mostrarAdministrador();
+        for (Administrador u : usuarios) {
             model.addRow(new Object[]{
-            		u.getId(), u.getNombre(), u.getApellido(), u.getDni(),u.getFechaNacimiento(),u.getEmail(),u.getContrasenia()
+            		u.getId(), u.getNombre(), u.getApellido(),u.getEmail(),u.getContrasenia()
             		});
         }
     }
     private void cargarTablaMedico() {
         model.setRowCount(0);
-        LinkedList<Paciente> usuarios = DLL.ControllerPaciente.mostrarPaciente();
-        for (Paciente u : usuarios) {
+        LinkedList<Medico> usuarios = DLL.ControllerMedico.mostrarMedicos();
+        for (Medico u : usuarios) {
             model.addRow(new Object[]{
-            		u.getId(), u.getNombre(), u.getApellido(), u.getDni(),u.getFechaNacimiento(),u.getEmail(),u.getContrasenia()
+            		u.getId(), u.getNombre(), u.getApellido(), u.getMatricula(),u.getEmail(),u.getContrasenia(),u.getEspecialidad()
             		});
         }
     }
     private void cargarTablaTurno() {
         model.setRowCount(0);
-        LinkedList<Paciente> usuarios = DLL.ControllerPaciente.mostrarPaciente();
-        for (Paciente u : usuarios) {
+        LinkedList<Turno> turno = DLL.ControllerTurno.listarTurnos();
+        for (Turno u : turno) {
             model.addRow(new Object[]{
-            		u.getId(), u.getNombre(), u.getApellido(), u.getDni(),u.getFechaNacimiento(),u.getEmail(),u.getContrasenia()
+            		//FALTA TERMINAR ESTA PARTE DE ACA
+            		//u.get(), u.getNombre(), u.getApellido(), u.getDni(),u.getFechaNacimiento(),u.getEmail(),u.getContrasenia()
             		});
         }
     }
