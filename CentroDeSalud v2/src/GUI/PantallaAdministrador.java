@@ -313,7 +313,7 @@ public class PantallaAdministrador extends JFrame {
     
     private void cargarTabla() {
         model.setRowCount(0);
-        LinkedList<Paciente> usuarios = DLL.ControllerPaciente.mostrarPaciente();
+        LinkedList<Paciente> usuarios = DLL.ControllerPaciente.mostrarPacientes();
         for (Paciente u : usuarios) {
             model.addRow(new Object[]{
             		u.getId(), u.getNombre(), u.getApellido(), u.getDni(),u.getFechaNacimiento(),u.getEmail(),u.getContrasenia()
