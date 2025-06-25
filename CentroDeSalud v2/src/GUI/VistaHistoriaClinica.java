@@ -81,23 +81,23 @@ public class VistaHistoriaClinica extends JFrame {
 		
 	        table = new JTable(model);
 	        JScrollPane scrollPane = new JScrollPane(table);
-	        scrollPane.setBounds(10, 100, 760, 200);
+	        scrollPane.setBounds(10, 100, 760, 300);
 	        contentPane.add(scrollPane);
 	        
 	     // Botones
 	        JButton btnAgregar = new JButton("Agregar");
 	        btnAgregar.setFont(new Font("Tahoma", Font.BOLD, 11));
-	        btnAgregar.setBounds(112, 329, 124, 55);
+	        btnAgregar.setBounds(80, 420, 124, 40);
 	        contentPane.add(btnAgregar);
 
 	        JButton btnEditar = new JButton("Editar");
 	        btnEditar.setFont(new Font("Tahoma", Font.BOLD, 11));
-	        btnEditar.setBounds(322, 329, 124, 55);
+	        btnEditar.setBounds(320, 420, 124, 40);
 	        contentPane.add(btnEditar);
 	        
 	        JButton btnEliminar = new JButton("Eliminar");
 	        btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 11));
-	        btnEliminar.setBounds(531, 329, 124, 55);
+	        btnEliminar.setBounds(560, 420, 124, 40);
 	        contentPane.add(btnEliminar);
 	        
 	        
@@ -137,11 +137,11 @@ public class VistaHistoriaClinica extends JFrame {
 	        
 	        
 	        inpFiltro = new JTextField(); //112, 329, 124, 55
-	        inpFiltro.setBounds(112, 430, 124, 30);
+	        inpFiltro.setBounds(80, 511, 142, 30);
 	        contentPane.add(inpFiltro);
 	        inpFiltro.setColumns(10);
 	        inpFiltro.setVisible(true);
-	        JButton btnFiltroGeneral = new JButton("Filtrar ID Paciente?");
+	        JButton btnFiltroGeneral = new JButton("Filtrar");
 	        btnFiltroGeneral.setVisible(true);
 	        btnFiltroGeneral.addActionListener(new ActionListener() {
 	        	public void actionPerformed(ActionEvent e) {
@@ -149,11 +149,11 @@ public class VistaHistoriaClinica extends JFrame {
 	        		cargarTablaFiltradaStream(inpFiltro.getText());
 	        	}
 	        });
-	        btnFiltroGeneral.setBounds(322, 430, 124, 30);
+	        btnFiltroGeneral.setBounds(320, 491, 124, 30);
 	        contentPane.add(btnFiltroGeneral);
 	        
-	        JLabel lblNewLabel = new JLabel("Filtrar por id paciente?:");
-	        lblNewLabel.setBounds(112, 400, 124, 30);
+	        JLabel lblNewLabel = new JLabel("Filtrar por id Historia Clinica?:");
+	        lblNewLabel.setBounds(80, 481, 142, 30);
 	        contentPane.add(lblNewLabel);
 	        
 	        JButton reinicio = new JButton("Reiniciar filtro");
@@ -164,7 +164,7 @@ public class VistaHistoriaClinica extends JFrame {
 	        		
 	        	}
 	        });
-	        reinicio.setBounds(322, 470, 124, 30);
+	        reinicio.setBounds(320, 531, 124, 30);
 	        contentPane.add(reinicio);
 	        
 	        /* FIN filtros en la vista de HC */
@@ -261,6 +261,4 @@ public class VistaHistoriaClinica extends JFrame {
             });
         }
     }
-
-
 } // fin clase
