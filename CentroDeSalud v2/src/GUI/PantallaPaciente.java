@@ -78,6 +78,11 @@ public class PantallaPaciente extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("Ver turnos");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnNewButton.setBounds(498, 190, 89, 23);
 		contentPane.add(btnNewButton);
 		
@@ -99,7 +104,7 @@ public class PantallaPaciente extends JFrame {
 		});
 		
 		btnNewButton_5.setBackground(new Color(255, 0, 0));
-		btnNewButton_5.setBounds(539, 50, 119, 23);
+		btnNewButton_5.setBounds(488, 50, 119, 23);
 		contentPane.add(btnNewButton_5);
 		
 		JButton btnNewButton_1 = new JButton("Ver Perfil");
@@ -108,7 +113,7 @@ public class PantallaPaciente extends JFrame {
 				JOptionPane.showMessageDialog(null, logueado);
 			}
 		});
-		btnNewButton_1.setBounds(378, 190, 89, 23);
+		btnNewButton_1.setBounds(488, 16, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);

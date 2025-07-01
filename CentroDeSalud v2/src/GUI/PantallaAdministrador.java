@@ -22,6 +22,9 @@ public class PantallaAdministrador extends JFrame {
     // Componentes GUI
     private Paciente usuarioSeleccionado;
     private DefaultTableModel model;
+    private DefaultTableModel modelMedico;
+    private DefaultTableModel modelAdministrador;
+    private DefaultTableModel modelTurno;
     private DefaultTableModel modeloTabla;
 	private JPanel contentPane;
 	private JTextField inpEmail;
@@ -206,7 +209,7 @@ public class PantallaAdministrador extends JFrame {
 		RegistroPaciente.add(table_1);
 		
 		JButton btnNewButton = new JButton("Ver Pacientes");
-		btnNewButton.setBounds(10, 264, 140, 23);
+		btnNewButton.setBounds(10, 252, 140, 23);
 		RegistroPaciente.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -222,20 +225,21 @@ public class PantallaAdministrador extends JFrame {
         // Cargar datos
         cargarTabla();
         
+        
 		JPanel RegistroMedico = new JPanel();
 		RegistroMedico.setLayout(null);
 		tabbedPane_2.addTab("Registro medicos", null, RegistroMedico, null);
 		
 		//ACA ES PARA VER LA TABLA DE MEDICOS 
-		model = new DefaultTableModel(new String[]{
+		modelMedico = new DefaultTableModel(new String[]{
         		"idMedico", "nombre", "apellido", "matricula", "", "email", "contrasenia", "especialidad"}, 0);
 	 
-		table_2 = new JTable(model);
+		table_2 = new JTable(modelMedico);
 		table_2.setBounds(0, 0, 672, 253);
 		RegistroMedico.add(table_2);
 		
 		JButton btnNewButton_2 = new JButton("Ver Medicos");
-		btnNewButton_2.setBounds(10, 264, 149, 23);
+		btnNewButton_2.setBounds(10, 252, 149, 23);
 		RegistroMedico.add(btnNewButton_2);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -252,16 +256,16 @@ public class PantallaAdministrador extends JFrame {
 		RegistroAdministradores.setLayout(null);
 		tabbedPane_2.addTab("Registro Administradores", null, RegistroAdministradores, null);
 		
-		model = new DefaultTableModel(new String[]{
+		modelAdministrador = new DefaultTableModel(new String[]{
         		"idAdministrador", "nombre", "apellido", "email", "contrasenia"}, 0);
 		
 		//ACA ES PARA VER LA TABLA DE ADMINISTRADORES
-		table_3 = new JTable(model);
+		table_3 = new JTable(modelAdministrador);
 		table_3.setBounds(0, 0, 672, 253);
 		RegistroAdministradores.add(table_3);
 		
 		JButton btnNewButton_3 = new JButton("Ver Administradores");
-		btnNewButton_3.setBounds(10, 264, 150, 23);
+		btnNewButton_3.setBounds(10, 252, 150, 23);
 		RegistroAdministradores.add(btnNewButton_3);
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -273,21 +277,23 @@ public class PantallaAdministrador extends JFrame {
 				}
 			}
 		});
+		cargarTablaAdmin();
+		
 		
 		JPanel RegistroTurno = new JPanel();
 		RegistroTurno.setLayout(null);
 		tabbedPane_2.addTab("Registro turnos", null, RegistroTurno, null);
 		
 		//ACA ES PARA VER LA TABLA DE TURNO
-		model = new DefaultTableModel(new String[]{
-        		"idTurno", "fechaTurno", "horaTurno", "tipoConsulta", "estado", "paciente_idPaciente", "medico_idMedico", "especialidad", "motivoConsulta", "resultadoConsulta" }, 0);
+		modelTurno = new DefaultTableModel(new String[]{
+        		"idTurno", "fechaTurno", "horaTurno", "tipoConsulta", "estado", "paciente_idPaciente", "medico_idMedico" }, 0);
 	 
-		table_4 = new JTable(model);
+		table_4 = new JTable(modelTurno);
 		table_4.setBounds(0, 0, 682, 253);
 		RegistroTurno.add(table_4);
 		
 		JButton btnNewButton_1 = new JButton("Ver turnos");
-		btnNewButton_1.setBounds(10, 264, 114, 23);
+		btnNewButton_1.setBounds(10, 252, 114, 23);
 		RegistroTurno.add(btnNewButton_1);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -300,6 +306,7 @@ public class PantallaAdministrador extends JFrame {
 				}
 			}
 		});
+		cargarTablaTurno();
 		
 		JButton btnNewButton_1_1 = new JButton("Ver Perfil");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -309,7 +316,8 @@ public class PantallaAdministrador extends JFrame {
 		});
 		btnNewButton_1_1.setBounds(423, 31, 89, 23);
 		contentPane.add(btnNewButton_1_1);
-    	
+		cargarTablaMedico();
+		
     }
     
     private void cargarTabla() {
@@ -322,28 +330,28 @@ public class PantallaAdministrador extends JFrame {
         }
     }
     private void cargarTablaAdmin() {
-        model.setRowCount(0);
+        modelAdministrador.setRowCount(0);
         LinkedList<Administrador> usuarios = DLL.ControllerAdministrador.mostrarAdministrador();
         for (Administrador u : usuarios) {
-            model.addRow(new Object[]{
+            modelAdministrador.addRow(new Object[]{
             		u.getId(), u.getNombre(), u.getApellido(),u.getEmail(),u.getContrasenia(), u.getActivo()
             		});
         }
     }
     private void cargarTablaMedico() {
-        model.setRowCount(0);
+        modelMedico.setRowCount(0);
         LinkedList<Medico> usuarios = DLL.ControllerMedico.mostrarMedicos();
         for (Medico u : usuarios) {
-            model.addRow(new Object[]{
+            modelMedico.addRow(new Object[]{
             		u.getId(), u.getNombre(), u.getApellido(), u.getMatricula(),u.getEmail(),u.getContrasenia(),u.getEspecialidad()
             		});
         }
     }
     private void cargarTablaTurno() {
-        model.setRowCount(0);
+        modelTurno.setRowCount(0);
         LinkedList<Turno> turno = DLL.ControllerTurno.listarTurnos();
         for (Turno u : turno) {
-            model.addRow(new Object[]{
+            modelTurno.addRow(new Object[]{
             		//FALTA TERMINAR ESTA PARTE DE ACA
             		u.getIdTurno(), u.getFechaTurno(), u.getHoraTurno(), u.getTipoConsulta(),u.getEstado(),u.getIdPaciente(),u.getIdMedico()
             		});

@@ -77,10 +77,20 @@ public class PantallaMedico extends JFrame {
 		contentPane.add(btnNewButton_5);
 		
 		JButton btnNewButton_2 = new JButton("Ver turnos");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnNewButton_2.setBounds(360, 159, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("solicitar turno");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnNewButton_3.setBounds(471, 159, 97, 23);
 		contentPane.add(btnNewButton_3);
 		
