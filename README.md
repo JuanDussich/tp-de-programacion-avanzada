@@ -4,7 +4,7 @@
     <title>Image Gallery</title>
 </head>
 <body>
-    <h1>My Image Gallery</h1>
+    <h1>Diagramas Entidad Relacion y modelo logico</h1>
     <div class="image-container">
         <img src="https://placehold.co/600x400" alt="Sample placeholder image" />
         <div class="caption">This is an example image hosted online</div>
