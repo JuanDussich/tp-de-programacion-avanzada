@@ -9,6 +9,10 @@
         <img src="https://placehold.co/600x400" alt="Sample placeholder image" />
         <div class="caption">This is an example image hosted online</div>
     </div>
+    <div class="image-container">
+        <img src="https://placehold.co/600x400" alt="Sample placeholder image" />
+        <div class="caption">This is an example image hosted online</div>
+    </div>
     
     <div class="image-container">
         <img src="images/my-image.jpg" alt="Description of local image" />
