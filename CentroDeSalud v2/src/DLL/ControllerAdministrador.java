@@ -3,9 +3,12 @@ package DLL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import BLL.Administrador;
 import BLL.Usuario;
@@ -19,9 +22,10 @@ public class ControllerAdministrador {
 		
 		//METODOS
 		
+		//METODO LOGIN DEL ADMINISTRADOR
 		public static Administrador login(String email, String contrasenia) {
 	        Administrador administrador = new Administrador();
-	        JOptionPane.showMessageDialog(null, administrador);
+	        //JOptionPane.showMessageDialog(null, administrador);
 	        try {
 	            PreparedStatement stmt = con.prepareStatement(
 	                    "SELECT * FROM administrador WHERE email = ? AND contrasenia = ?"
@@ -46,19 +50,18 @@ public class ControllerAdministrador {
 	        return administrador;
 	    }
 
+		//METODO AGREGAR ADMINISTRADOR (ok)
 	    public static void agregarAdministrador(Administrador usuario) {
+	    	 String sql = "INSERT INTO `administrador`( `nombre`, `apellido`, `email`, `contrasenia`) VALUES (?,?,?,?)";
 	        try {
-	            PreparedStatement statement = con.prepareStatement(
-	            		// ** correccion administrador -- correccion pasaba 5 parametros**
-	                    "INSERT INTO `administrador`( `nombre`, `apellido`, `email`, `contrasenia`) VALUES (?,?,?,?)"
-	            );
-	            statement.setString(1, usuario.getNombre());
-	            statement.setString(2, usuario.getApellido());
-	            statement.setString(3, usuario.getEmail());
-	            statement.setString(4, usuario.encriptar(usuario.getContrasenia()));
+	            PreparedStatement stmt = con.prepareStatement(sql);
+	            stmt.setString(1, usuario.getNombre());
+	            stmt.setString(2, usuario.getApellido());
+	            stmt.setString(3, usuario.getEmail());
+	            stmt.setString(4, usuario.encriptar(usuario.getContrasenia()));
 	            //statement.setString(6, usuario.getContrasenia());
 
-	            int filas = statement.executeUpdate();
+	            int filas = stmt.executeUpdate();
 	            if (filas > 0) {
 	                System.out.println("Administrador agregado correctamente.");
 	            }
@@ -67,6 +70,7 @@ public class ControllerAdministrador {
 	        }
 	    }
 
+	    //METODO DE REGISTRAR ADMINISTRADOR CREANDOLO EN EL METODO
 	    public static void RegistrarAdministrador() {
 
 	        String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
@@ -88,32 +92,90 @@ public class ControllerAdministrador {
 	        if (flag) {
 	            agregarAdministrador(nuevo);
 	        }else {
-	            JOptionPane.showMessageDialog(null, "Usuario ya creado");
+	            JOptionPane.showMessageDialog(null, "Administrador ya creado");
 	        }
 
 
 	    }
+	    
+	    //ESTE ES EL METODO DE REGISTRAR ADMINISTRADOR PERO SE ENVIA EL ADMINISTRADOR DESDE FUERA DEL METODO
+	    public static void RegistrarAdministrador(Administrador nuevo) {
+	        LinkedList<Administrador> existentes = mostrarAdministrador();
+	        boolean flag = true;
+	        for (Usuario existente : existentes) {
+	            if (existente.getEmail().equals(nuevo.getEmail())) {
+	                flag = false;
+	                break;
+	            }
+	        }
+	        if (flag) {
+	            agregarAdministrador(nuevo);
+	        }else {
+	            JOptionPane.showMessageDialog(null, "Administrador ya creado");
+	        }
+
+
+	    }
+	    
+	  //ESTA ES LA PARTE DE EDITAR ADMINISTRADOR (ok)
+		public static boolean EditarAdministrador(Administrador administrador) {
+			String sql = "UPDATE administrador SET nombre = ?, apellido = ?, email = ?, contrasenia = ?"
+	                   + "WHERE idAdministrador = ? ";
+			try {
+				PreparedStatement stmt = con.prepareStatement(sql);
+				stmt.setString(1, administrador.getNombre());
+				stmt.setString(2, administrador.getApellido());
+				stmt.setString(3, administrador.getEmail());
+				stmt.setString(4,administrador.encriptar(administrador.getContrasenia()));
+				stmt.setInt(5,administrador.getId());
+
+				int filas = stmt.executeUpdate();
+	            return filas > 0;
+	        } catch (SQLException e) {
+	            System.err.println("Error al editar Administrador: " + e.getMessage());
+	            return false;
+	        }
+	    }
+		
+		//ESTA ES LA PARTE DE MOSTRAR ADMINISTRADOR ver!!
 	    public static LinkedList<Administrador> mostrarAdministrador() {
-	        LinkedList<Administrador> usuarios = new LinkedList<>();
+	        LinkedList<Administrador> lista = new LinkedList<>();
+	        String sql = "SELECT * FROM administrador";
 	        try {
-	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM administrador");
+	            PreparedStatement stmt = con.prepareStatement(sql);
 	            ResultSet rs = stmt.executeQuery();
 
 	            while (rs.next()) {
-	                int id = rs.getInt("idAdministrador");
-	                String nombre = rs.getString("nombre");
-	                String apellido = rs.getString("apellido");
-	                String email = rs.getString("email");
-	                String contrasenia = rs.getString("contrasenia");
-
-	                usuarios.add(new Administrador(id, nombre,apellido, email,contrasenia));
-
+	            	Administrador administrador = new Administrador(
+	                rs.getInt("idAdministrador"),
+	                rs.getString("nombre"),
+	                rs.getString("apellido"),
+	                rs.getString("email"),
+	                rs.getString("contrasenia"),
+	                rs.getInt("activo")
+	            	);
+	                
+	                lista.add(administrador);
+	               
 	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
+	        }catch (SQLException e) {
+	            System.err.println("Error al mostrar médicos: " + e.getMessage());
 	        }
-	        return usuarios;
+	        return lista;
 	    }
 
+	 // Método para eliminar un administrador (logicamente)
+	    public static boolean EliminarAdministrador(int id) {
+	        String sql = "UPDATE administrador SET activo = FALSE WHERE idAdministrador = ?"; // Campo corregido
+	        try {
+	            PreparedStatement stmt = con.prepareStatement(sql);
+	            stmt.setInt(1, id);
+	            int filas = stmt.executeUpdate();
+	            return filas > 0;
+	        } catch (SQLException e) {
+	            System.err.println("Error al eliminar Administrador: " + e.getMessage());
+	            return false;
+	        }
+	    }
 }
 

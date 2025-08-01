@@ -13,6 +13,7 @@ import BLL.Usuario;
 
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
@@ -48,7 +49,7 @@ public class PantallaPrincipal extends JFrame {
 		JLabel LblTitulo = new JLabel("Centro De Salud");
 		LblTitulo.setForeground(Color.GRAY);
 		LblTitulo.setFont(new Font("Copperplate Gothic Light", Font.BOLD, 30));
-		LblTitulo.setBounds(225, 34, 293, 137);
+		LblTitulo.setBounds(0, 0, 293, 137);
 		contentPane.add(LblTitulo);
 		
 		JButton btnPaciente = new JButton("Menu Paciente");
@@ -74,13 +75,35 @@ public class PantallaPrincipal extends JFrame {
 		JButton btnMedico = new JButton("Menu Medico");
 		btnMedico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaMedico vista = new PantallaMedico();
+				GUI.PantallaMedico vista = new PantallaMedico();
 				vista.setVisible(true);
 				
 			}
 		});
 		btnMedico.setBounds(553, 374, 137, 61);
 		contentPane.add(btnMedico);
-
+		
+		
+		// Cargar la imagen
+        JLabel Logo = new JLabel("");
+		Logo.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\logo.jpg"));
+		Logo.setBounds(239, 0, 137, 137);
+		contentPane.add(Logo);
+		
+		
+		JLabel Medico = new JLabel("");
+		Medico.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\Medico.jpg"));
+		Medico.setBounds(553, 213, 137, 123);
+		contentPane.add(Medico);
+		
+		JLabel Administrador = new JLabel("");
+		Administrador.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\Admin.jpg"));
+		Administrador.setBounds(303, 213, 137, 123);
+		contentPane.add(Administrador);
+		
+		JLabel Paciente = new JLabel("");
+		Paciente.setIcon(new ImageIcon("C:\\Users\\Kavadie\\Documents\\Escuela Da VINCI\\Programacion Avanzada\\tp-de-programacion-avanzada\\CentroDeSalud v2\\src\\Imagenes\\paciente.jpg"));
+		Paciente.setBounds(50, 213, 137, 123);
+		contentPane.add(Paciente);
 	}
 }

@@ -10,10 +10,10 @@ public class ControllerHistoriaClinica {
 
     private static Connection con = Conexion.getInstance().getConnection();
 
-
+    // CREATE
     public void crearHistoriaClinica(HistoriaClinica hc) {
-        String sql = "INSERT INTO historia_clinica (observaciones, fecha, turnoId, pacienteId, tratamientoId, medicamentoId, medicoId, detalleConsulta) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO historia_clinica (observaciones, fecha, turnoId, pacienteId, tratamientoId, medicamentoId, medicoId) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, hc.getObservaciones());
@@ -23,7 +23,6 @@ public class ControllerHistoriaClinica {
             stmt.setInt(5, hc.getTratamientoId());
             stmt.setInt(6, hc.getMedicamentoId());
             stmt.setInt(7, hc.getMedicoId());
-            stmt.setString(8, hc.getDetalleConsulta());
             stmt.executeUpdate();
 
             System.out.println("Historia clínica creada correctamente.");
@@ -32,8 +31,8 @@ public class ControllerHistoriaClinica {
         }
     }
 
-
-    public ArrayList<HistoriaClinica> obtenerHistoriasClinicas() {
+    // READ
+    public static ArrayList<HistoriaClinica> obtenerHistoriasClinicas() {
         ArrayList<HistoriaClinica> lista = new ArrayList<>();
         String sql = "SELECT * FROM historia_clinica";
         try {
@@ -49,8 +48,7 @@ public class ControllerHistoriaClinica {
                     rs.getInt("pacienteId"),
                     rs.getInt("tratamientoId"),
                     rs.getInt("medicamentoId"),
-                    rs.getInt("medicoId"),
-                    rs.getString("detalleConsulta")
+                    rs.getInt("medicoId")
                 );
                 lista.add(hc);
             }
@@ -60,7 +58,7 @@ public class ControllerHistoriaClinica {
         return lista;
     }
 
-
+    // UPDATE
     public void actualizarHistoriaClinica(int id, String nuevasObservaciones) {
         String sql = "UPDATE historia_clinica SET observaciones = ? WHERE idHistorialMedico = ?";
         try {
@@ -74,7 +72,7 @@ public class ControllerHistoriaClinica {
         }
     }
 
-
+    // DELETE
     public void eliminarHistoriaClinica(int id) {
         String sql = "DELETE FROM historia_clinica WHERE idHistorialMedico = ?";
         try {
@@ -87,5 +85,3 @@ public class ControllerHistoriaClinica {
         }
     }
 }
-
-

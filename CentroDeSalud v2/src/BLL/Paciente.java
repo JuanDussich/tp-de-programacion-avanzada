@@ -19,9 +19,10 @@ import DLL.ControllerPaciente;
 public class Paciente extends Usuario implements Encriptador{
 
 	//ATRIBUTOS
-    private int id;
+    private int idPaciente;
     private int dni;
     private String fechaNacimiento;
+    private int activo = 1; // true 1 false 0
     
 //    private HistoriaClinica historiaClinica;
 
@@ -29,41 +30,81 @@ public class Paciente extends Usuario implements Encriptador{
     public Paciente() {
     }
     
-    public Paciente(int id, String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia) {
+    public Paciente(int idPaciente, String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia, int activo) {
         super(nombre,apellido,email,contrasenia);
-        this.id = id;
+        this.idPaciente = idPaciente;
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
+        this.activo = activo;
+    }
+    // constructor sin id
+    public Paciente( String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia) {
+        super(nombre,apellido,email,contrasenia);
+        
+        this.dni = dni;
+        this.fechaNacimiento = fechaNacimiento;
+              
+    }
+    
+    // constructor sin id
+    public Paciente( int idPaciente, String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia) {
+        super(nombre,apellido,email,contrasenia);
+        this.idPaciente = idPaciente;
+        this.dni = dni;
+        this.fechaNacimiento = fechaNacimiento;
+              
     }
     // METODOS
     
+    //METODO PARA HACER LOGIN DE PACIENTE
     public static Paciente login(String email, String contrasenia) {
-    	Paciente usuario = new Paciente() ;
+    	
+    	//Paciente usuario = new Paciente() ;
     	if (email.isEmpty() || contrasenia.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Hay un error, no puede ser vacio");
 		}else {
-			usuario = ControllerPaciente.login(email, contrasenia);
+			//usuario = ControllerPaciente.login(email, contrasenia);
+			return ControllerPaciente.login(email,contrasenia);
 			
 		}
-    	return usuario;
+    	//return usuario;
+    	return null;
     }
-
-    public static void RegistrarUsuario(Paciente paciente) {
+    
+    //METODO PARA REGISTRAR PACIENTE PERO ENVIANDO EL PACIENTE ANTES DE IR AL CONTROLADOR
+    public static void RegistrarPaciente(Paciente paciente) {
     	
     	JOptionPane.showMessageDialog(null, "Estas registrandote");
     	ControllerPaciente.RegistrarPaciente(paciente);
     	
     }
     
+    //METODO REGISTRAR PACIENTE QUE LLAMA AL CONTROLADOR
+    public static void RegistrarPaciente() {
+    	
+    	ControllerPaciente.RegistrarPaciente();;
+    	
+    	
+    }
+    
+    //METODO PARA EDITAR PACIENTE
     public static String EditarPaciente(Paciente usuario) {
-		
-		if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty()|| usuario.getContrasenia().isEmpty()) {
-			return "No se pudo editar";
-		}else {
-			return DLL.ControllerPaciente.EditarPaciente(usuario);
-		}
-		
-	}
+        if (usuario.getEmail().isEmpty() || usuario.getNombre().isEmpty() || usuario.getContrasenia().isEmpty()) {
+            return "No se pudo editar";
+        } else {
+            boolean exito = DLL.ControllerPaciente.EditarPaciente(usuario);
+            if (exito) {
+                return "Paciente actualizado correctamente";
+            } else {
+                return "No se pudo actualizar el Paciente";
+            }
+        }
+    }
+    
+    //METODO PARA ELIMINAR PACIENTE
+    // --
+    
+    
     
     public void MenuPaciente() {
 
@@ -88,12 +129,28 @@ public class Paciente extends Usuario implements Encriptador{
                             
                             break;
                         case 1:
-                            Paciente.RegistrarUsuario(paciente);
+                        	//primer forma de registrar paciente, en esta se crea el paciente dentro del metodo registro
+                        	
+                        	//Paciente.RegistrarPaciente();
+                        	
+                        	//segunda forma de registrar paciente, en esta se envia el paciente ya registrado con sus datos
+                        	String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
+                            String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
+                            int  dni = Integer.parseInt(JOptionPane.showInputDialog("ingresa tu dni"));
+                            String fechaNacimiento = JOptionPane.showInputDialog("ingresa la fecha");
+
+                            mail = JOptionPane.showInputDialog("ingresa tu email");
+                            contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
+                            
+                            paciente = new Paciente(0,nombre,apellido,dni,fechaNacimiento,mail,contrasenia, activo);
+                            Paciente.RegistrarPaciente(paciente);
+                            
                             break;
                         case 2:
                             JOptionPane.showMessageDialog(null, paciente);
                             break;
                         case 3:
+                        	JOptionPane.showMessageDialog(null, "a bueno adios master");
                             break;
                     }
                     break;
@@ -104,10 +161,9 @@ public class Paciente extends Usuario implements Encriptador{
                     // Ver turnos
                     break;
                 case 3:
-                    // Ver Historial Medico
+                    // Ver historial Medico
                     break;
                 case 4:
-                	JOptionPane.showMessageDialog(null, "a bueno adios master");
                     JOptionPane.showMessageDialog(null, "Saliendo del menu Paciente");
                     break;
             }
@@ -117,10 +173,10 @@ public class Paciente extends Usuario implements Encriptador{
     
     // GETTERS Y SETTERS
     public int getId() {
-		return id;
+		return idPaciente;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.idPaciente = idPaciente;
 	}
 
 	// dni
@@ -141,11 +197,20 @@ public class Paciente extends Usuario implements Encriptador{
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    // activo 
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
+        this.activo = activo;
+    }
+
 
 
     @Override
     public String toString() {
-        return "Paciente{" + "id=" + id + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + "} " + super.toString();
+        return "Paciente{" + "id Paciente=" + idPaciente + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + "} " + super.toString();
     }
 
 }

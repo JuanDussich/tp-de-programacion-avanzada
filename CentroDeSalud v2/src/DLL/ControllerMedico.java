@@ -1,6 +1,7 @@
 package DLL;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +10,9 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import BLL.Medico;
+import BLL.Especialidad;
 import BLL.Usuario;
+
 
 public class ControllerMedico {
 
@@ -29,6 +32,7 @@ public class ControllerMedico {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+            	Especialidad especialidadEnum = Especialidad.valueOf(rs.getString("especialidad"));
                 Medico medico = new Medico(
                     rs.getInt("idMedico"),
                     rs.getString("nombre"),
@@ -36,7 +40,7 @@ public class ControllerMedico {
                     rs.getString("matricula"),
                     rs.getString("email"),
                     rs.getString("contrasenia"),
-                    rs.getString("especialidad"),
+                    especialidadEnum,
                     rs.getInt("activo")
                 );
                 
@@ -59,10 +63,10 @@ public class ControllerMedico {
         	PreparedStatement stmt = con.prepareStatement(sql);
         	stmt.setString(1, medico.getNombre());
         	stmt.setString(2, medico.getApellido());
-        	stmt.setString(3, medico.getMatricula());  // WHERE matricula = ?
+        	stmt.setString(3, medico.getMatricula());  // 
         	stmt.setString(4, medico.getEmail());
         	stmt.setString(5, medico.getContrasenia());
-        	stmt.setString(6, medico.getEspecialidad());
+        	stmt.setString(6, medico.getEspecialidad().name());;
 
                        
             int filas = stmt.executeUpdate();
@@ -88,6 +92,7 @@ public class ControllerMedico {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+            	Especialidad especialidadEnum = Especialidad.valueOf(rs.getString("especialidad"));
                 Medico medico = new Medico(
                     rs.getInt("idMedico"),
                     rs.getString("nombre"),
@@ -95,7 +100,7 @@ public class ControllerMedico {
                     rs.getString("matricula"),
                     rs.getString("email"),
                     rs.getString("contrasenia"),
-                    rs.getString("especialidad"),
+                    especialidadEnum,
                     rs.getInt("activo")
                 );
                 
@@ -116,22 +121,21 @@ public class ControllerMedico {
      * Retorna true si se actualizó correctamente, false si no.
      */
     public static boolean EditarMedico(Medico medico) {
-        String sql = "UPDATE medico SET nombre = ?, apellido = ?, matricula = ?, email = ?, contrasenia = ?, especialidad = ? "
-                   + "WHERE matricula = ? AND activo = TRUE";
+        String sql = "UPDATE medico SET nombre = ?, apellido = ?, email = ?, contrasenia = ? "
+        		+ "WHERE matricula = ? "
+        		+ "AND activo = TRUE";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, medico.getNombre());
             stmt.setString(2, medico.getApellido());
-            stmt.setString(3, medico.getMatricula()); // nuevo valor
-            stmt.setString(4, medico.getEmail());
-            stmt.setString(5, medico.getContrasenia());
-            stmt.setString(6, medico.getEspecialidad());
-            stmt.setString(7, medico.getMatricula()); // valor para el WHERE
+            stmt.setString(3, medico.getEmail());
+            stmt.setString(4, medico.getContrasenia());
+            stmt.setString(5, medico.getMatricula()); // usamos el matricula como filtro no lo guarde en una otra variable xq no edito Matricula!!
 
             int filas = stmt.executeUpdate();
             return filas > 0;
         } catch (SQLException e) {
-            System.err.println("Error al editar médico: " + e.getMessage());
+            System.err.println("Error al editar paciente: " + e.getMessage());
             return false;
         }
     }
@@ -164,12 +168,12 @@ public class ControllerMedico {
         String nombre = JOptionPane.showInputDialog("ingresa tu nombre");
         String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
         String matricula = JOptionPane.showInputDialog("ingresa tu dni");
-        String especialidad = JOptionPane.showInputDialog("ingresa la fecha");
+        Especialidad especialidadEnum = Especialidad.valueOf(JOptionPane.showInputDialog("ingresa la fecha"));
 
         String email = JOptionPane.showInputDialog("ingresa tu email");
         String contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
         int estado = Integer.parseInt(JOptionPane.showInputDialog("ingrese 1 o 0 para ver si esta activo o no"));
-        Medico nuevo = new Medico(0,nombre,apellido,matricula,email,contrasenia,especialidad,estado);
+        Medico nuevo = new Medico(0,nombre,apellido,matricula,email,contrasenia,especialidadEnum,estado);
 
         LinkedList<Medico> existentes = mostrarMedicos();
         boolean flag = true;
@@ -218,6 +222,7 @@ public class ControllerMedico {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+            	Especialidad especialidadEnum = Especialidad.valueOf(rs.getString("especialidad"));
                 Medico medico = new Medico(
                     rs.getInt("idMedico"),
                     rs.getString("nombre"),
@@ -225,7 +230,7 @@ public class ControllerMedico {
                     rs.getString("matricula"),
                     rs.getString("email"),
                     rs.getString("contrasenia"),
-                    rs.getString("especialidad"),
+                    especialidadEnum,
                     rs.getInt("activo")
                 );
                 // medico.setCantidadConsultas(rs.getInt("cantidadConsultas")); // Si usas este campo
@@ -239,5 +244,3 @@ public class ControllerMedico {
         return null;
     }
 }
-
-
