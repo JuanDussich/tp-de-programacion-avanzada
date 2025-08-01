@@ -6,10 +6,11 @@ import java.util.List;
 
 public class HistoriaClinica {
 
-    // ATRIBUTOS
+
     private int idHistorialMedico;
     private String observaciones;
     private LocalDate fecha;
+    private String detalleConsulta;
 
     private int turnoId;
     private int pacienteId;
@@ -20,7 +21,7 @@ public class HistoriaClinica {
     private List<String> notasMedicas;
     private List<String> recetas;
 
-    // CONSTRUCTORES
+
 
     public HistoriaClinica() {
         this.notasMedicas = new ArrayList<>();
@@ -28,7 +29,7 @@ public class HistoriaClinica {
     }
 
     public HistoriaClinica(String observaciones, LocalDate fecha, int turnoId, int pacienteId,
-                           int tratamientoId, int medicamentoId, int medicoId) {
+                           int tratamientoId, int medicamentoId, int medicoId, String detalleConsulta) {
         this();
         this.observaciones = observaciones;
         this.fecha = fecha;
@@ -37,15 +38,16 @@ public class HistoriaClinica {
         this.tratamientoId = tratamientoId;
         this.medicamentoId = medicamentoId;
         this.medicoId = medicoId;
+        this.detalleConsulta = detalleConsulta;
     }
 
     public HistoriaClinica(int idHistorialMedico, String observaciones, LocalDate fecha, int turnoId,
-                           int pacienteId, int tratamientoId, int medicamentoId, int medicoId) {
-        this(observaciones, fecha, turnoId, pacienteId, tratamientoId, medicamentoId, medicoId);
+                           int pacienteId, int tratamientoId, int medicamentoId, int medicoId, String detalleConsulta) {
+        this(observaciones, fecha, turnoId, pacienteId, tratamientoId, medicamentoId, medicoId, detalleConsulta);
         this.idHistorialMedico = idHistorialMedico;
     }
 
-    // MÉTODOS PERSONALIZADOS
+
 
     public void agregarNotaMedica(String nota) {
         this.notasMedicas.add(nota);
@@ -53,6 +55,20 @@ public class HistoriaClinica {
 
     public void agregarReceta(String receta) {
         this.recetas.add(receta);
+    }
+
+    public boolean perteneceAlMedico(int idMedico) {
+        return this.medicoId == idMedico;
+    }
+
+    public boolean datosCompletos() {
+        return observaciones != null && !observaciones.isEmpty() &&
+               fecha != null &&
+               detalleConsulta != null && !detalleConsulta.isEmpty();
+    }
+
+    public boolean fechaEsValida() {
+        return fecha != null && !fecha.isAfter(LocalDate.now());
     }
 
     // GETTERS Y SETTERS
@@ -137,13 +153,21 @@ public class HistoriaClinica {
         this.recetas = recetas;
     }
 
-    // TO STRING
+    public String getDetalleConsulta() {
+        return detalleConsulta;
+    }
+
+    public void setDetalleConsulta(String detalleConsulta) {
+        this.detalleConsulta = detalleConsulta;
+    }
+
 
     @Override
     public String toString() {
-        return "HistoriaClinica " +
+        return "HistoriaClinica {" +
                 "\n  ID: " + idHistorialMedico +
                 "\n  Observaciones: '" + observaciones + '\'' +
+                "\n  Detalle de Consulta: '" + detalleConsulta + '\'' +
                 "\n  Fecha: " + fecha +
                 "\n  Turno ID: " + turnoId +
                 "\n  Paciente ID: " + pacienteId +
@@ -151,6 +175,5 @@ public class HistoriaClinica {
                 "\n  Medicamento ID: " + medicamentoId +
                 "\n  Médico ID: " + medicoId +
                 "\n}";
-    
-}       
+    }
 }
