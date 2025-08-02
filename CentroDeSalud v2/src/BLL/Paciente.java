@@ -23,6 +23,8 @@ public class Paciente extends Usuario implements Encriptador{
     private int dni;
     private String fechaNacimiento;
     private int activo = 1; // true 1 false 0
+    private String obraSocial;
+
     
 //    private HistoriaClinica historiaClinica;
 
@@ -36,6 +38,7 @@ public class Paciente extends Usuario implements Encriptador{
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
         this.activo = activo;
+        this.obraSocial = obraSocial;
     }
     // constructor sin id
     public Paciente( String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia) {
@@ -43,6 +46,7 @@ public class Paciente extends Usuario implements Encriptador{
         
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
+        this.obraSocial = obraSocial;
               
     }
     
@@ -52,8 +56,18 @@ public class Paciente extends Usuario implements Encriptador{
         this.idPaciente = idPaciente;
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
+        this.obraSocial = obraSocial;
               
     }
+    public Paciente(int idPaciente, String nombre, String apellido, int dni, String fechaNacimiento, String email, String contrasenia, int activo, String obraSocial) {
+        super(nombre, apellido, email, contrasenia);
+        this.idPaciente = idPaciente;
+        this.dni = dni;
+        this.fechaNacimiento = fechaNacimiento;
+        this.activo = activo;
+        this.obraSocial = obraSocial;
+    }
+
     // METODOS
     
     //METODO PARA HACER LOGIN DE PACIENTE
@@ -138,7 +152,6 @@ public class Paciente extends Usuario implements Encriptador{
                             String apellido = JOptionPane.showInputDialog("ingresa tu apellido");
                             int  dni = Integer.parseInt(JOptionPane.showInputDialog("ingresa tu dni"));
                             String fechaNacimiento = JOptionPane.showInputDialog("ingresa la fecha");
-
                             mail = JOptionPane.showInputDialog("ingresa tu email");
                             contrasenia = JOptionPane.showInputDialog("ingresa tu contrasenia");
                             
@@ -206,11 +219,18 @@ public class Paciente extends Usuario implements Encriptador{
         this.activo = activo;
     }
 
+    public String getObraSocial() {
+        return obraSocial;
+    }
 
+    public void setObraSocial(String obraSocial) {
+        this.obraSocial = obraSocial;
+    }
 
     @Override
     public String toString() {
-        return "Paciente{" + "id Paciente=" + idPaciente + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + "} " + super.toString();
+        return "Paciente{" + "id Paciente=" + idPaciente + ", dni=" + dni + ", fechaNacimiento=" + fechaNacimiento + ", obraSocial=" + obraSocial + "} " + super.toString();
     }
+
 
 }

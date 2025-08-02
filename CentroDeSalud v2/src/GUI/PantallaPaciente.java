@@ -38,7 +38,10 @@ public class PantallaPaciente extends JFrame {
 	private JTextField inpFechaDeNacimiento;
 	private JTextField inpMail;
 	private JTextField inpContra;
+	private JTextField inpObraSocial;
 	private Paciente logueado;
+	private int idPacienteLogueado;
+
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -77,21 +80,32 @@ public class PantallaPaciente extends JFrame {
 		contentPane.add(Paciente);
 		
 		
-		JButton btnNewButton = new JButton("Ver turnos");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
+		JButton btnVerTurnos = new JButton("Ver turnos");
+		btnVerTurnos.setBounds(597, 230, 119, 23);
+		contentPane.add(btnVerTurnos);
+
+		btnVerTurnos.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        System.out.println("CLICK EN VER TURNOS DETECTADO"); // Confirmación de clic
+
+		        VistaTurnoPaciente ventanaTurnos = new VistaTurnoPaciente(logueado.getId());
+		        ventanaTurnos.setVisible(true);
+		    }
 		});
-		btnNewButton.setBounds(498, 190, 89, 23);
-		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_4 = new JButton("Solicitar turno");
 		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
+		    public void actionPerformed(ActionEvent arg0) {
+		        if (logueado != null) {
+		            int idPaciente = logueado.getId(); // id del paciente logueado
+		            SolicitarTurno solicitar = new SolicitarTurno(idPaciente); // 👈 usa constructor para paciente
+		            solicitar.setVisible(true);
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Error: No hay paciente logueado.");
+		        }
+		    }
 		});
+
 		btnNewButton_4.setBounds(597, 190, 119, 23);
 		contentPane.add(btnNewButton_4);
 		
@@ -110,14 +124,21 @@ public class PantallaPaciente extends JFrame {
 		JButton btnNewButton_1 = new JButton("Ver Perfil");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, logueado);
+				String perfil = "Nombre: " + logueado.getNombre() +
+		                "\nApellido: " + logueado.getApellido() +
+		                "\nDNI: " + logueado.getDni() +
+		                "\nFecha de nacimiento: " + logueado.getFechaNacimiento() +
+		                "\nEmail: " + logueado.getEmail() +
+		                "\nObra Social: " + logueado.getObraSocial();
+
+		JOptionPane.showMessageDialog(null, perfil, "Perfil del Paciente", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnNewButton_1.setBounds(488, 16, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(39, 173, 329, 266);
+		tabbedPane.setBounds(39, 173, 329, 306);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel_1 = new JPanel();
@@ -156,6 +177,7 @@ public class PantallaPaciente extends JFrame {
 				if (logueado == null) {
 					lblError.setText("No se encontró");
 				} else {
+					idPacienteLogueado = logueado.getId();
 					JOptionPane.showMessageDialog(null, "estas logueado");
 					JOptionPane.showMessageDialog(null, "Bienvenido "  +  logueado.getNombre());
 					//VistaUsuarios tabla = new VistaUsuarios();
@@ -225,12 +247,32 @@ public class PantallaPaciente extends JFrame {
 		inpContra.setBounds(174, 162, 140, 32);
 		panel_1_1.add(inpContra);
 		
+		JLabel lblObraSocial = new JLabel("Obra Social");
+		lblObraSocial.setBounds(10, 206, 140, 14);
+		panel_1_1.add(lblObraSocial);
+
+		inpObraSocial = new JTextField();
+		inpObraSocial.setColumns(10);
+		inpObraSocial.setBounds(10, 222, 140, 32);
+		panel_1_1.add(inpObraSocial);
+
+		
 		
 		JButton btnNewButton_2_1 = new JButton("Registrarse");
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Paciente Registrado = new Paciente(0,inpNombre.getText(), inpApellido.getText(), Integer.parseInt(inpDni.getText())  , inpFechaDeNacimiento.getText(),inpMail.getText(), inpContra.getText());
+				Paciente Registrado = new Paciente(
+					    0,
+					    inpNombre.getText(),
+					    inpApellido.getText(),
+					    Integer.parseInt(inpDni.getText()),
+					    inpFechaDeNacimiento.getText(),
+					    inpMail.getText(),
+					    inpContra.getText(),
+					    1,
+					    inpObraSocial.getText()
+					);
 				
 				BLL.Paciente.RegistrarPaciente(Registrado);
 				
@@ -245,7 +287,7 @@ public class PantallaPaciente extends JFrame {
 				}
 			}
 		});
-		btnNewButton_2_1.setBounds(10, 206, 89, 23);
+		btnNewButton_2_1.setBounds(174, 220, 110, 23);
 		panel_1_1.add(btnNewButton_2_1);
 		
 		

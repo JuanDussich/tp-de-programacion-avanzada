@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
@@ -19,19 +18,23 @@ public class VistaTurno extends JFrame {
     private DefaultTableModel model;
     private Turno turnoSeleccionado;
     private JTextField inpFiltroIdTurno;
+    private int idMedico;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                VistaTurno frame = new VistaTurno();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+    // Constructor para médico logueado
+    public VistaTurno(int idMedicoLogueado) {
+        this.idMedico = idMedicoLogueado;
+        inicializarComponentes();
+        cargarTurnos();
     }
 
+    // Constructor vacío para administrador (ver todos los turnos)
     public VistaTurno() {
+        this.idMedico = 0; // 0 implica sin filtro por médico
+        inicializarComponentes();
+        cargarTurnos();
+    }
+
+    private void inicializarComponentes() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 700);
 
@@ -40,22 +43,18 @@ public class VistaTurno extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Título de la ventana
         JLabel lblTitulo = new JLabel("Centro De Salud - Turnos");
         lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 19));
         lblTitulo.setBounds(10, 10, 760, 30);
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblTitulo);
 
-        // Imagen de turno
         ImageIcon iconoOriginal = new ImageIcon(getClass().getResource("/img/turno.png"));
         Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-        ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
-        JLabel lblImagen = new JLabel(iconoEscalado);
+        JLabel lblImagen = new JLabel(new ImageIcon(imagenEscalada));
         lblImagen.setBounds(700, 10, 60, 60);
         contentPane.add(lblImagen);
 
-        // Tabla con columnas de Turno
         model = new DefaultTableModel(new String[]{
                 "Nro. Turno", "Fecha", "Hora", "Tipo", "Estado",
                 "Paciente ID", "Médico ID", "Especialidad",
@@ -67,25 +66,21 @@ public class VistaTurno extends JFrame {
         scrollPane.setBounds(10, 100, 760, 300);
         contentPane.add(scrollPane);
 
-        // Botón Agregar
         JButton btnAgregar = new JButton("Agregar");
         btnAgregar.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnAgregar.setBounds(80, 420, 120, 40);
         contentPane.add(btnAgregar);
 
-        // Botón Editar
         JButton btnEditar = new JButton("Editar");
         btnEditar.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnEditar.setBounds(320, 420, 120, 40);
         contentPane.add(btnEditar);
 
-        // Botón Eliminar
         JButton btnEliminar = new JButton("Eliminar");
         btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnEliminar.setBounds(560, 420, 120, 40);
         contentPane.add(btnEliminar);
 
-        // Campo de texto para filtrar por ID turno
         inpFiltroIdTurno = new JTextField();
         inpFiltroIdTurno.setBounds(80, 511, 120, 30);
         contentPane.add(inpFiltroIdTurno);
@@ -95,37 +90,20 @@ public class VistaTurno extends JFrame {
         lblFiltro.setBounds(80, 481, 131, 20);
         contentPane.add(lblFiltro);
 
-        // Botón para aplicar filtro
         JButton btnFiltrar = new JButton("Filtrar");
         btnFiltrar.setBounds(320, 491, 140, 30);
         contentPane.add(btnFiltrar);
 
-        // Botón para reiniciar filtro
         JButton btnReiniciarFiltro = new JButton("Reiniciar filtro");
         btnReiniciarFiltro.setBounds(320, 531, 140, 30);
         contentPane.add(btnReiniciarFiltro);
 
-		/*
-		 * // Agregue este boton para probar solicitar turno, pase parametros fijo id
-		 * usuario JButton btnSolicitar = new JButton("Solicitar Turno");
-		 * btnSolicitar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		 * btnSolicitar.setBounds(560, 486, 120, 40); // Ubicalo donde quieras
-		 * contentPane.add(btnSolicitar);
-		 * 
-		 * // Acción para abrir la ventana SolicitarTurno
-		 * btnSolicitar.addActionListener(e -> { int idPaciente = 123; // el id paciente
-		 * tendria que mandar el del login SolicitarTurno solicitar = new
-		 * SolicitarTurno(idPaciente); solicitar.setVisible(true); // });
-		 */
-        
-        // Acción del botón Agregar: abre ventana AgregarTurno
         btnAgregar.addActionListener(e -> {
             AgregarTurno agregar = new AgregarTurno();
             agregar.setVisible(true);
             dispose();
         });
 
-        // Acción del botón Editar: abre ventana EditarTurno si hay turno seleccionado
         btnEditar.addActionListener(e -> {
             if (turnoSeleccionado != null) {
                 EditarTurno editar = new EditarTurno(turnoSeleccionado);
@@ -136,10 +114,9 @@ public class VistaTurno extends JFrame {
             }
         });
 
-        // Acción del botón Eliminar: elimina el turno seleccionado con confirmación
         btnEliminar.addActionListener(e -> {
             if (turnoSeleccionado != null) {
-                int confirm = JOptionPane.showConfirmDialog(null, 
+                int confirm = JOptionPane.showConfirmDialog(null,
                         "¿Está seguro que desea eliminar el turno nro. " + turnoSeleccionado.getIdTurno() + "?",
                         "Confirmar eliminación",
                         JOptionPane.YES_NO_OPTION);
@@ -152,7 +129,6 @@ public class VistaTurno extends JFrame {
             }
         });
 
-        // Acción botón filtrar: filtra la tabla por ID turno (si el campo está vacío carga todo)
         btnFiltrar.addActionListener(e -> {
             String filtroTexto = inpFiltroIdTurno.getText().trim();
             if (filtroTexto.isEmpty()) {
@@ -167,13 +143,11 @@ public class VistaTurno extends JFrame {
             }
         });
 
-        // Acción botón reiniciar filtro: limpia filtro y recarga todos los turnos
         btnReiniciarFiltro.addActionListener(e -> {
             inpFiltroIdTurno.setText("");
             cargarTurnos();
         });
 
-        // Detectar selección de fila en la tabla para almacenar turno seleccionado
         table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && table.getSelectedRow() != -1) {
                 int row = table.getSelectedRow();
@@ -190,15 +164,14 @@ public class VistaTurno extends JFrame {
                 turnoSeleccionado.setResultadoConsulta((String) model.getValueAt(row, 9));
             }
         });
-
-        // Cargar todos los turnos inicialmente
-        cargarTurnos();
     }
 
-    // Método para cargar todos los turnos desde la BD
     private void cargarTurnos() {
         model.setRowCount(0);
-        LinkedList<Turno> turnos = ControllerTurno.listarTurnos();
+        LinkedList<Turno> turnos = ControllerTurno.listarTurnos().stream()
+                .filter(t -> idMedico == 0 || t.getIdMedico() == idMedico)
+                .collect(Collectors.toCollection(LinkedList::new));
+
         for (Turno t : turnos) {
             model.addRow(new Object[]{
                     t.getIdTurno(),
@@ -215,11 +188,10 @@ public class VistaTurno extends JFrame {
         }
     }
 
-    // Método para cargar turnos filtrados por ID (exacto)
     private void cargarTurnosFiltrados(int filtroId) {
         model.setRowCount(0);
         LinkedList<Turno> filtrados = ControllerTurno.listarTurnos().stream()
-                .filter(t -> t.getIdTurno() == filtroId)
+                .filter(t -> t.getIdTurno() == filtroId && (idMedico == 0 || t.getIdMedico() == idMedico))
                 .collect(Collectors.toCollection(LinkedList::new));
 
         for (Turno t : filtrados) {

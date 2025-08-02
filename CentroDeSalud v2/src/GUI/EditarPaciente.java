@@ -23,6 +23,8 @@ public class EditarPaciente extends JFrame{
 	private JTextField inpApellido;
 	private JTextField inpMail;
 	private JTextField inpContrasenia;
+	private JTextField inpObraSocial;
+
 	
 	public EditarPaciente(Paciente usuario) {
 		
@@ -79,6 +81,18 @@ public class EditarPaciente extends JFrame{
 		inpContrasenia.setBounds(116, 270, 184, 20);
 		inpContrasenia.setColumns(10);
 		contentPane.add(inpContrasenia);
+		
+		// Etiqueta para Obra Social
+		JLabel lblObraSocial = new JLabel("Obra Social");
+		lblObraSocial.setBounds(116, 300, 96, 14);
+		contentPane.add(lblObraSocial);
+
+		// Campo de texto para Obra Social
+		inpObraSocial = new JTextField(usuario.getObraSocial());
+		inpObraSocial.setBounds(116, 320, 184, 20);
+		inpObraSocial.setColumns(10);
+		contentPane.add(inpObraSocial);
+
 
          // Label para mostrar mensajes al usuario (éxito o error)
         JLabel lblMensaje = new JLabel("");
@@ -98,7 +112,8 @@ public class EditarPaciente extends JFrame{
 			    usuario.setApellido(inpApellido.getText());
 			    usuario.setEmail(inpMail.getText());
 			    usuario.setContrasenia(inpContrasenia.getText());
-				
+			    usuario.setObraSocial(inpObraSocial.getText());
+
 				String mensaje = Paciente.EditarPaciente(usuario);
 				
 				lblMensaje.setText(mensaje);

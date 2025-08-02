@@ -23,6 +23,8 @@ public class AgregarPaciente extends JFrame implements Validaciones {
     private JTextField inpNombre, inpApellido, inpDni,inpEmail;
     private JPasswordField inpContrasenia;
     private JDateChooser dateChooser;
+    private JTextField inpObraSocial;
+
 
     public AgregarPaciente() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,6 +101,17 @@ public class AgregarPaciente extends JFrame implements Validaciones {
         inpContrasenia = new JPasswordField();
         inpContrasenia.setBounds(180, 260, 220, 20);
         contentPane.add(inpContrasenia);
+        
+      //y += 40;
+        
+        JLabel lblObraSocial = new JLabel("Obra Social:");
+        lblObraSocial.setBounds(50, 300, 120, 20);
+        contentPane.add(lblObraSocial);
+
+        inpObraSocial = new JTextField();
+        inpObraSocial.setBounds(180, 300, 220, 20);
+        contentPane.add(inpObraSocial);
+
 
         //y += 50;
 
@@ -122,15 +135,18 @@ public class AgregarPaciente extends JFrame implements Validaciones {
             public void actionPerformed(ActionEvent e) {
                 try {
                 	                	
-                    Paciente nuevo = new Paciente(
-                    	0,
-                        inpNombre.getText(),
-                        inpApellido.getText(),
-                        validardni(inpDni.getText()),
-                        new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate()),
-                        inpEmail.getText(),
-                        new String(inpContrasenia.getPassword())
-                    );
+                	Paciente nuevo = new Paciente(
+                		    0,
+                		    inpNombre.getText(),
+                		    inpApellido.getText(),
+                		    validardni(inpDni.getText()),
+                		    new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate()),
+                		    inpEmail.getText(),
+                		    new String(inpContrasenia.getPassword()),
+                		    1, // activo
+                		    inpObraSocial.getText()
+                		);
+
 
                     ControllerPaciente.RegistrarPaciente(nuevo);
                     lblMensaje.setText("Paciente registrado correctamente.");
@@ -160,5 +176,7 @@ public class AgregarPaciente extends JFrame implements Validaciones {
         dateChooser.setDate(null);
         inpEmail.setText("");
         inpContrasenia.setText("");
+        inpObraSocial.setText("");
+
     }
 }
