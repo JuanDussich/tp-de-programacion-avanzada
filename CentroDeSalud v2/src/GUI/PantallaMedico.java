@@ -92,22 +92,6 @@ public class PantallaMedico extends JFrame {
 		btnNewButton_2.setBounds(360, 159, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("solicitar turno");
-		btnNewButton_3.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        if (logueado != null) {
-		            int idMedico = logueado.getId();      // ID del médico logueado
-		            int idPaciente = 0;                   // Asumimos que el médico elige el paciente (por ahora)
-		            SolicitarTurno solicitar = new SolicitarTurno(idPaciente, idMedico); // 👈 constructor para médico
-		            solicitar.setVisible(true);
-		        } else {
-		            JOptionPane.showMessageDialog(null, "Error: No hay médico logueado.");
-		        }
-		    }
-		});
-
-		btnNewButton_3.setBounds(471, 159, 97, 23);
-		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Ver historiales medicos");
 		btnNewButton_4.addActionListener(new ActionListener() {
