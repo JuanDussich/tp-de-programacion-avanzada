@@ -70,8 +70,9 @@ public class VistaPacientes extends JFrame {
 
 	        // Definir columnas según atributos de Paciente 
 	        model = new DefaultTableModel(new String[]{
-	        		"Id Paciente", "Nombre", "Apellido", "DNI", "Fecha de Nacimiento", "Email", "Contrase","Estado"}, 0);
-	        
+	        	    "Id Paciente", "Nombre", "Apellido", "DNI", "Fecha de Nacimiento", "Email", "Contrase", "Obra Social", "Estado"
+	        	}, 0);
+
 	        table = new JTable(model);
 	        JScrollPane scrollPane = new JScrollPane(table);
 	        scrollPane.setBounds(10, 100, 760, 200);
@@ -106,16 +107,18 @@ public class VistaPacientes extends JFrame {
 	                int row = table.getSelectedRow();
 	                if (row != -1) {
 	                	// Crear un objeto Paciente con datos de la fila seleccionada
-	                    usuarioSeleccionado = new Paciente(
-	                        (int) model.getValueAt(row, 0),      // id Paciente
-	                        (String) model.getValueAt(row, 1),   // nombre
-	                        (String) model.getValueAt(row, 2),   // apellido
-	                        (int) model.getValueAt(row, 3),      // dni
-	                        (String) model.getValueAt(row, 4),   // fecha nac
-	                        (String) model.getValueAt(row, 5),   // email
-	                        (String) model.getValueAt(row, 6),   // pass
-	                        (int) model.getValueAt(row, 7)       // campo activo
-	                        );
+	                	usuarioSeleccionado = new Paciente(
+	                		    (int) model.getValueAt(row, 0),      // id Paciente
+	                		    (String) model.getValueAt(row, 1),   // nombre
+	                		    (String) model.getValueAt(row, 2),   // apellido
+	                		    (int) model.getValueAt(row, 3),      // dni
+	                		    (String) model.getValueAt(row, 4),   // fecha nac
+	                		    (String) model.getValueAt(row, 5),   // email
+	                		    (String) model.getValueAt(row, 6),   // pass
+	                		    (int) model.getValueAt(row, 8),      // activo
+	                		    (String) model.getValueAt(row, 7)    // obra social
+	                		);
+
 	                    
 	                    // Paciente(int id, String nombre,String apellido,int dni,String fechaNacimiento,String email,String contrasenia, int activo)
 	                    
@@ -226,6 +229,7 @@ public class VistaPacientes extends JFrame {
 	            		u.getFechaNacimiento(),
 	            		u.getEmail(),
 	            		u.getContrasenia(),
+	            		u.getObraSocial(),
 	            		u.getActivo()
 	            		});
 	        }
@@ -251,6 +255,7 @@ public class VistaPacientes extends JFrame {
 	            		u.getFechaNacimiento(),
 	            		u.getEmail(),
 	            		u.getContrasenia(),
+	            		u.getObraSocial(),
 	            		u.getActivo()
 	            });
 	    		

@@ -78,21 +78,20 @@ public class PantallaMedico extends JFrame {
 		
 		JButton btnNewButton_2 = new JButton("Ver turnos");
 		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
+		    public void actionPerformed(ActionEvent arg0) {
+		        if (logueado != null) {
+		            VistaTurno vista = new VistaTurno(logueado.getId());
+		            vista.setVisible(true);
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Debe iniciar sesión primero.");
+		        }
+		    }
 		});
+
+
 		btnNewButton_2.setBounds(360, 159, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("solicitar turno");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnNewButton_3.setBounds(471, 159, 97, 23);
-		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Ver historiales medicos");
 		btnNewButton_4.addActionListener(new ActionListener() {
@@ -104,16 +103,24 @@ public class PantallaMedico extends JFrame {
 		btnNewButton_4.setBounds(578, 159, 148, 23);
 		contentPane.add(btnNewButton_4);
 		
-		JButton btnNewButton_6 = new JButton("Modificar Historiales medicos");
-		btnNewButton_6.setBounds(556, 11, 160, 23);
-		contentPane.add(btnNewButton_6);
 		
 		JButton btnNewButton_1_1 = new JButton("Ver Perfil");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, logueado);
+				if (logueado != null) {
+					String perfil = "Nombre: " + logueado.getNombre() +
+					                "\nApellido: " + logueado.getApellido() +
+					                "\nMatrícula: " + logueado.getMatricula() +
+					                "\nEspecialidad: " + logueado.getEspecialidad().toString() +
+					                "\nEmail: " + logueado.getEmail();
+					
+					JOptionPane.showMessageDialog(null, perfil, "Perfil del Médico", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "No hay médico logueado.");
+				}
 			}
 		});
+
 		btnNewButton_1_1.setBounds(449, 39, 89, 23);
 		contentPane.add(btnNewButton_1_1);
 		
@@ -121,7 +128,7 @@ public class PantallaMedico extends JFrame {
 		tabbedPane.setBounds(10, 133, 329, 368);
 		contentPane.add(tabbedPane);
 		
-		
+		 
 		//ESTA ES LA OTRA PARTE DE LA TABLA QUE ES LA TABLA PARA INICIAR SESION
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);

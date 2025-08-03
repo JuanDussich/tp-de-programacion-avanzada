@@ -309,17 +309,24 @@ public class PantallaAdministrador extends JFrame {
 		cargarTablaTurno();
 		
 		JButton btnNewButton_1_1 = new JButton("Ver Perfil");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, admin);
-			}
-		});
-		btnNewButton_1_1.setBounds(423, 31, 89, 23);
+		btnNewButton_1_1.setBounds(423, 31, 120, 23);
 		contentPane.add(btnNewButton_1_1);
-		cargarTablaMedico();
-		
+
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        if (admin != null) {
+		            String perfil = "Nombre: " + admin.getNombre() +
+		                    "\nApellido: " + admin.getApellido() +
+		                    "\nEmail: " + admin.getEmail();
+
+		            JOptionPane.showMessageDialog(null, perfil, "Perfil del Administrador", JOptionPane.INFORMATION_MESSAGE);
+		        } else {
+		            JOptionPane.showMessageDialog(null, "No hay administrador logueado.");
+		        }
+		    }
+		});
     }
-    
+
     private void cargarTabla() {
         model.setRowCount(0);
         LinkedList<Paciente> usuarios = DLL.ControllerPaciente.mostrarPacientes();
