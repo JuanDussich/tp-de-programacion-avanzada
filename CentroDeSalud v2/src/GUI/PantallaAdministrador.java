@@ -26,6 +26,7 @@ public class PantallaAdministrador extends JFrame {
     private DefaultTableModel modelAdministrador;
     private DefaultTableModel modelTurno;
     private DefaultTableModel modeloTabla;
+    private JTabbedPane tabbedPaneCuenta; 
 	private JPanel contentPane;
 	private JTextField inpEmail;
 	private JPasswordField inpContrasenia;
@@ -84,12 +85,13 @@ public class PantallaAdministrador extends JFrame {
 		
 		
 		//NOMBRE PARA LA PRIMERA PARTE DE LA TABLA QUE SERIA SOBRE LA CUENTA
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane_1.addTab("Cuenta Registro e inicio de sesion", null, tabbedPane, null);
+		tabbedPaneCuenta = new JTabbedPane(JTabbedPane.TOP); 
+		tabbedPane_1.addTab("Cuenta Registro e inicio de sesion", null, tabbedPaneCuenta, null);
+
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
-		tabbedPane.addTab("Login ", null, panel_1, null);
+		tabbedPaneCuenta.addTab("Login ", null, panel_1, null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Email");
 		lblNewLabel_1.setBounds(10, 11, 200, 14);
@@ -112,24 +114,22 @@ public class PantallaAdministrador extends JFrame {
 		btnLogin.setBounds(10, 147, 121, 23);
 		panel_1.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				admin = BLL.Administrador.login(inpEmail.getText(), inpContrasenia.getText());
-				if (admin == null) {
-					lblError.setText("No se encontró");
-				} else {
-					JOptionPane.showMessageDialog(null, "estas logueado");
-					JOptionPane.showMessageDialog(null, "Bienvenido "  +  admin.getNombre());
-					//VistaUsuarios tabla = new VistaUsuarios();
-					//tabla.setVisible(true);
-					//dispose();
-				}
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        admin = BLL.Administrador.login(inpEmail.getText(), inpContrasenia.getText());
+		        if (admin == null) {
+		            lblError.setText("No se encontró");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "estas logueado");
+		            JOptionPane.showMessageDialog(null, "Bienvenido " + admin.getNombre());
+		            tabbedPane_1.removeTabAt(0);  // Oculta la pestaña de login/registro
+		        }
+		    }
 		});
+
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		tabbedPane.addTab("Registrarse", null, panel_1_1, null);
+		tabbedPaneCuenta.addTab("Registrarse", null, panel_1_1, null);
 		
 		
 		
