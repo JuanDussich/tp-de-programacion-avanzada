@@ -23,8 +23,6 @@ public class SolicitarTurno extends JFrame {
     private JPanel contentPane;
     private JTextField txtMotivo, txtResultado, txtHora, txtTipo;
     private JDateChooser dateChooser;
-    private JDateChooser dateChooser;
-    private JTextField txtMotivo, txtResultado, txtHora, txtTipo;
     private JComboBox<Especialidad> cbEspecialidad;
     private JComboBox<Medico> cbMedico;
     private int idPaciente;
