@@ -29,6 +29,7 @@ import javax.swing.JTextField;
 public class PantallaPaciente extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
+	private JTabbedPane tabbedPaneLogin; 
 	private JPanel contentPane;
 	private JTextField inpEmail;
 	private JPasswordField inpContrasenia;
@@ -86,7 +87,7 @@ public class PantallaPaciente extends JFrame {
 
 		btnVerTurnos.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        System.out.println("CLICK EN VER TURNOS DETECTADO"); // Confirmación de clic
+		        System.out.println("CLICK EN VER TURNOS DETECTADO"); // Confirmación de click
 
 		        VistaTurnoPaciente ventanaTurnos = new VistaTurnoPaciente(logueado.getId());
 		        ventanaTurnos.setVisible(true);
@@ -98,7 +99,7 @@ public class PantallaPaciente extends JFrame {
 		    public void actionPerformed(ActionEvent arg0) {
 		        if (logueado != null) {
 		            int idPaciente = logueado.getId(); // id del paciente logueado
-		            SolicitarTurno solicitar = new SolicitarTurno(idPaciente); // 👈 usa constructor para paciente
+		            SolicitarTurno solicitar = new SolicitarTurno(idPaciente); // usa constructor para paciente
 		            solicitar.setVisible(true);
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Error: No hay paciente logueado.");
@@ -137,13 +138,13 @@ public class PantallaPaciente extends JFrame {
 		btnNewButton_1.setBounds(488, 16, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(39, 173, 329, 306);
-		contentPane.add(tabbedPane);
+		tabbedPaneLogin = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneLogin.setBounds(39, 173, 329, 306);
+		contentPane.add(tabbedPaneLogin);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
-		tabbedPane.addTab("Login ", null, panel_1, null);
+		tabbedPaneLogin.addTab("Login ", null, panel_1, null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Email");
 		lblNewLabel_1.setBounds(10, 59, 200, 14);
@@ -171,25 +172,21 @@ public class PantallaPaciente extends JFrame {
 		btnLogin.setBounds(10, 204, 121, 23);
 		panel_1.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				logueado = BLL.Paciente.login(inpEmail.getText(), inpContrasenia.getText());
-				if (logueado == null) {
-					lblError.setText("No se encontró");
-				} else {
-					idPacienteLogueado = logueado.getId();
-					JOptionPane.showMessageDialog(null, "estas logueado");
-					JOptionPane.showMessageDialog(null, "Bienvenido "  +  logueado.getNombre());
-					//VistaUsuarios tabla = new VistaUsuarios();
-					//tabla.setVisible(true);
-					//dispose();
-				}
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        logueado = BLL.Paciente.login(inpEmail.getText(), inpContrasenia.getText());
+		        if (logueado == null) {
+		            lblError.setText("No se encontró");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Bienvenido " + logueado.getNombre());
+		            tabbedPaneLogin.setVisible(false); // Oculta el login
+		        }
+		    }
 		});
+
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		tabbedPane.addTab("Registrarse", null, panel_1_1, null);
+		tabbedPaneLogin.addTab("Registrarse", null, panel_1_1, null);
 		
 		
 		

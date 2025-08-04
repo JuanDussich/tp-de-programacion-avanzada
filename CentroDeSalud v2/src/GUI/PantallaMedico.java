@@ -20,6 +20,7 @@ public class PantallaMedico extends JFrame {
 	 */
 	private static final long serialVersionUID = -1496404291286514983L;
 	// Componentes de la GUI
+	private JTabbedPane tabbedPaneLogin; 
     private JTable tablaMedicos;
     private DefaultTableModel modeloTabla;
     private JButton btnEditar, btnEliminar, btnRefrescar;
@@ -124,15 +125,15 @@ public class PantallaMedico extends JFrame {
 		btnNewButton_1_1.setBounds(449, 39, 89, 23);
 		contentPane.add(btnNewButton_1_1);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 133, 329, 368);
-		contentPane.add(tabbedPane);
+		tabbedPaneLogin = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneLogin.setBounds(10, 133, 329, 368);
+		contentPane.add(tabbedPaneLogin);
 		
 		 
 		//ESTA ES LA OTRA PARTE DE LA TABLA QUE ES LA TABLA PARA INICIAR SESION
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
-		tabbedPane.addTab("Login", null, panel_1, null);
+		tabbedPaneLogin.addTab("Login", null, panel_1, null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Email");
 		lblNewLabel_1.setBounds(10, 142, 200, 14);
@@ -158,21 +159,17 @@ public class PantallaMedico extends JFrame {
 		
 		JButton btnLogin = new JButton("Inciar sesión");
 		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				logueado = BLL.Medico.login(inpEmail.getText(), inpContrasenia.getText());
-				if (logueado == null) {
-					lblError.setText("No se encontró");
-				} else {
-					JOptionPane.showMessageDialog(null, "estas logueado");
-					JOptionPane.showMessageDialog(null, "Bienvenido "  +  logueado.getNombre());
-					//VistaUsuarios tabla = new VistaUsuarios();
-					//tabla.setVisible(true);
-					//dispose();
-				}
-				
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        logueado = BLL.Medico.login(inpEmail.getText(), inpContrasenia.getText());
+		        if (logueado == null) {
+		            lblError.setText("No se encontró");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Bienvenido " + logueado.getNombre());
+		            tabbedPaneLogin.setVisible(false); // Oculta el login
+		        }
+		    }
 		});
+
 		btnLogin.setBounds(10, 306, 121, 23);
 		panel_1.add(btnLogin);
 		
@@ -187,7 +184,7 @@ public class PantallaMedico extends JFrame {
 		//ESTA ES LA SEGUNDA TABLA Y ES LA TABLA DE REGISTRO
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		tabbedPane.addTab("Registrarse", null, panel_1_1, null);
+		tabbedPaneLogin.addTab("Registrarse", null, panel_1_1, null);
 		
 		JLabel lblNewLabel_1_3_2 = new JLabel("Nombre");
 		lblNewLabel_1_3_2.setBounds(10, 11, 140, 14);
