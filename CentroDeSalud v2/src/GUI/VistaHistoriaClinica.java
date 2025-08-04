@@ -224,44 +224,62 @@ public class VistaHistoriaClinica extends JFrame {
 	} // fin metodo VistaHistoriaClinica()
 	
 	// Método para cargar Las hc desde la base de datos y actualizar la tabla.
-    private void cargarTabla() {
-        model.setRowCount(0); // limpiar tabla
-        ArrayList<HistoriaClinica> historiaClinica = ControllerHistoriaClinica.obtenerHistoriasClinicas(); //
-        for (HistoriaClinica hc : historiaClinica) {
-            model.addRow(new Object[]{
-                hc.getIdHistorialMedico(),
-                hc.getObservaciones(),
-                hc.getFecha(),
-                hc.getTurnoId(),
-                hc.getPacienteId(),
-                hc.getTratamientoId(),
-                hc.getMedicamentoId(),
-                hc.getMedicoId(),
-                hc.getDetalleConsulta()
-            });
-        }
-    }
+	private void cargarTabla() {
+	    model.setRowCount(0); // limpiar tabla
+
+	    if (PantallaMedico.logueado == null) {
+	        JOptionPane.showMessageDialog(null, "No hay médico logueado.");
+	        return;
+	    }
+
+	    ArrayList<HistoriaClinica> historiaClinica = ControllerHistoriaClinica.obtenerHistoriasClinicas().stream()
+	        .filter(hc -> hc.getMedicoId() == PantallaMedico.logueado.getId())
+	        .collect(Collectors.toCollection(ArrayList::new));
+
+	    for (HistoriaClinica hc : historiaClinica) {
+	        model.addRow(new Object[]{
+	            hc.getIdHistorialMedico(),
+	            hc.getObservaciones(),
+	            hc.getFecha(),
+	            hc.getTurnoId(),
+	            hc.getPacienteId(),
+	            hc.getTratamientoId(),
+	            hc.getMedicamentoId(),
+	            hc.getMedicoId(),
+	            hc.getDetalleConsulta()
+	        });
+	    }
+	}
+
+
     
    // tabla para mostrat filtro HC
-    private void cargarTablaFiltradaStream(String filtro) {
-        ArrayList<HistoriaClinica> filtradasPorHc = ControllerHistoriaClinica.obtenerHistoriasClinicas().stream()
-            .filter(hc -> String.valueOf(hc.getIdHistorialMedico()).startsWith(filtro))
-            .collect(Collectors.toCollection(ArrayList::new)); // corregido
+	private void cargarTablaFiltradaStream(String filtro) {
+	    model.setRowCount(0); // limpiar tabla
 
-        model.setRowCount(0); // limpiar tabla
+	    if (PantallaMedico.logueado == null) {
+	        JOptionPane.showMessageDialog(null, "No hay médico logueado.");
+	        return;
+	    }
 
-        for (HistoriaClinica hc : filtradasPorHc) {
-            model.addRow(new Object[]{
-                hc.getIdHistorialMedico(),
-                hc.getObservaciones(),
-                hc.getFecha(),
-                hc.getTurnoId(),
-                hc.getPacienteId(),
-                hc.getTratamientoId(),
-                hc.getMedicamentoId(),
-                hc.getMedicoId(),
-                hc.getDetalleConsulta()
-            });
-        }
-    }
+	    ArrayList<HistoriaClinica> filtradas = ControllerHistoriaClinica.obtenerHistoriasClinicas().stream()
+	        .filter(hc -> hc.getMedicoId() == PantallaMedico.logueado.getId())
+	        .filter(hc -> String.valueOf(hc.getIdHistorialMedico()).startsWith(filtro))
+	        .collect(Collectors.toCollection(ArrayList::new));
+
+	    for (HistoriaClinica hc : filtradas) {
+	        model.addRow(new Object[]{
+	            hc.getIdHistorialMedico(),
+	            hc.getObservaciones(),
+	            hc.getFecha(),
+	            hc.getTurnoId(),
+	            hc.getPacienteId(),
+	            hc.getTratamientoId(),
+	            hc.getMedicamentoId(),
+	            hc.getMedicoId(),
+	            hc.getDetalleConsulta()
+	        });
+	    }
+	}
+
 } // fin clase

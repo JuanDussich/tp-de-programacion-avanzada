@@ -59,7 +59,8 @@ public class ControllerHistoriaClinica {
         }
         return lista;
     }
-
+    
+  
 
     public void actualizarHistoriaClinica(int id, String nuevasObservaciones) {
         String sql = "UPDATE historia_clinica SET observaciones = ? WHERE idHistorialMedico = ?";
