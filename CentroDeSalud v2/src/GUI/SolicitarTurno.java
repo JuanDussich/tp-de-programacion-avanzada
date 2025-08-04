@@ -23,6 +23,8 @@ public class SolicitarTurno extends JFrame {
     private JPanel contentPane;
     private JTextField txtMotivo, txtResultado, txtHora, txtTipo;
     private JDateChooser dateChooser;
+    private JDateChooser dateChooser;
+    private JTextField txtMotivo, txtResultado, txtHora, txtTipo;
     private JComboBox<Especialidad> cbEspecialidad;
     private JComboBox<Medico> cbMedico;
     private int idPaciente;
@@ -69,6 +71,7 @@ public class SolicitarTurno extends JFrame {
         JLabel lblFecha = new JLabel("Fecha (AAAA-MM-DD):");
         lblFecha.setBounds(30, 180, 150, 20);
         contentPane.add(lblFecha);
+
         dateChooser = new JDateChooser();
         dateChooser.setDateFormatString("yyyy-MM-dd");
         dateChooser.setBounds(190, 180, 270, 25);
@@ -118,6 +121,10 @@ public class SolicitarTurno extends JFrame {
                 String especialidad = cbEspecialidad.getSelectedItem().toString();
                 String fechaTexto = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
                 LocalDate fecha = LocalDate.parse(fechaTexto);
+                LocalDate fechaTurno = dateChooser.getDate()
+                	    .toInstant()
+                	    .atZone(java.time.ZoneId.systemDefault())
+                	    .toLocalDate();
                 LocalTime hora = LocalTime.parse(txtHora.getText().trim());
                 String motivo = txtMotivo.getText().trim();
                 String resultado = txtResultado.getText().trim();
@@ -128,7 +135,7 @@ public class SolicitarTurno extends JFrame {
 
                 Turno nuevoTurno = new Turno(
                         tipo,
-                        fecha,
+                        fechaTurno,
                         hora,
                         estado,
                         idPaciente,
