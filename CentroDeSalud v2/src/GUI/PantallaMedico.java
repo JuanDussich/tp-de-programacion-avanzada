@@ -32,7 +32,8 @@ public class PantallaMedico extends JFrame {
 	private JTextField inpEspecialidad;
 	private JTextField inpMail;
 	private JTextField inpContra;
-	private Medico logueado;
+	
+	public static Medico logueado;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {

@@ -1,7 +1,9 @@
 package GUI;
 
 import BLL.Turno;
+import BLL.Medico;
 import DLL.ControllerTurno;
+import DLL.ControllerMedico;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -99,10 +101,24 @@ public class VistaTurno extends JFrame {
         contentPane.add(btnReiniciarFiltro);
 
         btnAgregar.addActionListener(e -> {
-            AgregarTurno agregar = new AgregarTurno();
-            agregar.setVisible(true);
-            dispose();
+            if (idMedico != 0) {
+                // Si hay un médico logueado
+                Medico medico = ControllerMedico.buscarPorId(idMedico);
+                if (medico != null) {
+                    AgregarTurno agregar = new AgregarTurno(medico);
+                    agregar.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontró información del médico logueado.");
+                }
+            } else {
+                // Si accede un administrador
+                AgregarTurno agregar = new AgregarTurno();
+                agregar.setVisible(true);
+                dispose();
+            }
         });
+
 
         btnEditar.addActionListener(e -> {
             if (turnoSeleccionado != null) {

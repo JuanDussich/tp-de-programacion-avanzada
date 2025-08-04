@@ -7,6 +7,8 @@ import DLL.ControllerTurno;
 import DLL.ControllerMedico;
 
 import javax.swing.*;
+import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +21,8 @@ public class SolicitarTurno extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField txtMotivo, txtResultado, txtHora, txtFecha, txtTipo;
+    private JTextField txtMotivo, txtResultado, txtHora, txtTipo;
+    private JDateChooser dateChooser;
     private JComboBox<Especialidad> cbEspecialidad;
     private JComboBox<Medico> cbMedico;
     private int idPaciente;
@@ -66,9 +69,11 @@ public class SolicitarTurno extends JFrame {
         JLabel lblFecha = new JLabel("Fecha (AAAA-MM-DD):");
         lblFecha.setBounds(30, 180, 150, 20);
         contentPane.add(lblFecha);
-        txtFecha = new JTextField();
-        txtFecha.setBounds(190, 180, 270, 25);
-        contentPane.add(txtFecha);
+        dateChooser = new JDateChooser();
+        dateChooser.setDateFormatString("yyyy-MM-dd");
+        dateChooser.setBounds(190, 180, 270, 25);
+        contentPane.add(dateChooser);
+
 
         JLabel lblHora = new JLabel("Hora (HH:MM):");
         lblHora.setBounds(30, 220, 120, 20);
@@ -111,7 +116,8 @@ public class SolicitarTurno extends JFrame {
             try {
                 String tipo = txtTipo.getText().trim();
                 String especialidad = cbEspecialidad.getSelectedItem().toString();
-                LocalDate fecha = LocalDate.parse(txtFecha.getText().trim());
+                String fechaTexto = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+                LocalDate fecha = LocalDate.parse(fechaTexto);
                 LocalTime hora = LocalTime.parse(txtHora.getText().trim());
                 String motivo = txtMotivo.getText().trim();
                 String resultado = txtResultado.getText().trim();

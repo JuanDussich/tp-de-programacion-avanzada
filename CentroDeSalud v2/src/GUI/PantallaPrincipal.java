@@ -33,7 +33,7 @@ public class PantallaPrincipal extends JFrame {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
+			} 
 		});
 	}
 	public PantallaPrincipal() {

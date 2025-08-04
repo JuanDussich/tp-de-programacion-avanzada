@@ -2,8 +2,11 @@ package GUI;
 
 import BLL.Turno;
 import DLL.ControllerTurno;
+import GUI.PantallaMedico;
 
 import javax.swing.*;
+import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.time.LocalDate;
@@ -16,7 +19,7 @@ public class EditarTurno extends JFrame {
     private JPanel contentPane;
 
     private JTextField txtIdTurno;
-    private JTextField txtFecha;
+    private JDateChooser dateChooser;
     private JTextField txtHora;
     private JTextField txtTipoConsulta;
     private JTextField txtEstado;
@@ -55,9 +58,12 @@ public class EditarTurno extends JFrame {
         lblFecha.setBounds(10, 45, 120, 25);
         contentPane.add(lblFecha);
 
-        txtFecha = new JTextField(turno.getFechaTurno().toString());
-        txtFecha.setBounds(140, 45, 250, 25);
-        contentPane.add(txtFecha);
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(140, 45, 250, 25);
+        dateChooser.setDateFormatString("yyyy-MM-dd");
+        dateChooser.setDate(java.sql.Date.valueOf(turno.getFechaTurno()));
+        contentPane.add(dateChooser);
+
 
         JLabel lblHora = new JLabel("Hora (HH:MM:SS):");
         lblHora.setBounds(10, 80, 120, 25);
@@ -129,15 +135,16 @@ public class EditarTurno extends JFrame {
         contentPane.add(btnGuardar);
 
         // Botón Cancelar
-        JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(250, 380, 120, 40);
-        contentPane.add(btnCancelar);
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setBounds(250, 380, 120, 40);
+        contentPane.add(btnVolver);
 
         // Acción botón Guardar
         btnGuardar.addActionListener(e -> {
             try {
                 // Validar y obtener datos
-                LocalDate fecha = LocalDate.parse(txtFecha.getText().trim());
+            	String fechaTexto = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+            	LocalDate fecha = LocalDate.parse(fechaTexto);
                 LocalTime hora = LocalTime.parse(txtHora.getText().trim());
                 String tipoConsulta = txtTipoConsulta.getText().trim();
                 String estado = txtEstado.getText().trim();
@@ -165,10 +172,17 @@ public class EditarTurno extends JFrame {
 
                 if (modificado) {
                     JOptionPane.showMessageDialog(null, "Turno actualizado correctamente.");
-                    // Volver a la vista principal
-                    VistaTurno vistaTurno = new VistaTurno();
+
+                    VistaTurno vistaTurno;
+                    if (PantallaMedico.logueado != null) {
+                        vistaTurno = new VistaTurno(PantallaMedico.logueado.getId());
+                    } else {
+                        vistaTurno = new VistaTurno();
+                    }
+
                     vistaTurno.setVisible(true);
                     dispose();
+               
                 } else {
                     JOptionPane.showMessageDialog(null, "Error al actualizar turno.");
                 }
@@ -183,10 +197,13 @@ public class EditarTurno extends JFrame {
         });
 
         // Acción botón Cancelar: volver a la vista sin guardar
-        btnCancelar.addActionListener(e -> {
-            VistaTurno vistaTurno = new VistaTurno();
-            vistaTurno.setVisible(true);
+        btnVolver.addActionListener(e -> {
+            VistaTurno vista = (PantallaMedico.logueado != null)
+                ? new VistaTurno(PantallaMedico.logueado.getId())
+                : new VistaTurno();
+            vista.setVisible(true);
             dispose();
         });
+
     }
 }

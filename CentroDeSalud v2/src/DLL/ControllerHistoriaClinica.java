@@ -33,7 +33,7 @@ public class ControllerHistoriaClinica {
     }
 
 
-    public ArrayList<HistoriaClinica> obtenerHistoriasClinicas() {
+    public static ArrayList<HistoriaClinica> obtenerHistoriasClinicas() {
         ArrayList<HistoriaClinica> lista = new ArrayList<>();
         String sql = "SELECT * FROM historia_clinica";
         try {

@@ -16,6 +16,32 @@ public class ControllerMedico {
 
     private static Connection con = Conexion.getInstance().getConnection();
 
+    public static Medico buscarPorId(int idMedico) {
+        String sql = "SELECT * FROM medico WHERE idMedico = ? AND activo = TRUE";
+        try {
+            PreparedStatement stmt = Conexion.getInstance().getConnection().prepareStatement(sql);
+            stmt.setInt(1, idMedico);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Especialidad esp = Especialidad.valueOf(rs.getString("especialidad"));
+                return new Medico(
+                    rs.getInt("idMedico"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("matricula"),
+                    rs.getString("email"),
+                    rs.getString("contrasenia"),
+                    esp,
+                    rs.getInt("activo")
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al buscar médico por ID: " + e.getMessage());
+        }
+        return null;
+    }
+
+    
     public static Medico login(String email, String contrasenia) {
         String sql = "SELECT * FROM medico WHERE email = ? AND contrasenia = ? AND activo = TRUE";
         try {

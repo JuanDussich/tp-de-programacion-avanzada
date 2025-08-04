@@ -1,9 +1,12 @@
 package GUI;
 
 import BLL.Turno;
+import BLL.Medico;
 import DLL.ControllerTurno;
 
 import javax.swing.*;
+import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,10 +17,15 @@ public class AgregarTurno extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
-    // Campos de entrada
-    private JTextField inpFecha, inpHora, inpTipo, inpEstado, inpIdPaciente, inpIdMedico, inpEspecialidad, inpMotivo, inpResultado;
+    private JTextField inpHora, inpTipo, inpEstado, inpIdPaciente, inpIdMedico, inpEspecialidad, inpMotivo, inpResultado;
+    private JDateChooser dateChooser;
+
 
     public AgregarTurno() {
+        this(null);  // Llama al constructor con médico nulo si se usa sin argumentos
+    }
+
+    public AgregarTurno(Medico medicoLogueado) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 500, 630);
 
@@ -32,9 +40,15 @@ public class AgregarTurno extends JFrame {
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblTitulo);
 
-        contentPane.add(crearLabel("Fecha (yyyy-MM-dd):", 50, 60));
-        inpFecha = crearCampo(200, 60);
-        contentPane.add(inpFecha);
+        JLabel lblFecha = new JLabel("Fecha (AAAA-MM-DD):");
+        lblFecha.setBounds(50, 60, 150, 25);
+        contentPane.add(lblFecha);
+
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(200, 60, 200, 25);
+        dateChooser.setDateFormatString("yyyy-MM-dd");
+        contentPane.add(dateChooser);
+
 
         contentPane.add(crearLabel("Hora (HH:mm):", 50, 100));
         inpHora = crearCampo(200, 100);
@@ -81,10 +95,22 @@ public class AgregarTurno extends JFrame {
         btnVolver.setBounds(250, 470, 120, 40);
         contentPane.add(btnVolver);
 
+        // 👇 Autocompletar si hay médico logueado
+        if (medicoLogueado != null) {
+            inpIdMedico.setText(String.valueOf(medicoLogueado.getId()));
+            inpEspecialidad.setText(medicoLogueado.getEspecialidad().toString());
+            inpIdMedico.setEditable(false);
+            inpEspecialidad.setEditable(false);
+        }
+
         btnGuardar.addActionListener(e -> {
             try {
                 String tipoConsulta = inpTipo.getText();
-                LocalDate fechaTurno = LocalDate.parse(inpFecha.getText());
+                
+                // ✅ NUEVO BLOQUE PARA FECHA DESDE JDateChooser
+                String fechaTexto = new SimpleDateFormat("yyyy-MM-dd").format(dateChooser.getDate());
+                LocalDate fechaTurno = LocalDate.parse(fechaTexto);
+
                 LocalTime horaTurno = LocalTime.parse(inpHora.getText());
                 String estado = inpEstado.getText();
                 int idPaciente = Integer.parseInt(inpIdPaciente.getText());
@@ -92,7 +118,7 @@ public class AgregarTurno extends JFrame {
                 String especialidad = inpEspecialidad.getText();
                 String motivoConsulta = inpMotivo.getText();
                 String resultadoConsulta = inpResultado.getText();
-// private JTextField inpFecha, inpHora, inpTipo, inpEstado, inpIdPaciente, inpIdMedico, inpEspecialidad, inpMotivo, inpResultado;
+
                 Turno nuevoTurno = new Turno(
                     tipoConsulta,
                     fechaTurno,
@@ -114,8 +140,9 @@ public class AgregarTurno extends JFrame {
             }
         });
 
+
         btnVolver.addActionListener(e -> {
-            VistaTurno vista = new VistaTurno();
+            VistaTurno vista = (medicoLogueado != null) ? new VistaTurno(medicoLogueado.getId()) : new VistaTurno();
             vista.setVisible(true);
             dispose();
         });
@@ -134,7 +161,7 @@ public class AgregarTurno extends JFrame {
     }
 
     private void limpiarCampos() {
-        inpFecha.setText("");
+    	dateChooser.setDate(null);
         inpHora.setText("");
         inpTipo.setText("");
         inpEstado.setText("");
