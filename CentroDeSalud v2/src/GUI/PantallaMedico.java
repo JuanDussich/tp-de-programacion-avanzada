@@ -91,7 +91,7 @@ public class PantallaMedico extends JFrame {
 		});
 
 
-		btnNewButton_2.setBounds(360, 159, 89, 23);
+		btnNewButton_2.setBounds(360, 159, 119, 23);
 		contentPane.add(btnNewButton_2);
 		
 		
