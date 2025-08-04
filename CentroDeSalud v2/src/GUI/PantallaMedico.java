@@ -91,7 +91,7 @@ public class PantallaMedico extends JFrame {
 		});
 
 
-		btnNewButton_2.setBounds(360, 159, 89, 23);
+		btnNewButton_2.setBounds(360, 159, 119, 23);
 		contentPane.add(btnNewButton_2);
 		
 		
@@ -102,7 +102,7 @@ public class PantallaMedico extends JFrame {
 				vista.setVisible(true);
 			}
 		});
-		btnNewButton_4.setBounds(578, 159, 148, 23);
+		btnNewButton_4.setBounds(556, 159, 170, 23);
 		contentPane.add(btnNewButton_4);
 		
 		

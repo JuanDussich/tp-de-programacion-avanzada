@@ -82,7 +82,7 @@ public class PantallaPaciente extends JFrame {
 		
 		
 		JButton btnVerTurnos = new JButton("Ver turnos");
-		btnVerTurnos.setBounds(597, 230, 119, 23);
+		btnVerTurnos.setBounds(408, 190, 119, 23);
 		contentPane.add(btnVerTurnos);
 
 		btnVerTurnos.addActionListener(new ActionListener() {
@@ -125,7 +125,8 @@ public class PantallaPaciente extends JFrame {
 		JButton btnNewButton_1 = new JButton("Ver Perfil");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String perfil = "Nombre: " + logueado.getNombre() +
+				if (logueado != null) {
+					String perfil = "Nombre: " + logueado.getNombre() +
 		                "\nApellido: " + logueado.getApellido() +
 		                "\nDNI: " + logueado.getDni() +
 		                "\nFecha de nacimiento: " + logueado.getFechaNacimiento() +
@@ -133,6 +134,10 @@ public class PantallaPaciente extends JFrame {
 		                "\nObra Social: " + logueado.getObraSocial();
 
 		JOptionPane.showMessageDialog(null, perfil, "Perfil del Paciente", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null, "no estas logueado para ver tu perfil");
+				}
+				
 			}
 		});
 		btnNewButton_1.setBounds(488, 16, 89, 23);

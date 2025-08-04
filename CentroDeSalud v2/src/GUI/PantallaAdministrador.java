@@ -232,7 +232,7 @@ public class PantallaAdministrador extends JFrame {
 		
 		//ACA ES PARA VER LA TABLA DE MEDICOS 
 		modelMedico = new DefaultTableModel(new String[]{
-        		"idMedico", "nombre", "apellido", "matricula", "", "email", "contrasenia", "especialidad"}, 0);
+        		"idMedico", "nombre", "apellido", "matricula", "", "email", "contrasenia", "especialidad","activo"}, 0);
 	 
 		table_2 = new JTable(modelMedico);
 		table_2.setBounds(0, 0, 672, 253);
@@ -350,7 +350,7 @@ public class PantallaAdministrador extends JFrame {
         LinkedList<Medico> usuarios = DLL.ControllerMedico.mostrarMedicos();
         for (Medico u : usuarios) {
             modelMedico.addRow(new Object[]{
-            		u.getId(), u.getNombre(), u.getApellido(), u.getMatricula(),u.getEmail(),u.getContrasenia(),u.getEspecialidad()
+            		u.getId(), u.getNombre(), u.getApellido(), u.getMatricula(),u.getEmail(),u.getContrasenia(),u.getEspecialidad(), u.getActivo()
             		});
         }
     }
