@@ -76,7 +76,7 @@ public class VistaHistoriaClinica extends JFrame {
             //int pacienteId, int tratamientoId, int medicamentoId, int medicoId)
 	        
 	        model = new DefaultTableModel(new String[]{
-					"ID Historial Medico", "Observaciones", "Fecha", "ID Turno" , "ID Paciente", "ID Tratamiento", "ID Medicamento", "ID Medico", "Detalle consulta"
+					"ID Historial Medico", "Observaciones", "Fecha", "ID Turno" , "ID Paciente", "ID Tratamiento", "ID Medicamento", "ID Medico", "Detalle consulta "
 	        }, 0);
 		
 	        table = new JTable(model);
