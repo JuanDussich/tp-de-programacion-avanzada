@@ -100,6 +100,11 @@ public class VistaTurno extends JFrame {
         btnReiniciarFiltro.setBounds(320, 531, 140, 30);
         contentPane.add(btnReiniciarFiltro);
 
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnVolver.setBounds(560, 480, 120, 40);
+        contentPane.add(btnVolver);
+
         btnAgregar.addActionListener(e -> {
             if (idMedico != 0) {
                 // Si hay un médico logueado
@@ -164,6 +169,25 @@ public class VistaTurno extends JFrame {
             cargarTurnos();
         });
 
+//        btnVolver.addActionListener(e -> {
+//            if (idMedico != 0) {
+//                // Si hay un médico logueado, volver a PantallaMedico
+//                PantallaMedico pantalla = new PantallaMedico();
+//                pantalla.setVisible(true);
+//            } else {
+//                // Si accede un administrador, volver a PantallaAdministrador
+//                PantallaAdministrador pantalla = new PantallaAdministrador();
+//                pantalla.setVisible(true);
+//            }
+//            dispose();
+//        });
+
+     // Acción botón Volver
+        btnVolver.addActionListener(e -> {
+            dispose(); // Solo cierra esta ventana, la pantalla del usuario debe mantenerse visible
+        });
+        
+        
         table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && table.getSelectedRow() != -1) {
                 int row = table.getSelectedRow();

@@ -103,11 +103,15 @@ public class AgregarMedico extends JFrame {
         //y += 50;
 
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(80, 360, 120, 40);
+        btnGuardar.setBounds(26, 350, 120, 40);
         contentPane.add(btnGuardar);
 
+        JButton btnLimpiar = new JButton("Limpiar");
+        btnLimpiar.setBounds(166, 350, 120, 40);
+        contentPane.add(btnLimpiar);
+
         JButton btnVolver = new JButton("Volver");
-        btnVolver.setBounds(220, 360, 120, 40);
+        btnVolver.setBounds(306, 350, 120, 40);
         contentPane.add(btnVolver);
 
         // Acción botón Guardar
@@ -139,9 +143,15 @@ public class AgregarMedico extends JFrame {
         // Acción botón Volver
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VistaMedico vista = new VistaMedico();
-                vista.setVisible(true);
-                dispose();
+                dispose(); // Solo cierra esta ventana, la pantalla del médico debe mantenerse visible
+            }
+        });
+
+        // Acción botón Limpiar
+        btnLimpiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                limpiarCampos();
+                lblMensaje.setText(""); // Limpia también el mensaje
             }
         });
     }

@@ -65,8 +65,7 @@ public class PantallaAdministrador extends JFrame {
 		JButton btnNewButton_5 = new JButton("Cerrar Sesion");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaPrincipal vista = new PantallaPrincipal();
-				vista.setVisible(true);
+				dispose(); // Cierra la ventana actual
 			}
 		});
 		btnNewButton_5.setBackground(Color.RED);
@@ -315,11 +314,14 @@ public class PantallaAdministrador extends JFrame {
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        if (admin != null) {
-		            String perfil = "Nombre: " + admin.getNombre() +
-		                    "\nApellido: " + admin.getApellido() +
-		                    "\nEmail: " + admin.getEmail();
-
-		            JOptionPane.showMessageDialog(null, perfil, "Perfil del Administrador", JOptionPane.INFORMATION_MESSAGE);
+		            VistaPerfil vistaPerfil = new VistaPerfil(
+		                "Perfil del Administrador",
+		                admin.getNombre(),
+		                admin.getApellido(),
+		                admin.getEmail(),
+		                null // No hay campos adicionales para administrador
+		            );
+		            vistaPerfil.setVisible(true);
 		        } else {
 		            JOptionPane.showMessageDialog(null, "No hay administrador logueado.");
 		        }

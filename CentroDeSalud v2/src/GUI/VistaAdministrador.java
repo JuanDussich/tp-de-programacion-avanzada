@@ -105,6 +105,11 @@ public class VistaAdministrador extends JFrame {
         btnEliminar.setBounds(531, 329, 124, 55);
         contentPane.add(btnEliminar);
 
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnVolver.setBounds(531, 400, 124, 55);
+        contentPane.add(btnVolver);
+
      // Al seleccionar fila, actualizar la variable usuarioSeleccionado y mostrar datos en el label
         table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
@@ -193,19 +198,30 @@ public class VistaAdministrador extends JFrame {
      // Acción botón Eliminar: cambiar activo a falso para el adm seleccionado
         btnEliminar.addActionListener(e -> {
             if (usuarioSeleccionado != null) {
-                int confirm = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este Administrador?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+                int confirm = JOptionPane.showConfirmDialog(null,
+                        "¿Está seguro que desea eliminar el administrador " + usuarioSeleccionado.getNombre() + "?",
+                        "Confirmar eliminación",
+                        JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    boolean eliminado = ControllerAdministrador.EliminarAdministrador(usuarioSeleccionado.getId());
-                    if (eliminado) {
-                        JOptionPane.showMessageDialog(null, "Administrador eliminado correctamente.");
-                        cargarTabla();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error al eliminar Administrador.");
-                    }
+                    ControllerAdministrador.EliminarAdministrador(usuarioSeleccionado.getId());
+                    cargarTabla();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Seleccione un usuario para eliminar.");
+                JOptionPane.showMessageDialog(null, "Seleccione un administrador para eliminar.");
             }
+        });
+
+        // Acción botón Volver
+//        btnVolver.addActionListener(e -> {
+//            PantallaAdministrador pantalla = new PantallaAdministrador();
+//            pantalla.setVisible(true);
+//            dispose();
+//        });
+//        
+        
+     // Acción botón Volver
+        btnVolver.addActionListener(e -> {
+            dispose(); // Solo cierra esta ventana, la pantalla del paciente debe mantenerse visible
         });
 	}// cierre vista
         

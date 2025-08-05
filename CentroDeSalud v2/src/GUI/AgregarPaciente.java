@@ -123,11 +123,15 @@ public class AgregarPaciente extends JFrame implements Validaciones {
        // y += 50;
 
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(100, 360, 120, 40);
+        btnGuardar.setBounds(50, 360, 120, 40);
         contentPane.add(btnGuardar);
 
+        JButton btnLimpiar = new JButton("Limpiar");
+        btnLimpiar.setBounds(197, 360, 120, 40);
+        contentPane.add(btnLimpiar);
+
         JButton btnVolver = new JButton("Volver");
-        btnVolver.setBounds(250, 360, 120, 40);
+        btnVolver.setBounds(335, 360, 120, 40);
         contentPane.add(btnVolver);
 
         // Acción botón Guardar
@@ -165,6 +169,14 @@ public class AgregarPaciente extends JFrame implements Validaciones {
                 VistaPacientes vista = new VistaPacientes(); // <- cambiá por el nombre real
                 vista.setVisible(true);
                 dispose();
+            }
+        });
+
+        // Acción botón Limpiar
+        btnLimpiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                limpiarCampos();
+                lblMensaje.setText(""); // Limpia también el mensaje
             }
         });
     }

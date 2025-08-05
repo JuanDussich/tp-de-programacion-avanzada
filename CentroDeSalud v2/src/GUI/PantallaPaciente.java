@@ -89,8 +89,12 @@ public class PantallaPaciente extends JFrame {
 		    public void actionPerformed(ActionEvent e) {
 		        System.out.println("CLICK EN VER TURNOS DETECTADO"); // Confirmación de click
 
-		        VistaTurnoPaciente ventanaTurnos = new VistaTurnoPaciente(logueado.getId());
-		        ventanaTurnos.setVisible(true);
+		        if (logueado != null) {
+		            VistaTurnoPaciente ventanaTurnos = new VistaTurnoPaciente(logueado.getId());
+		            ventanaTurnos.setVisible(true);
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Debe iniciar sesión para ver sus turnos.");
+		        }
 		    }
 		});
 		
@@ -113,8 +117,7 @@ public class PantallaPaciente extends JFrame {
 		JButton btnNewButton_5 = new JButton("Cerrar Sesion");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaPrincipal vista = new PantallaPrincipal();
-				vista.setVisible(true);
+				dispose(); // Cierra la ventana actual
 			}
 		});
 		
@@ -126,18 +129,23 @@ public class PantallaPaciente extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (logueado != null) {
-					String perfil = "Nombre: " + logueado.getNombre() +
-		                "\nApellido: " + logueado.getApellido() +
-		                "\nDNI: " + logueado.getDni() +
-		                "\nFecha de nacimiento: " + logueado.getFechaNacimiento() +
-		                "\nEmail: " + logueado.getEmail() +
-		                "\nObra Social: " + logueado.getObraSocial();
-
-		JOptionPane.showMessageDialog(null, perfil, "Perfil del Paciente", JOptionPane.INFORMATION_MESSAGE);
-				}else {
-					JOptionPane.showMessageDialog(null, "no estas logueado para ver tu perfil");
+					String[] camposAdicionales = {
+						"DNI", String.valueOf(logueado.getDni()),
+						"Fecha de Nacimiento", logueado.getFechaNacimiento(),
+						"Obra Social", logueado.getObraSocial()
+					};
+					
+					VistaPerfil vistaPerfil = new VistaPerfil(
+						"Perfil del Paciente",
+						logueado.getNombre(),
+						logueado.getApellido(),
+						logueado.getEmail(),
+						camposAdicionales
+					);
+					vistaPerfil.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "No estás logueado para ver tu perfil");
 				}
-				
 			}
 		});
 		btnNewButton_1.setBounds(488, 16, 89, 23);

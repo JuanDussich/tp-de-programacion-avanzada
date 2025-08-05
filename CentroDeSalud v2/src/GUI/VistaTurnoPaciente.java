@@ -24,6 +24,7 @@ public class VistaTurnoPaciente extends JFrame {
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 800, 600);
+        
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         setContentPane(contentPane);
@@ -47,8 +48,13 @@ public class VistaTurnoPaciente extends JFrame {
 
         JButton btnCancelar = new JButton("Cancelar Turno");
         btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btnCancelar.setBounds(320, 430, 160, 40);
+        btnCancelar.setBounds(196, 430, 160, 40);
         contentPane.add(btnCancelar);
+
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnVolver.setBounds(455, 430, 120, 40);
+        contentPane.add(btnVolver);
 
         // Acción botón cancelar
         btnCancelar.addActionListener(e -> {
@@ -64,6 +70,11 @@ public class VistaTurnoPaciente extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione un turno para cancelar.");
             }
+        });
+
+        // Acción botón Volver
+        btnVolver.addActionListener(e -> {
+            dispose(); // Solo cierra esta ventana, la pantalla del paciente debe mantenerse visible
         });
 
         // Detectar selección de fila

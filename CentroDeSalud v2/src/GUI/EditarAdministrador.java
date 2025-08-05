@@ -100,18 +100,20 @@ public class EditarAdministrador extends JFrame {
         });
         contentPane.add(btnEditar);
 
-        // Botón para volver a la ventana anterior sin guardar cambios
-        JButton btnVolver = new JButton("Volver");
-        btnVolver.setBounds(258, 352, 119, 50);
-        btnVolver.addActionListener(new ActionListener() {
+        // Botón para cancelar cambios y restaurar valores originales
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(213, 352, 119, 50);
+        btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Abre la ventana VistaAdmin y cierra esta ventana
-                VistaAdministrador vista = new VistaAdministrador();
-                vista.setVisible(true);
-                dispose();
+                // Restaura los valores originales
+                inpNombre.setText(usuario.getNombre());
+                inpApellido.setText(usuario.getApellido());
+                inpMail.setText(usuario.getEmail());
+                inpContrasenia.setText(usuario.getContrasenia());
+                lblMensaje.setText("Cambios cancelados");
             }
         });
-        contentPane.add(btnVolver);
+        contentPane.add(btnCancelar);
 
         // Título de la ventana
         JLabel lblTitulo = new JLabel("Centro De Salud - Editar Administrador");
