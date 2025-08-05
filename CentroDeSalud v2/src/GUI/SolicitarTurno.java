@@ -98,8 +98,16 @@ public class SolicitarTurno extends JFrame {
         contentPane.add(txtResultado);
 
         JButton btnSolicitar = new JButton("Solicitar Turno");
-        btnSolicitar.setBounds(190, 360, 150, 30);
+        btnSolicitar.setBounds(30, 360, 150, 30);
         contentPane.add(btnSolicitar);
+
+        JButton btnLimpiar = new JButton("Limpiar");
+        btnLimpiar.setBounds(222, 360, 100, 30);
+        contentPane.add(btnLimpiar);
+
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(357, 360, 100, 30);
+        contentPane.add(btnCancelar);
 
         cbEspecialidad.addActionListener((ActionEvent e) -> {
             Especialidad especialidadSeleccionada = (Especialidad) cbEspecialidad.getSelectedItem();
@@ -151,12 +159,29 @@ public class SolicitarTurno extends JFrame {
             }
         });
 
+        btnLimpiar.addActionListener((ActionEvent e) -> {
+            txtTipo.setText("");
+            txtHora.setText("");
+            txtMotivo.setText("");
+            txtResultado.setText("Pendiente");
+            dateChooser.setDate(null);
+            cbEspecialidad.setSelectedIndex(0);
+            cbMedico.removeAllItems();
+        });
+
+        btnCancelar.addActionListener((ActionEvent e) -> {
+            dispose();
+        });
+
         // Inicializar médicos según especialidad al cargar
         cbEspecialidad.setSelectedIndex(0);
         cbEspecialidad.getActionListeners()[0].actionPerformed(null);
     }
 
     // Constructor adicional para que el médico solicite turnos
+    /**
+     * @wbp.parser.constructor
+     */
     public SolicitarTurno(int idPaciente, int idMedico) {
         this(idPaciente); // Reutiliza interfaz
 

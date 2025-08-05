@@ -109,6 +109,11 @@ public class VistaMedico extends JFrame {
         btnEliminar.setBounds(531, 329, 124, 55);
         contentPane.add(btnEliminar);
 
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnVolver.setBounds(531, 417, 124, 55);
+        contentPane.add(btnVolver);
+
         // Al seleccionar fila, actualizar la variable usuarioSeleccionado y mostrar datos en el label
         table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
@@ -225,22 +230,38 @@ public class VistaMedico extends JFrame {
             }
         });
 
-        // Acción botón Eliminar: cambiar activo a falso para el médico seleccionado
+        // Acción botón Eliminar
         btnEliminar.addActionListener(e -> {
             if (usuarioSeleccionado != null) {
-                int confirm = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este médico?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+                int confirm = JOptionPane.showConfirmDialog(null,
+                        "¿Está seguro que desea eliminar el médico " + usuarioSeleccionado.getNombre() + "?",
+                        "Confirmar eliminación",
+                        JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    boolean eliminado = ControllerMedico.eliminarMedico(usuarioSeleccionado.getId());
-                    if (eliminado) {
-                        JOptionPane.showMessageDialog(null, "Médico eliminado correctamente.");
-                        cargarTabla();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error al eliminar médico.");
-                    }
+                    ControllerMedico.eliminarMedico(usuarioSeleccionado.getId());
+                    cargarTabla();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Seleccione un usuario para eliminar.");
+                JOptionPane.showMessageDialog(null, "Seleccione un médico para eliminar.");
             }
+        });
+
+        // Acción botón Volver
+//        btnVolver.addActionListener(e -> {
+//            if (PantallaMedico.logueado != null) {
+//                // Si hay un médico logueado, solo cerrar esta ventana
+//                dispose();
+//            } else {
+//                // Si no hay médico logueado (fue abierto por administrador), volver a PantallaAdministrador
+//                PantallaAdministrador pantalla = new PantallaAdministrador();
+//                pantalla.setVisible(true);
+//                dispose();
+//            }
+//        });
+        
+     // Acción botón Volver
+        btnVolver.addActionListener(e -> {
+            dispose(); // Solo cierra esta ventana, la pantalla del paciente debe mantenerse visible
         });
 
     }

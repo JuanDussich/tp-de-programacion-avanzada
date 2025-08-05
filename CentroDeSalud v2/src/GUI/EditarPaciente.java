@@ -121,19 +121,22 @@ public class EditarPaciente extends JFrame{
 			}
 		});
 		contentPane.add(btnEditar);
-		
-		// Botón para volver a la ventana anterior sin guardar cambios
-        JButton btnVolver = new JButton("Volver");
-        btnVolver.setBounds(258, 352, 119, 50);
-        btnVolver.addActionListener(new ActionListener() {
+
+        // Botón para cancelar cambios y restaurar valores originales
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(213, 350, 119, 50);
+        btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Abre la ventana VistaPaciente y cierra esta ventana
-                VistaPacientes vista = new VistaPacientes();
-                vista.setVisible(true);
-                dispose();
+                // Restaura los valores originales
+                inpNombre.setText(usuario.getNombre());
+                inpApellido.setText(usuario.getApellido());
+                inpMail.setText(usuario.getEmail());
+                inpContrasenia.setText(usuario.getContrasenia());
+                inpObraSocial.setText(usuario.getObraSocial());
+                lblMensaje.setText("Cambios cancelados");
             }
         });
-        contentPane.add(btnVolver);
+        contentPane.add(btnCancelar);
 
         // Título de la ventana
         JLabel lblTitulo = new JLabel("Centro De Salud - Editar Paciente");

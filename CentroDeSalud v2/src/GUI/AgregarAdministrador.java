@@ -79,11 +79,15 @@ public class AgregarAdministrador extends JFrame {
         //y += 50;
 
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(100, 280, 120, 40);
+        btnGuardar.setBounds(50, 270, 120, 40);
         contentPane.add(btnGuardar);
 
+        JButton btnLimpiar = new JButton("Limpiar");
+        btnLimpiar.setBounds(190, 270, 120, 40);
+        contentPane.add(btnLimpiar);
+
         JButton btnVolver = new JButton("Volver");
-        btnVolver.setBounds(250, 280, 120, 40);
+        btnVolver.setBounds(330, 270, 120, 40);
         contentPane.add(btnVolver);
 
         // Acción Guardar
@@ -112,6 +116,14 @@ public class AgregarAdministrador extends JFrame {
                 VistaAdministrador vista = new VistaAdministrador();
                 vista.setVisible(true);
                 dispose();
+            }
+        });
+
+        // Acción Limpiar
+        btnLimpiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                limpiarCampos();
+                lblMensaje.setText(""); // Limpia también el mensaje
             }
         });
     }

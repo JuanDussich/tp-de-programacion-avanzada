@@ -60,9 +60,7 @@ public class EditarHistoriaClinica extends JFrame {
         // Acción volver a la vista principal
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VistaHistoriaClinica vista = new VistaHistoriaClinica();
-                vista.setVisible(true);
-                dispose();
+                dispose(); // Solo cierra esta ventana, la pantalla del médico debe mantenerse visible
             }
         });
     }

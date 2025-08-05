@@ -109,11 +109,15 @@ public class AgregarHistoriaClinica extends JFrame {
         contentPane.add(lblMensaje);
 
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(80, 430, 120, 40);
+        btnGuardar.setBounds(20, 424, 120, 40);
         contentPane.add(btnGuardar);
 
+        JButton btnLimpiar = new JButton("Limpiar");
+        btnLimpiar.setBounds(160, 424, 120, 40);
+        contentPane.add(btnLimpiar);
+
         JButton btnVolver = new JButton("Volver");
-        btnVolver.setBounds(220, 430, 120, 40);
+        btnVolver.setBounds(300, 424, 120, 40);
         contentPane.add(btnVolver);
 
         btnGuardar.addActionListener(new ActionListener() {
@@ -148,11 +152,16 @@ public class AgregarHistoriaClinica extends JFrame {
             }
         });
 
+        btnLimpiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                limpiarCampos();
+                lblMensaje.setText("");
+            }
+        });
+
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                VistaHistoriaClinica vista = new VistaHistoriaClinica();
-                vista.setVisible(true);
-                dispose();
+                dispose(); // Solo cierra esta ventana, la pantalla del médico debe mantenerse visible
             }
         });
     }

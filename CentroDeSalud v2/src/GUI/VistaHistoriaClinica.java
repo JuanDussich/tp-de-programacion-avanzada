@@ -97,8 +97,13 @@ public class VistaHistoriaClinica extends JFrame {
 	        
 	        JButton btnEliminar = new JButton("Eliminar");
 	        btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 11));
-	        btnEliminar.setBounds(560, 420, 124, 40);
+	        btnEliminar.setBounds(531, 329, 124, 55);
 	        contentPane.add(btnEliminar);
+
+	        JButton btnVolver = new JButton("Volver");
+	        btnVolver.setFont(new Font("Tahoma", Font.BOLD, 11));
+	        btnVolver.setBounds(531, 420, 124, 40);
+	        contentPane.add(btnVolver);
 	        
 	        
 	        // Al seleccionar fila, actualizar la variable historiaSeleccionada y mostrar datos en el label
@@ -219,6 +224,18 @@ public class VistaHistoriaClinica extends JFrame {
 	                JOptionPane.showMessageDialog(null, "Seleccione una Historia Clínica para eliminar.");
 	            }
 	        });
+
+        // Acción botón Volver
+//        btnVolver.addActionListener(e -> {
+//            PantallaMedico pantalla = new PantallaMedico();
+//            pantalla.setVisible(true);
+//            dispose();
+//        });
+//        
+     // Acción botón Volver
+        btnVolver.addActionListener(e -> {
+            dispose(); // Solo cierra esta ventana, la pantalla del usuario debe mantenerse visible
+        });
 
 	    
 	} // fin metodo VistaHistoriaClinica()

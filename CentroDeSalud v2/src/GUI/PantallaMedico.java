@@ -70,8 +70,7 @@ public class PantallaMedico extends JFrame {
 		JButton btnNewButton_5 = new JButton("Cerrar Sesion");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaPrincipal vista = new PantallaPrincipal();
-				vista.setVisible(true);
+				dispose(); // Cierra la ventana actual
 			}
 		});
 		btnNewButton_5.setBackground(Color.RED);
@@ -98,8 +97,12 @@ public class PantallaMedico extends JFrame {
 		JButton btnNewButton_4 = new JButton("Ver historiales medicos");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VistaHistoriaClinica vista = new VistaHistoriaClinica();
-				vista.setVisible(true);
+				if (logueado != null) {
+					VistaHistoriaClinica vista = new VistaHistoriaClinica();
+					vista.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "Debe iniciar sesión primero.");
+				}
 			}
 		});
 		btnNewButton_4.setBounds(556, 159, 170, 23);
@@ -110,13 +113,19 @@ public class PantallaMedico extends JFrame {
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (logueado != null) {
-					String perfil = "Nombre: " + logueado.getNombre() +
-					                "\nApellido: " + logueado.getApellido() +
-					                "\nMatrícula: " + logueado.getMatricula() +
-					                "\nEspecialidad: " + logueado.getEspecialidad().toString() +
-					                "\nEmail: " + logueado.getEmail();
+					String[] camposAdicionales = {
+						"Matrícula", String.valueOf(logueado.getMatricula()),
+						"Especialidad", logueado.getEspecialidad().toString()
+					};
 					
-					JOptionPane.showMessageDialog(null, perfil, "Perfil del Médico", JOptionPane.INFORMATION_MESSAGE);
+					VistaPerfil vistaPerfil = new VistaPerfil(
+						"Perfil del Médico",
+						logueado.getNombre(),
+						logueado.getApellido(),
+						logueado.getEmail(),
+						camposAdicionales
+					);
+					vistaPerfil.setVisible(true);
 				} else {
 					JOptionPane.showMessageDialog(null, "No hay médico logueado.");
 				}

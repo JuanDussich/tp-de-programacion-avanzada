@@ -250,4 +250,10 @@ public class ControllerMedico {
 
         return null;
     }
+
+
+	public static void eliminarMedico1(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 }
